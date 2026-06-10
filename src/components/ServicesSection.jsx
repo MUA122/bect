@@ -4,6 +4,12 @@ import ArrowBackRounded from '@mui/icons-material/ArrowBackRounded';
 import ArrowForwardRounded from '@mui/icons-material/ArrowForwardRounded';
 import ArrowOutwardRounded from '@mui/icons-material/ArrowOutwardRounded';
 import './ServicesSection.css';
+import halfMoonImage from '../assets/projects/half-moon.png';
+import helioImage from '../assets/projects/helio.jpg';
+import metroImage from '../assets/projects/metro.jpg';
+import schneiderImage from '../assets/projects/schneider.jpeg';
+import utopiaImage from '../assets/projects/utopia.jpeg';
+import wadiDayqahImage from '../assets/projects/wadi-dayqah.jpeg';
 
 const services = [
   {
@@ -13,7 +19,7 @@ const services = [
       en: 'Our multidisciplinary capabilities give us the freedom to create architecture that is distinctive, responsive and deeply connected to each client’s vision. We bring together spatial clarity, innovative materials and human experience to shape places with lasting value.',
       ar: 'تمنحنا خبراتنا متعددة التخصصات الحرية لابتكار عمارة مميزة ومتجاوبة ترتبط بعمق برؤية كل عميل. نجمع بين وضوح الفراغ والمواد المبتكرة والتجربة الإنسانية لصياغة أماكن ذات قيمة مستدامة.',
     },
-    image: 'https://bect-bak.s3.amazonaws.com/media/images/Helio.jpg',
+    image: helioImage,
   },
   {
     title: { en: 'Civil & Structural Design', ar: 'التصميم المدني والإنشائي' },
@@ -22,7 +28,7 @@ const services = [
       en: 'BECT’s civil and structural engineers design and supervise complex projects and systems including roads, bridges, buildings, airports, tunnels, dams, water networks and wastewater infrastructure, balancing resilience, efficiency and constructability.',
       ar: 'يصمم مهندسو BECT المدنيون والإنشائيون المشروعات والأنظمة المعقدة ويشرفون عليها، بما يشمل الطرق والجسور والمباني والمطارات والأنفاق والسدود وشبكات المياه والصرف، مع تحقيق التوازن بين المتانة والكفاءة وقابلية التنفيذ.',
     },
-    image: 'https://bect-bak.s3.amazonaws.com/media/images/Wadi_Dayqah.jpeg',
+    image: wadiDayqahImage,
   },
   {
     title: { en: 'Landscape Design', ar: 'تصميم المناظر الطبيعية' },
@@ -31,7 +37,7 @@ const services = [
       en: 'Thoughtful landscapes invite people in, encourage movement and offer moments of relief from the pace of modern life. Our designs respond to climate, culture and ecology to create generous public realms that feel rooted in place.',
       ar: 'تدعو المناظر الطبيعية المدروسة الناس إلى التفاعل والحركة، وتوفر لحظات من الهدوء بعيدًا عن إيقاع الحياة الحديثة. تستجيب تصاميمنا للمناخ والثقافة والبيئة لتكوين مساحات عامة رحبة تنتمي إلى مكانها.',
     },
-    image: 'https://bect-bak.s3.amazonaws.com/media/images/Half_Moon.png',
+    image: halfMoonImage,
   },
   {
     title: { en: 'Urban Design & Planning', ar: 'التصميم والتخطيط العمراني' },
@@ -40,7 +46,7 @@ const services = [
       en: 'Our urban planning services span metropolitan and regional development, infrastructure planning and major urban renewal. We connect land use, mobility, public space and economic opportunity into clear frameworks for long-term growth.',
       ar: 'تشمل خدماتنا في التخطيط العمراني التنمية الحضرية والإقليمية، وتخطيط البنية التحتية، وتجديد المدن الكبرى. نربط استخدامات الأراضي والحركة والفراغات العامة والفرص الاقتصادية ضمن أطر واضحة للنمو طويل المدى.',
     },
-    image: 'https://bect-bak.s3.amazonaws.com/media/images/Metro4B-08.jpg',
+    image: metroImage,
   },
   {
     title: { en: 'MEP & Firefighting', ar: 'الأعمال الكهروميكانيكية ومكافحة الحريق' },
@@ -49,7 +55,7 @@ const services = [
       en: 'Mechanical, electrical and plumbing systems are essential to safe, efficient and comfortable environments. Our integrated expertise covers HVAC, lighting, firefighting, fire alarm, water supply, sanitation and intelligent building systems.',
       ar: 'تمثل الأنظمة الميكانيكية والكهربائية والصحية أساس البيئات الآمنة والكفؤة والمريحة. تغطي خبراتنا المتكاملة التكييف والإضاءة ومكافحة وإنذار الحريق وإمدادات المياه والصرف وأنظمة المباني الذكية.',
     },
-    image: 'https://bect-bak.s3.amazonaws.com/media/images/Schneider.jpeg',
+    image: schneiderImage,
   },
   {
     title: { en: 'Project Management & Site Supervision', ar: 'إدارة المشروعات والإشراف على المواقع' },
@@ -58,7 +64,7 @@ const services = [
       en: 'Our experienced teams monitor, coordinate and guide every project activity with strong technical discipline. We protect quality, safety, programme and environmental performance from early planning through delivery.',
       ar: 'تراقب فرقنا ذات الخبرة جميع أنشطة المشروع وتنسقها وتوجهها بانضباط تقني راسخ. نحافظ على الجودة والسلامة والبرنامج الزمني والأداء البيئي منذ التخطيط المبكر وحتى التسليم.',
     },
-    image: 'https://bect-bak.s3.amazonaws.com/media/images/Utopia.jpeg',
+    image: utopiaImage,
   },
 ];
 

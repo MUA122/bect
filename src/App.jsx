@@ -33,6 +33,12 @@ import LeadershipSection from './components/LeadershipSection';
 import CertificationsSection from './components/CertificationsSection';
 import GlobalPresenceSection from './components/GlobalPresenceSection';
 import SiteFooter from './components/SiteFooter';
+import halfMoonImage from './assets/projects/half-moon.png';
+import helioImage from './assets/projects/helio.jpg';
+import metroImage from './assets/projects/metro.jpg';
+import schneiderImage from './assets/projects/schneider.jpeg';
+import utopiaImage from './assets/projects/utopia.jpeg';
+import wadiDayqahImage from './assets/projects/wadi-dayqah.jpeg';
 
 // Paste your deployed Google Apps Script web app URL here.
 const GOOGLE_SHEETS_ENDPOINT = '';
@@ -49,32 +55,32 @@ const slides = [
   {
     title: { en: 'Half Moon Bay', ar: 'خليج نصف القمر' },
     category: { en: 'Urban Development', ar: 'التطوير العمراني' },
-    image: 'https://bect-bak.s3.amazonaws.com/media/images/Half_Moon.png',
+    image: halfMoonImage,
   },
   {
     title: { en: 'Helio Gate', ar: 'هيليو جيت' },
     category: { en: 'Architecture & Design', ar: 'العمارة والتصميم' },
-    image: 'https://bect-bak.s3.amazonaws.com/media/images/Helio.jpg',
+    image: helioImage,
   },
   {
     title: { en: 'Wadi Dayqah', ar: 'وادي ضيقة' },
     category: { en: 'Infrastructure', ar: 'البنية التحتية' },
-    image: 'https://bect-bak.s3.amazonaws.com/media/images/Wadi_Dayqah.jpeg',
+    image: wadiDayqahImage,
   },
   {
     title: { en: 'Schneider Factory', ar: 'مصنع شنايدر' },
     category: { en: 'Industrial', ar: 'الصناعة' },
-    image: 'https://bect-bak.s3.amazonaws.com/media/images/Schneider.jpeg',
+    image: schneiderImage,
   },
   {
     title: { en: 'Utopia Pharmaceuticals', ar: 'يوتوبيا للأدوية' },
     category: { en: 'Industrial', ar: 'الصناعة' },
-    image: 'https://bect-bak.s3.amazonaws.com/media/images/Utopia.jpeg',
+    image: utopiaImage,
   },
   {
     title: { en: 'Metro Lines', ar: 'خطوط المترو' },
     category: { en: 'Transportation', ar: 'النقل والمواصلات' },
-    image: 'https://bect-bak.s3.amazonaws.com/media/images/Metro4B-08.jpg',
+    image: metroImage,
   },
 ];
 
