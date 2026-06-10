@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 150">
+  <g fill="none" stroke="#707579" stroke-width="5">
+    <circle cx="36" cy="31" r="18"/><circle cx="36" cy="31" r="8"/>
+    <path d="M36 7v9M36 46v9M12 31h9M51 31h9M19 14l7 7M46 41l7 7M53 14l-7 7M26 41l-7 7"/>
+    <circle cx="76" cy="37" r="13"/><circle cx="76" cy="37" r="5"/>
+  </g>
+  <path fill="#6f7478" d="M25 65h20v57H25zM57 65h26c31 0 50 9 50 28 0 20-19 29-50 29H57zm22 17v23h7c16 0 24-4 24-12s-8-11-24-11z"/>
+  <path fill="#8b9093" d="M143 65h30l34 57h-25l-6-12h-39l-6 12h-23zm12 15-12 17h27z"/>
+  <text x="24" y="139" fill="#62686c" font-family="Arial" font-size="13" font-weight="700">Industrial Development Authority</text>
+</svg>

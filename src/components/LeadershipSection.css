@@ -1,0 +1,254 @@
+.leadership-section {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(62px, 6vw, 96px) 0 0;
+  color: #0a3853;
+  background:
+    radial-gradient(circle at 76% 20%, rgba(86, 188, 225, .13), transparent 24%),
+    linear-gradient(135deg, #f7f8f7, #eef2f3);
+}
+
+.leadership-section::before {
+  position: absolute;
+  top: 0;
+  left: 8%;
+  width: 32%;
+  height: 2px;
+  content: "";
+  background: linear-gradient(90deg, #f3c33b, #5fc2e5, transparent);
+}
+
+.leadership-shell {
+  display: grid !important;
+  grid-template-columns: minmax(0, .9fr) minmax(440px, 1.1fr);
+  align-items: end;
+  gap: clamp(35px, 5vw, 90px);
+  padding-inline: clamp(24px, 5vw, 84px) !important;
+}
+
+.leadership-copy {
+  align-self: center;
+  max-width: 650px;
+  padding-bottom: clamp(50px, 6vw, 88px);
+  opacity: 0;
+  transform: translateX(-28px);
+  transition: opacity .8s ease, transform .8s cubic-bezier(.22, 1, .36, 1);
+}
+
+[dir="rtl"] .leadership-copy { transform: translateX(28px); }
+.leadership-section.is-visible .leadership-copy { opacity: 1; transform: translateX(0); }
+
+.leadership-eyebrow {
+  margin-bottom: 12px !important;
+  color: #0874a7;
+  font-size: 9px !important;
+  font-weight: 700 !important;
+  letter-spacing: .18em !important;
+  text-transform: uppercase;
+}
+
+.leadership-title {
+  max-width: 560px;
+  font-size: clamp(3rem, 4.8vw, 5.7rem) !important;
+  font-weight: 500 !important;
+  line-height: .95 !important;
+  letter-spacing: -.065em !important;
+}
+
+[dir="rtl"] .leadership-title {
+  font-family: "Noto Kufi Arabic", sans-serif;
+  font-size: clamp(2.7rem, 4vw, 4.8rem) !important;
+  line-height: 1.32 !important;
+  letter-spacing: -.05em !important;
+}
+
+.leader-names {
+  max-width: 550px;
+  margin-top: 34px;
+  border-top: 1px solid rgba(10, 56, 83, .15);
+}
+
+.leader-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  min-height: 74px;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(10, 56, 83, .15);
+}
+
+.leader-row h3 {
+  font-size: clamp(1.15rem, 1.7vw, 1.55rem);
+  font-weight: 650;
+  line-height: 1.3;
+}
+
+[dir="rtl"] .leader-row h3 { font-family: "Noto Kufi Arabic", sans-serif; }
+
+.leadership-role {
+  margin-top: 3px !important;
+  color: #71828b;
+  font-size: 11px !important;
+}
+
+.leader-linkedin {
+  width: 43px;
+  height: 43px;
+  flex-shrink: 0;
+  color: #0874a7 !important;
+  border: 1px solid rgba(8, 116, 167, .2) !important;
+  background: rgba(255,255,255,.55) !important;
+  transition: color .3s ease, background .3s ease, transform .3s ease !important;
+}
+
+.leader-linkedin:hover {
+  color: white !important;
+  background: #0874a7 !important;
+  transform: translateY(-3px);
+}
+
+.leadership-quote {
+  position: relative;
+  max-width: 570px;
+  margin: 32px 0 0;
+  padding: 3px 0 3px 28px;
+  border-left: 2px solid #5bbddd;
+}
+
+[dir="rtl"] .leadership-quote {
+  padding: 3px 28px 3px 0;
+  border-right: 2px solid #5bbddd;
+  border-left: 0;
+}
+
+.leadership-quote::before {
+  position: absolute;
+  top: -20px;
+  left: 24px;
+  content: "“";
+  color: rgba(8, 116, 167, .17);
+  font-size: 78px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+[dir="rtl"] .leadership-quote::before { right: 24px; left: auto; }
+
+.leadership-quote p {
+  position: relative;
+  color: #526a77;
+  font-size: 14px;
+  line-height: 1.85;
+}
+
+.leadership-portrait {
+  position: relative;
+  min-height: 570px;
+  opacity: 0;
+  transform: translateY(35px);
+  transition: opacity .9s .12s ease, transform .9s .12s cubic-bezier(.22, 1, .36, 1);
+}
+
+.leadership-section.is-visible .leadership-portrait { opacity: 1; transform: translateY(0); }
+
+.leadership-portrait img {
+  position: absolute;
+  z-index: 2;
+  right: 0;
+  bottom: 0;
+  width: min(100%, 720px);
+  max-height: 560px;
+  object-fit: contain;
+  object-position: bottom right;
+  filter: drop-shadow(0 24px 34px rgba(4, 34, 51, .13));
+}
+
+[dir="rtl"] .leadership-portrait img {
+  right: auto;
+  left: 0;
+  object-position: bottom left;
+}
+
+.leadership-orbit {
+  position: absolute;
+  top: 9%;
+  right: 8%;
+  width: min(34vw, 430px);
+  aspect-ratio: 1;
+  border: 1px solid rgba(8, 116, 167, .16);
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 48px rgba(8, 116, 167, .035),
+    0 0 0 96px rgba(8, 116, 167, .02);
+}
+
+[dir="rtl"] .leadership-orbit { right: auto; left: 8%; }
+
+.leadership-year {
+  position: absolute;
+  z-index: 1;
+  top: 8%;
+  right: 2%;
+  color: rgba(8, 116, 167, .06);
+  font-size: clamp(8rem, 15vw, 14rem) !important;
+  font-weight: 700 !important;
+  line-height: 1 !important;
+  letter-spacing: -.09em !important;
+}
+
+[dir="rtl"] .leadership-year { right: auto; left: 2%; }
+
+.leadership-caption {
+  position: absolute;
+  z-index: 3;
+  right: 12px;
+  bottom: 26px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 13px;
+  color: white;
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: 12px;
+  background: rgba(3, 43, 65, .74);
+  backdrop-filter: blur(13px);
+}
+
+[dir="rtl"] .leadership-caption { right: auto; left: 12px; }
+.leadership-caption span:first-child { color: #74cbe9; font-size: 10px; font-weight: 800; letter-spacing: .12em; }
+.leadership-caption span:last-child { font-size: 10px; }
+
+@media (max-width: 900px) {
+  .leadership-shell { grid-template-columns: 1fr; }
+  .leadership-copy { max-width: 720px; padding-bottom: 0; }
+  .leadership-portrait { min-height: 470px; }
+  .leadership-portrait img { right: 50%; width: min(100%, 620px); transform: translateX(50%); }
+  [dir="rtl"] .leadership-portrait img { right: auto; left: 50%; transform: translateX(-50%); }
+  .leadership-orbit { right: 50%; width: min(64vw, 400px); transform: translateX(50%); }
+  [dir="rtl"] .leadership-orbit { right: auto; left: 50%; transform: translateX(-50%); }
+}
+
+@media (max-width: 599px) {
+  .leadership-section { padding-top: 48px; }
+  .leadership-shell { gap: 28px; padding-inline: 18px !important; }
+  .leadership-title { font-size: 3rem !important; }
+  [dir="rtl"] .leadership-title { font-size: 2.6rem !important; }
+  .leader-names { margin-top: 24px; }
+  .leader-row { min-height: 65px; }
+  .leader-row h3 { font-size: 17px; }
+  .leader-linkedin { width: 39px; height: 39px; }
+  .leadership-quote { margin-top: 26px; }
+  .leadership-quote p { font-size: 12px; line-height: 1.75; }
+  .leadership-portrait { min-height: 340px; }
+  .leadership-portrait img { max-height: 340px; }
+  .leadership-caption { right: 0; bottom: 12px; }
+  [dir="rtl"] .leadership-caption { right: auto; left: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .leadership-copy,
+  .leadership-portrait {
+    transition: none !important;
+  }
+}

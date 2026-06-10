@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 170">
+  <g fill="#696e72">
+    <path d="M26 116 118 15l89 101h-35l-54-61-56 61z"/>
+    <path d="M68 116 120 58l50 58h-24l-26-29-27 29z" fill="#f4f6f6"/>
+    <path d="M102 116h151l-18-22H122z"/><path d="m183 68 68 48h-41l-48-34z"/>
+  </g>
+  <path d="M91 125h144" stroke="#696e72" stroke-width="4"/>
+  <text x="150" y="151" text-anchor="middle" fill="#62676b" font-family="Arial" font-size="14" font-weight="800">EXPERTISE HOUSE</text>
+</svg>

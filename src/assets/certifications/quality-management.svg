@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 170">
+  <g fill="#54595d" font-family="Arial" font-weight="700" text-anchor="middle">
+    <text x="150" y="77" font-size="38">Quality</text>
+    <text x="150" y="120" font-size="38">Management</text>
+  </g>
+  <path d="M78 138h144" stroke="#7f8589" stroke-width="3"/>
+</svg>
