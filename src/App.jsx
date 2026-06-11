@@ -232,7 +232,7 @@ function Logo({ light = false, compact = false }) {
   );
 }
 
-function LoadingScreen({ visible, language, progress }) {
+function LoadingScreen({ visible, language, progress, compact = false }) {
   const [phrase, setPhrase] = useState(0);
   useEffect(() => {
     if (!visible) return undefined;
@@ -242,7 +242,7 @@ function LoadingScreen({ visible, language, progress }) {
 
   return (
     <Fade in={visible} timeout={{ enter: 0, exit: 700 }} unmountOnExit>
-      <Box className="loading-screen" dir={language === 'ar' ? 'rtl' : 'ltr'}>
+      <Box className={`loading-screen ${compact ? 'is-transition' : ''}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
         <Box className="loader-orbit"><Box className="loader-logo"><Logo light compact /></Box></Box>
         <Box sx={{ width: 'min(78vw, 430px)', textAlign: 'center' }}>
           <Typography key={`${language}-${phrase}`} className="loading-phrase">{copy[language].loading[phrase]}</Typography>
@@ -324,32 +324,72 @@ function ImpactSection({ language }) {
 function App() {
   const [language, setLanguage] = useState('en');
   const [currentPage, setCurrentPage] = useState(
-    () => (window.location.hash === '#expertise' ? 'expertise' : 'home'),
+    () => (window.location.hash.startsWith('#expertise') ? 'expertise' : 'home'),
   );
   const [active, setActive] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
   const [openMenu, setOpenMenu] = useState(null);
   const [loadedImages, setLoadedImages] = useState(0);
+  const [firstImageReady, setFirstImageReady] = useState(false);
   const [minimumTimePassed, setMinimumTimePassed] = useState(false);
+  const [initialLoadReleased, setInitialLoadReleased] = useState(false);
+  const [pageTransitioning, setPageTransitioning] = useState(false);
+  const [transitionProgress, setTransitionProgress] = useState(0);
   const [contactOpen, setContactOpen] = useState(false);
   const [formStatus, setFormStatus] = useState('idle');
   const menuCloseTimer = useRef(null);
+  const transitionTimer = useRef(null);
+  const transitionProgressTimer = useRef(null);
+  const currentPageRef = useRef(currentPage);
   const isArabic = language === 'ar';
   const text = copy[language];
   const nav = menuData[language];
   const slide = slides[active];
-  const loading = currentPage === 'home' && (!minimumTimePassed || loadedImages === 0);
-  const progress = Math.min(100, Math.round((loadedImages / slides.length) * 100));
+  const initialLoading = !initialLoadReleased;
+  const loading = initialLoading || pageTransitioning;
+  const progress = pageTransitioning
+    ? transitionProgress
+    : firstImageReady && minimumTimePassed
+      ? 100
+      : Math.min(92, 18 + Math.round((loadedImages / slides.length) * 68));
 
   useEffect(() => {
     const syncPage = () => {
-      const nextPage = window.location.hash === '#expertise' ? 'expertise' : 'home';
-      setCurrentPage(nextPage);
-      if (nextPage === 'expertise') window.scrollTo({ top: 0, behavior: 'smooth' });
+      const hash = window.location.hash;
+      const nextPage = hash.startsWith('#expertise') ? 'expertise' : 'home';
+
+      if (nextPage === currentPageRef.current) return;
+
+      window.clearTimeout(transitionTimer.current);
+      window.clearTimeout(transitionProgressTimer.current);
+      setMenuOpen(false);
+      setOpenMenu(null);
+      setPageTransitioning(true);
+      setTransitionProgress(18);
+
+      transitionProgressTimer.current = window.setTimeout(() => {
+        setTransitionProgress(82);
+      }, 70);
+
+      transitionTimer.current = window.setTimeout(() => {
+        currentPageRef.current = nextPage;
+        setCurrentPage(nextPage);
+        window.scrollTo({ top: 0, behavior: 'auto' });
+        setTransitionProgress(100);
+
+        transitionTimer.current = window.setTimeout(() => {
+          setPageTransitioning(false);
+          setTransitionProgress(0);
+        }, 140);
+      }, 170);
     };
 
     window.addEventListener('hashchange', syncPage);
-    return () => window.removeEventListener('hashchange', syncPage);
+    return () => {
+      window.removeEventListener('hashchange', syncPage);
+      window.clearTimeout(transitionTimer.current);
+      window.clearTimeout(transitionProgressTimer.current);
+    };
   }, []);
 
   useEffect(() => {
@@ -358,14 +398,31 @@ function App() {
   }, [language, isArabic]);
 
   useEffect(() => {
-    const minimumTimer = window.setTimeout(() => setMinimumTimePassed(true), 1500);
-    slides.forEach(({ image }) => {
+    const minimumTimer = window.setTimeout(() => setMinimumTimePassed(true), 450);
+    const releaseTimer = window.setTimeout(() => setInitialLoadReleased(true), 1400);
+
+    slides.forEach(({ image }, index) => {
       const img = new Image();
-      img.onload = img.onerror = () => setLoadedImages((count) => Math.min(slides.length, count + 1));
+      let settled = false;
+      img.onload = img.onerror = () => {
+        if (settled) return;
+        settled = true;
+        setLoadedImages((count) => Math.min(slides.length, count + 1));
+        if (index === 0) setFirstImageReady(true);
+      };
       img.src = image;
     });
-    return () => window.clearTimeout(minimumTimer);
+    return () => {
+      window.clearTimeout(minimumTimer);
+      window.clearTimeout(releaseTimer);
+    };
   }, []);
+
+  useEffect(() => {
+    if (!minimumTimePassed || !firstImageReady) return undefined;
+    const releaseTimer = window.setTimeout(() => setInitialLoadReleased(true), 120);
+    return () => window.clearTimeout(releaseTimer);
+  }, [firstImageReady, minimumTimePassed]);
 
   useEffect(() => {
     if (loading) return undefined;
@@ -428,7 +485,12 @@ function App() {
 
   return (
     <Box id={currentPage === 'home' ? 'home' : undefined} dir={isArabic ? 'rtl' : 'ltr'} sx={{ minHeight: '100svh', bgcolor: '#06273b' }}>
-      <LoadingScreen visible={loading} language={language} progress={progress} />
+      <LoadingScreen
+        visible={loading}
+        language={language}
+        progress={progress}
+        compact={pageTransitioning && !initialLoading}
+      />
 
       <AppBar
         elevation={0}

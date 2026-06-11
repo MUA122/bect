@@ -311,6 +311,20 @@ a { color: inherit; }
     radial-gradient(circle at 50% 42%, rgba(32, 151, 195, .2), transparent 27%),
     linear-gradient(145deg, #031d2d, #062f48 58%, #041f31);
 }
+.loading-screen.is-transition {
+  gap: 34px;
+}
+.loading-screen.is-transition .loader-orbit {
+  width: 112px;
+  height: 112px;
+}
+.loading-screen.is-transition .loader-orbit::before { inset: -10px; }
+.loading-screen.is-transition .loader-orbit::after { inset: 13px; }
+.loading-screen.is-transition .loading-phrase {
+  min-height: 22px;
+  font-size: 14px !important;
+}
+.loading-screen.is-transition .loading-track { margin-top: 14px; }
 .loader-orbit {
   position: relative;
   display: grid;
