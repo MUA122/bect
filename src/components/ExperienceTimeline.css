@@ -99,6 +99,10 @@
   overflow: visible;
 }
 
+[dir="rtl"] .timeline-route {
+  transform: scaleX(-1);
+}
+
 .timeline-route-base,
 .timeline-route-progress {
   fill: none;
@@ -129,7 +133,7 @@
   top: 215px;
   right: 10%;
   left: 10%;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(6, minmax(0, 1fr));
 }
 
 .timeline-milestone {

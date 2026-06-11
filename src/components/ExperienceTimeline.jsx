@@ -47,6 +47,13 @@ const milestones = [
     year: '2023',
     text: { en: 'World Bank Upper Egypt local development programme', ar: 'برنامج البنك الدولي للتنمية المحلية في صعيد مصر' },
   },
+  {
+    year: '2025',
+    text: {
+      en: 'Establishment of Second KSA Office in Jeddah',
+      ar: 'تأسيس المكتب الثاني في المملكة العربية السعودية بمدينة جدة',
+    },
+  },
 ];
 
 const copy = {

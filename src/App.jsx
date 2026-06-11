@@ -28,6 +28,7 @@ import LanguageRounded from '@mui/icons-material/LanguageRounded';
 import MenuRounded from '@mui/icons-material/MenuRounded';
 import SendRounded from '@mui/icons-material/SendRounded';
 import ServicesSection from './components/ServicesSection';
+import ExpertisePage from './components/ExpertisePage';
 import ExperienceTimeline from './components/ExperienceTimeline';
 import LeadershipSection from './components/LeadershipSection';
 import CertificationsSection from './components/CertificationsSection';
@@ -321,6 +322,9 @@ function ImpactSection({ language }) {
 
 function App() {
   const [language, setLanguage] = useState('en');
+  const [currentPage, setCurrentPage] = useState(
+    () => (window.location.hash === '#expertise' ? 'expertise' : 'home'),
+  );
   const [active, setActive] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
   const [openMenu, setOpenMenu] = useState(null);
@@ -333,8 +337,19 @@ function App() {
   const text = copy[language];
   const nav = menuData[language];
   const slide = slides[active];
-  const loading = !minimumTimePassed || loadedImages === 0;
+  const loading = currentPage === 'home' && (!minimumTimePassed || loadedImages === 0);
   const progress = Math.min(100, Math.round((loadedImages / slides.length) * 100));
+
+  useEffect(() => {
+    const syncPage = () => {
+      const nextPage = window.location.hash === '#expertise' ? 'expertise' : 'home';
+      setCurrentPage(nextPage);
+      if (nextPage === 'expertise') window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    window.addEventListener('hashchange', syncPage);
+    return () => window.removeEventListener('hashchange', syncPage);
+  }, []);
 
   useEffect(() => {
     document.documentElement.lang = language;
@@ -358,7 +373,11 @@ function App() {
   }, [loading]);
 
   const links = useMemo(
-    () => nav.map((item, index) => ({ ...item, href: index === 0 ? '#home' : `#${['home', 'expertise', 'projects', 'about', 'contact'][index]}` })),
+    () => nav.map((item, index) => ({
+      ...item,
+      groups: index === 1 ? [] : item.groups,
+      href: index === 0 ? '#home' : `#${['home', 'expertise', 'projects', 'about', 'contact'][index]}`,
+    })),
     [nav],
   );
 
@@ -402,7 +421,7 @@ function App() {
   };
 
   return (
-    <Box id="home" dir={isArabic ? 'rtl' : 'ltr'} sx={{ minHeight: '100svh', bgcolor: '#06273b' }}>
+    <Box id={currentPage === 'home' ? 'home' : undefined} dir={isArabic ? 'rtl' : 'ltr'} sx={{ minHeight: '100svh', bgcolor: '#06273b' }}>
       <LoadingScreen visible={loading} language={language} progress={progress} />
 
       <AppBar
@@ -428,7 +447,7 @@ function App() {
                   }}
                   endIcon={item.groups.length ? <KeyboardArrowDownRounded sx={{ fontSize: '16px !important' }} /> : null}
                   sx={{
-                    color: openMenu === index || index === 0 ? '#00639a' : '#183447',
+                    color: openMenu === index || (currentPage === 'expertise' ? index === 1 : index === 0) ? '#00639a' : '#183447',
                     minWidth: 0,
                     px: 0.5,
                     fontSize: { md: 12, lg: 13 },
@@ -469,6 +488,25 @@ function App() {
         </Container>
       </AppBar>
 
+      {currentPage === 'expertise' ? (
+        <>
+          <ExpertisePage
+            language={language}
+            onContactClick={() => {
+              setFormStatus('idle');
+              setContactOpen(true);
+            }}
+          />
+          <SiteFooter
+            language={language}
+            onContactClick={() => {
+              setFormStatus('idle');
+              setContactOpen(true);
+            }}
+          />
+        </>
+      ) : (
+        <>
       <Box component="main" className="hero">
         {slides.map((item, index) => (
           <Box
@@ -538,6 +576,8 @@ function App() {
           setContactOpen(true);
         }}
       />
+        </>
+      )}
 
       <Drawer
         anchor={isArabic ? 'left' : 'right'}

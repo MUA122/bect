@@ -87,10 +87,12 @@
 .footer-column a { color: rgba(255,255,255,.72); text-decoration: none; transition: color .25s ease; }
 .footer-column a:hover { color: #fff; }
 
-.footer-office { gap: 15px; }
-.footer-office .footer-column-title { margin-bottom: 9px !important; }
+.footer-office { gap: 20px; }
+.footer-office-entry { display: flex; flex-direction: column; gap: 8px; }
+.footer-office .footer-column-title { margin-bottom: 2px !important; }
 .footer-office a { display: flex; align-items: flex-start; gap: 11px; font-size: 11px; line-height: 1.6; }
 .footer-office svg { width: 17px; height: 17px; flex-shrink: 0; color: #5fbddd; }
+.footer-office-email { margin-top: 2px; }
 
 .footer-navigation { gap: 10px; }
 .footer-navigation .footer-column-title { margin-bottom: 13px !important; }

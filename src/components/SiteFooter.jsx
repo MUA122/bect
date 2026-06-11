@@ -17,6 +17,41 @@ const socials = [
   { label: 'X', href: 'https://www.twitter.com/BECT_consulting/', icon: X },
 ];
 
+const offices = {
+  en: [
+    {
+      name: 'Riyadh, KSA',
+      address: '11 Al Masif district, Riyadh, KSA',
+      mapUrl: 'https://maps.google.com/?q=11+Al+Masif+district+Riyadh+KSA',
+      phone: '+966 014535135',
+      phoneUrl: 'tel:+966014535135',
+    },
+    {
+      name: 'Cairo, Egypt',
+      address: '17 Minuf St., Heliopolis, Cairo, Egypt',
+      mapUrl: 'https://maps.google.com/?q=17+Minuf+St+Heliopolis+Cairo+Egypt',
+      phone: '+20 (02) 24187866',
+      phoneUrl: 'tel:+20224187866',
+    },
+  ],
+  ar: [
+    {
+      name: 'الرياض، المملكة العربية السعودية',
+      address: 'حي المصيف، شارع رقم 11، الرياض، المملكة العربية السعودية',
+      mapUrl: 'https://maps.google.com/?q=11+Al+Masif+district+Riyadh+KSA',
+      phone: '+966 014535135',
+      phoneUrl: 'tel:+966014535135',
+    },
+    {
+      name: 'القاهرة، مصر',
+      address: '17 شارع منوف، مصر الجديدة، القاهرة، مصر',
+      mapUrl: 'https://maps.google.com/?q=17+Minuf+St+Heliopolis+Cairo+Egypt',
+      phone: '+20 (02) 24187866',
+      phoneUrl: 'tel:+20224187866',
+    },
+  ],
+};
+
 const copy = {
   en: {
     eyebrow: 'Start something meaningful',
@@ -89,12 +124,20 @@ function SiteFooter({ language = 'en', onContactClick }) {
           </Box>
 
           <Box className="footer-column footer-office">
-            <Typography className="footer-column-title">{text.office}</Typography>
-            <a href="https://maps.google.com/?q=17+Menof+St+Heliopolis+Cairo+Egypt" target="_blank" rel="noreferrer">
-              <LocationOnRounded /><span>{text.address}</span>
+            {offices[language].map((office) => (
+              <Box className="footer-office-entry" key={office.name}>
+                <Typography className="footer-column-title">{office.name}</Typography>
+                <a href={office.mapUrl} target="_blank" rel="noreferrer">
+                  <LocationOnRounded /><span>{office.address}</span>
+                </a>
+                <a href={office.phoneUrl}>
+                  <PhoneRounded /><span dir="ltr">{office.phone}</span>
+                </a>
+              </Box>
+            ))}
+            <a className="footer-office-email" href="mailto:info@bect.net">
+              <EmailRounded /><span>info@bect.net</span>
             </a>
-            <a href="tel:+201223235749"><PhoneRounded /><span dir="ltr">012 23235749</span></a>
-            <a href="mailto:info@bect.net"><EmailRounded /><span>info@bect.net</span></a>
           </Box>
 
           <Box className="footer-column footer-navigation">
