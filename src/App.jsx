@@ -42,7 +42,8 @@ import utopiaImage from './assets/projects/utopia.jpeg';
 import wadiDayqahImage from './assets/projects/wadi-dayqah.jpeg';
 
 // Paste your deployed Google Apps Script web app URL here.
-const GOOGLE_SHEETS_ENDPOINT = '';
+const GOOGLE_SHEETS_ENDPOINT =
+  'https://script.google.com/macros/s/AKfycbzm0W8QlkWbNqhBwuE2VCDoeGMsri4R0EHawp3OGX0d3NZeOXcoH51_kjGEk7DXD2u0/exec';
 
 const impactStats = [
   { value: 300, suffix: '+', label: { en: 'Employees', ar: 'موظفًا' } },
@@ -405,14 +406,19 @@ function App() {
     setFormStatus('sending');
     const formData = new FormData(form);
     formData.append('language', language);
+    formData.append('formName', 'Website contact form');
+    formData.append('page', currentPage);
+    formData.append('pageUrl', window.location.href);
     formData.append('submittedAt', new Date().toISOString());
+    const payload = new URLSearchParams();
+    formData.forEach((value, key) => payload.append(key, String(value)));
 
     try {
-      const response = await fetch(GOOGLE_SHEETS_ENDPOINT, {
+      await fetch(GOOGLE_SHEETS_ENDPOINT, {
         method: 'POST',
-        body: formData,
+        mode: 'no-cors',
+        body: payload,
       });
-      if (!response.ok) throw new Error('Submission failed');
       form.reset();
       setFormStatus('success');
     } catch {
