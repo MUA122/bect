@@ -401,30 +401,6 @@ function ProjectsPage({ language = 'en', onContactClick }) {
 
       <Box className="projects-workspace" id="projects-collection">
         <Container maxWidth="xl" className="projects-shell">
-          <section className="projects-color-key" aria-labelledby="projects-legend-title">
-            <Box className="projects-color-key-heading">
-              <Typography className="projects-color-key-note">{text.legendNote}</Typography>
-              <Typography id="projects-legend-title" component="h2">{text.legend}</Typography>
-              <Typography>{text.legendIntro}</Typography>
-            </Box>
-            <Box className="projects-color-key-list">
-              {projectCategories.map((item) => (
-                <button
-                  type="button"
-                  key={item.id}
-                  className={category === item.id ? 'is-active' : ''}
-                  style={{ '--category': item.color }}
-                  onClick={() => setCategory(category === item.id ? 'all' : item.id)}
-                  aria-pressed={category === item.id}
-                >
-                  <i aria-hidden="true" />
-                  <span>{item.label[language]}</span>
-                  <small>{categoryCounts[item.id]} {isArabic ? 'مشروع' : 'projects'}</small>
-                </button>
-              ))}
-            </Box>
-          </section>
-
           <section className="projects-filter-panel" aria-labelledby="projects-filter-title">
             <Box className="projects-filter-heading">
               <Box>
@@ -434,22 +410,40 @@ function ProjectsPage({ language = 'en', onContactClick }) {
               <Typography>{text.showing} <strong>{Math.min(visibleCount, filtered.length)}</strong> {text.of} {filtered.length} {text.results}</Typography>
             </Box>
 
-            <Box className="projects-category-tabs">
-              <button type="button" className={category === 'all' ? 'is-active' : ''} onClick={() => setCategory('all')}>
+            <Box className="projects-category-reset">
+              <button
+                type="button"
+                className={category === 'all' ? 'is-active' : ''}
+                onClick={() => setCategory('all')}
+                aria-pressed={category === 'all'}
+              >
                 {text.all}
               </button>
-              {projectCategories.map((item) => (
-                <button
-                  type="button"
-                  key={item.id}
-                  className={category === item.id ? 'is-active' : ''}
-                  style={{ '--category': item.color }}
-                  onClick={() => setCategory(item.id)}
-                >
-                  <i />{item.label[language]}<small>{categoryCounts[item.id]}</small>
-                </button>
-              ))}
             </Box>
+
+            <section className="projects-color-key" aria-labelledby="projects-legend-title">
+              <Box className="projects-color-key-heading">
+                <Typography className="projects-color-key-note">{text.legendNote}</Typography>
+                <Typography id="projects-legend-title" component="h2">{text.legend}</Typography>
+                <Typography>{text.legendIntro}</Typography>
+              </Box>
+              <Box className="projects-color-key-list">
+                {projectCategories.map((item) => (
+                  <button
+                    type="button"
+                    key={item.id}
+                    className={category === item.id ? 'is-active' : ''}
+                    style={{ '--category': item.color }}
+                    onClick={() => setCategory(category === item.id ? 'all' : item.id)}
+                    aria-pressed={category === item.id}
+                  >
+                    <i aria-hidden="true" />
+                    <span>{item.label[language]}</span>
+                    <small>{categoryCounts[item.id]} {isArabic ? 'مشروع' : 'projects'}</small>
+                  </button>
+                ))}
+              </Box>
+            </section>
 
             <Box className="projects-filter-row">
               <label className="projects-search">
