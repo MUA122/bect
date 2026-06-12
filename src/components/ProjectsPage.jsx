@@ -87,10 +87,74 @@ const localizeProject = (project, field, language) => (
     : project[field]
 );
 
-const flagFor = (code) => {
-  if (!code || code.length !== 2) return '◎';
-  return String.fromCodePoint(...code.toUpperCase().split('').map((letter) => 127397 + letter.charCodeAt()));
-};
+function CountryFlag({ code }) {
+  const commonProps = {
+    className: 'country-flag',
+    viewBox: '0 0 24 16',
+    role: 'img',
+    'aria-label': `${code} flag`,
+  };
+
+  if (code === 'EG') {
+    return (
+      <svg {...commonProps}>
+        <rect width="24" height="16" rx="2" fill="#fff" />
+        <path d="M0 0h24v5.33H0z" fill="#ce1126" />
+        <path d="M0 10.67h24V16H0z" fill="#111" />
+        <path d="m12 6.1 1.15 1.05-.42 2.05h-1.46l-.42-2.05L12 6.1Z" fill="#c79b2b" />
+      </svg>
+    );
+  }
+
+  if (code === 'IQ') {
+    return (
+      <svg {...commonProps}>
+        <rect width="24" height="16" rx="2" fill="#fff" />
+        <path d="M0 0h24v5.33H0z" fill="#ce1126" />
+        <path d="M0 10.67h24V16H0z" fill="#111" />
+        <path d="M8 8h8" stroke="#168a45" strokeWidth="1.4" strokeLinecap="round" />
+        <circle cx="10" cy="8" r=".8" fill="#168a45" />
+        <circle cx="14" cy="8" r=".8" fill="#168a45" />
+      </svg>
+    );
+  }
+
+  if (code === 'OM') {
+    return (
+      <svg {...commonProps}>
+        <rect width="24" height="16" rx="2" fill="#fff" />
+        <path d="M0 5.33h24v5.34H0z" fill="#d9272e" />
+        <path d="M0 10.67h24V16H0z" fill="#00843d" />
+        <path d="M0 0h6.2v16H0z" fill="#d9272e" />
+        <path d="M1.7 2.1h2.8M2.1 1.4l2 2.1M4.1 1.4l-2 2.1" stroke="#fff" strokeWidth=".55" strokeLinecap="round" />
+      </svg>
+    );
+  }
+
+  if (code === 'SA') {
+    return (
+      <svg {...commonProps}>
+        <rect width="24" height="16" rx="2" fill="#006c35" />
+        <path d="M6.5 6.2h11M7.5 8h9" stroke="#fff" strokeWidth=".75" strokeLinecap="round" />
+        <path d="M7 11.2h9.5l1-1" fill="none" stroke="#fff" strokeWidth=".9" strokeLinecap="round" />
+      </svg>
+    );
+  }
+
+  if (code === 'ZM') {
+    return (
+      <svg {...commonProps}>
+        <rect width="24" height="16" rx="2" fill="#198a00" />
+        <path d="M17 8h2.33v8H17z" fill="#ef3340" />
+        <path d="M19.33 8h2.34v8h-2.34z" fill="#111" />
+        <path d="M21.67 8H24v8h-2.33z" fill="#f77f00" />
+        <path d="m19.3 4.3 1.4-1.2 1.4 1.2-1.4-.25-1.4.25Z" fill="#f77f00" />
+      </svg>
+    );
+  }
+
+  return <span className="country-flag-fallback">{code}</span>;
+}
 
 const featuredProjectPages = [18, 50, 61, 79, 88, 70, 40, 53, 91, 25, 85, 71];
 
@@ -127,7 +191,7 @@ function PremiumSelect({ label, value, options, onChange, type = 'date' }) {
     <div ref={rootRef} className={`premium-select ${open ? 'is-open' : ''}`}>
       <button type="button" className="premium-select-trigger" onClick={() => setOpen((current) => !current)} aria-expanded={open}>
         <span className="premium-select-icon">
-          {type === 'location' ? (selected.code ? flagFor(selected.code) : <PublicRounded />) : <CalendarMonthRounded />}
+          {type === 'location' ? (selected.code ? <CountryFlag code={selected.code} /> : <PublicRounded />) : <CalendarMonthRounded />}
         </span>
         <span className="premium-select-copy">
           <small>{label}</small>
@@ -150,7 +214,7 @@ function PremiumSelect({ label, value, options, onChange, type = 'date' }) {
             }}
           >
             <span className="premium-option-icon">
-              {type === 'location' ? (option.code ? flagFor(option.code) : <PublicRounded />) : <i />}
+              {type === 'location' ? (option.code ? <CountryFlag code={option.code} /> : <PublicRounded />) : <i />}
             </span>
             <span>{option.label}</span>
             {option.meta && <small>{option.meta}</small>}
@@ -436,7 +500,7 @@ function ProjectsPage({ language = 'en', onContactClick }) {
                       </Box>
                       <Box className="project-card-body">
                         <Box className="project-card-meta">
-                          <span>{flagFor(project.countryCode)} {projectLocation}</span><i /><span>{projectYear}</span>
+                          <span><CountryFlag code={project.countryCode} />{projectLocation}</span><i /><span>{projectYear}</span>
                         </Box>
                         <Typography component="h3">{projectName}</Typography>
                         <Typography>{projectDescription}</Typography>
@@ -502,7 +566,7 @@ function ProjectsPage({ language = 'en', onContactClick }) {
                 <Typography component="h2">{projectName}</Typography>
                 <Typography className="project-dialog-description">{projectDescription}</Typography>
                 <Box className="project-dialog-facts">
-                  <Box><span>{text.location}</span><strong>{flagFor(selected.countryCode)} {projectLocation}</strong></Box>
+                  <Box><span>{text.location}</span><strong><CountryFlag code={selected.countryCode} />{projectLocation}</strong></Box>
                   <Box><span>{text.status}</span><strong>{projectYear}</strong></Box>
                   {selected.value && <Box><span>{text.value}</span><strong>{projectValue}</strong></Box>}
                 </Box>

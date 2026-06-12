@@ -356,6 +356,10 @@
 .premium-option-icon { display: grid; width: 31px; height: 31px; font-size: 18px; border: 1px solid rgba(10,48,69,.08); border-radius: 9px; background: white; place-items: center; }
 .premium-option-icon svg { color: #24789d; font-size: 16px; }
 .premium-option-icon i { width: 8px; height: 8px; border: 2px solid #58b8de; border-radius: 50%; }
+.country-flag { display: block; width: 24px; height: 16px; flex: 0 0 auto; overflow: hidden; border-radius: 2px; box-shadow: 0 0 0 1px rgba(10,48,69,.12); }
+.premium-select-icon .country-flag { width: 23px; height: 15px; }
+.premium-option-icon .country-flag { width: 22px; height: 15px; }
+.country-flag-fallback { display: inline-grid; min-width: 24px; height: 16px; padding: 0 3px; color: #355768; font-size: 8px; font-weight: 900; border: 1px solid rgba(10,48,69,.12); border-radius: 3px; background: white; place-items: center; }
 .projects-clear {
   min-height: 58px;
   padding: 0 18px;
@@ -432,7 +436,8 @@
 .project-card-body { position: relative; padding: 27px 30px 31px; }
 .project-card-body::before { position: absolute; top: 0; inset-inline-start: 30px; width: 52px; height: 2px; content: ""; background: var(--category); }
 .project-card-meta { display: flex; align-items: center; gap: 9px; color: #71818a; font-size: 9px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
-.project-card-meta span:first-child { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.project-card-meta span:first-child { display: inline-flex; min-width: 0; align-items: center; overflow: hidden; gap: 6px; text-overflow: ellipsis; white-space: nowrap; }
+.project-card-meta .country-flag { width: 17px; height: 11px; }
 .project-card-meta i { width: 4px; height: 4px; flex: 0 0 auto; border-radius: 50%; background: var(--category); }
 .project-card-body h3 { margin-top: 14px !important; color: #0a3045; font-size: clamp(1.55rem,2.15vw,2.2rem) !important; font-weight: 600 !important; line-height: 1.08 !important; letter-spacing: -.04em !important; }
 .project-card-body > p { display: -webkit-box; overflow: hidden; margin-top: 14px !important; color: #687982; font-size: 12px !important; line-height: 1.72 !important; -webkit-box-orient: vertical; -webkit-line-clamp: 3; }
@@ -495,6 +500,8 @@
 .project-dialog-facts > div { display: flex; flex-direction: column; gap: 7px; }
 .project-dialog-facts span { color: #87949a; font-size: 8px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
 .project-dialog-facts strong { color: #173d50; font-size: 12px; line-height: 1.5; }
+.project-dialog-facts strong:has(.country-flag) { display: inline-flex; align-items: center; gap: 8px; }
+.project-dialog-facts .country-flag { width: 21px; height: 14px; }
 
 @keyframes atlasIn { from { opacity: 0; transform: translateY(35px) rotateY(-7deg); } to { opacity: 1; transform: none; } }
 @keyframes stampSpin { to { transform: rotate(360deg); } }
