@@ -1,8 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
   AppBar,
   Box,
   Button,
@@ -22,13 +19,12 @@ import ArrowBackRounded from '@mui/icons-material/ArrowBackRounded';
 import ArrowForwardRounded from '@mui/icons-material/ArrowForwardRounded';
 import ArrowOutwardRounded from '@mui/icons-material/ArrowOutwardRounded';
 import CloseRounded from '@mui/icons-material/CloseRounded';
-import ExpandMoreRounded from '@mui/icons-material/ExpandMoreRounded';
-import KeyboardArrowDownRounded from '@mui/icons-material/KeyboardArrowDownRounded';
 import LanguageRounded from '@mui/icons-material/LanguageRounded';
 import MenuRounded from '@mui/icons-material/MenuRounded';
 import SendRounded from '@mui/icons-material/SendRounded';
 import ServicesSection from './components/ServicesSection';
 import ExpertisePage from './components/ExpertisePage';
+import ProjectsPage from './components/ProjectsPage';
 import ExperienceTimeline from './components/ExperienceTimeline';
 import LeadershipSection from './components/LeadershipSection';
 import CertificationsSection from './components/CertificationsSection';
@@ -324,11 +320,14 @@ function ImpactSection({ language }) {
 function App() {
   const [language, setLanguage] = useState('en');
   const [currentPage, setCurrentPage] = useState(
-    () => (window.location.hash.startsWith('#expertise') ? 'expertise' : 'home'),
+    () => {
+      if (window.location.hash.startsWith('#expertise')) return 'expertise';
+      if (window.location.hash.startsWith('#projects')) return 'projects';
+      return 'home';
+    },
   );
   const [active, setActive] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [openMenu, setOpenMenu] = useState(null);
   const [loadedImages, setLoadedImages] = useState(0);
   const [firstImageReady, setFirstImageReady] = useState(false);
   const [minimumTimePassed, setMinimumTimePassed] = useState(false);
@@ -337,7 +336,6 @@ function App() {
   const [transitionProgress, setTransitionProgress] = useState(0);
   const [contactOpen, setContactOpen] = useState(false);
   const [formStatus, setFormStatus] = useState('idle');
-  const menuCloseTimer = useRef(null);
   const transitionTimer = useRef(null);
   const transitionProgressTimer = useRef(null);
   const currentPageRef = useRef(currentPage);
@@ -356,14 +354,17 @@ function App() {
   useEffect(() => {
     const syncPage = () => {
       const hash = window.location.hash;
-      const nextPage = hash.startsWith('#expertise') ? 'expertise' : 'home';
+      const nextPage = hash.startsWith('#expertise')
+        ? 'expertise'
+        : hash.startsWith('#projects')
+          ? 'projects'
+          : 'home';
 
       if (nextPage === currentPageRef.current) return;
 
       window.clearTimeout(transitionTimer.current);
       window.clearTimeout(transitionProgressTimer.current);
       setMenuOpen(false);
-      setOpenMenu(null);
       setPageTransitioning(true);
       setTransitionProgress(18);
 
@@ -433,7 +434,6 @@ function App() {
   const links = useMemo(
     () => nav.map((item, index) => ({
       ...item,
-      groups: index === 1 ? [] : item.groups,
       href: index === 0 ? '#home' : `#${['home', 'expertise', 'projects', 'about', 'contact'][index]}`,
     })),
     [nav],
@@ -441,15 +441,6 @@ function App() {
 
   const changeSlide = (direction) => {
     setActive((current) => (current + direction + slides.length) % slides.length);
-  };
-
-  const cancelMenuClose = () => {
-    window.clearTimeout(menuCloseTimer.current);
-  };
-
-  const scheduleMenuClose = () => {
-    cancelMenuClose();
-    menuCloseTimer.current = window.setTimeout(() => setOpenMenu(null), 350);
   };
 
   const handleContactSubmit = async (event) => {
@@ -496,8 +487,6 @@ function App() {
         elevation={0}
         position="fixed"
         color="transparent"
-        onMouseEnter={cancelMenuClose}
-        onMouseLeave={scheduleMenuClose}
         sx={{ pt: { xs: 1.25, md: 2 }, zIndex: 1200, pointerEvents: loading ? 'none' : 'auto' }}
       >
         <Container maxWidth="xl" sx={{ position: 'relative' }}>
@@ -509,18 +498,12 @@ function App() {
                 <Button
                   key={item.label}
                   href={item.href}
-                  onMouseEnter={() => {
-                    cancelMenuClose();
-                    setOpenMenu(item.groups.length ? index : null);
-                  }}
-                  endIcon={item.groups.length ? <KeyboardArrowDownRounded sx={{ fontSize: '16px !important' }} /> : null}
                   sx={{
-                    color: openMenu === index || (currentPage === 'expertise' ? index === 1 : index === 0) ? '#00639a' : '#183447',
+                    color: (currentPage === 'expertise' ? index === 1 : currentPage === 'projects' ? index === 2 : index === 0) ? '#00639a' : '#183447',
                     minWidth: 0,
                     px: 0.5,
                     fontSize: { md: 12, lg: 13 },
                     whiteSpace: 'nowrap',
-                    '& .MuiButton-endIcon': { ml: isArabic ? 0 : 0.25, mr: isArabic ? 0.25 : 0, transition: 'transform .25s', transform: openMenu === index ? 'rotate(180deg)' : 'none' },
                   }}
                 >
                   {item.label}
@@ -536,29 +519,29 @@ function App() {
             </Stack>
           </Toolbar>
 
-          <Fade in={openMenu !== null} timeout={220}>
-            <Box className="mega-menu" onMouseEnter={cancelMenuClose} onMouseLeave={scheduleMenuClose}>
-              {openMenu !== null && links[openMenu]?.groups.map((group) => (
-                <Box key={group.title} className="mega-group">
-                  <Typography className="mega-title">{group.title}</Typography>
-                  <Stack spacing={0.25}>
-                    {group.items.map((item) => <Button key={item} href="#" className="mega-link">{item}</Button>)}
-                  </Stack>
-                </Box>
-              ))}
-              <Box className="mega-accent">
-                <Typography>{String((openMenu ?? 0) + 1).padStart(2, '0')}</Typography>
-                <Box />
-                <Typography>{links[openMenu]?.label}</Typography>
-              </Box>
-            </Box>
-          </Fade>
         </Container>
       </AppBar>
 
       {currentPage === 'expertise' ? (
         <>
           <ExpertisePage
+            language={language}
+            onContactClick={() => {
+              setFormStatus('idle');
+              setContactOpen(true);
+            }}
+          />
+          <SiteFooter
+            language={language}
+            onContactClick={() => {
+              setFormStatus('idle');
+              setContactOpen(true);
+            }}
+          />
+        </>
+      ) : currentPage === 'projects' ? (
+        <>
+          <ProjectsPage
             language={language}
             onContactClick={() => {
               setFormStatus('idle');
@@ -658,22 +641,7 @@ function App() {
           <IconButton onClick={() => setMenuOpen(false)} sx={{ color: 'white' }}><CloseRounded /></IconButton>
         </Stack>
         <Stack component="nav" sx={{ mt: 5 }}>
-          {links.map((item, index) => item.groups.length ? (
-            <Accordion key={item.label} disableGutters elevation={0} sx={{ bgcolor: 'transparent', color: 'white', borderBottom: '1px solid rgba(255,255,255,.12)', '&::before': { display: 'none' } }}>
-              <AccordionSummary expandIcon={<ExpandMoreRounded sx={{ color: '#6bc5e5' }} />}>
-                <Typography sx={{ fontSize: 21, fontWeight: 600 }}>{item.label}</Typography>
-                <Typography sx={{ ml: isArabic ? 0 : 'auto', mr: isArabic ? 'auto' : 0, px: 1.5, color: 'rgba(255,255,255,.35)', fontSize: 10 }}>0{index + 1}</Typography>
-              </AccordionSummary>
-              <AccordionDetails sx={{ pt: 0, pb: 2 }}>
-                {item.groups.map((group) => (
-                  <Box key={group.title} sx={{ mb: 2 }}>
-                    <Typography sx={{ color: '#69c5e6', fontSize: 11, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '.1em', mb: 0.75 }}>{group.title}</Typography>
-                    {group.items.map((entry) => <Button key={entry} href="#" fullWidth sx={{ color: 'rgba(255,255,255,.75)', justifyContent: 'flex-start', px: 0, py: 0.4, fontWeight: 500 }}>{entry}</Button>)}
-                  </Box>
-                ))}
-              </AccordionDetails>
-            </Accordion>
-          ) : (
+          {links.map((item, index) => (
             <Button key={item.label} href={item.href} onClick={() => setMenuOpen(false)} sx={{ justifyContent: 'space-between', color: 'white', fontSize: 21, py: 2, borderBottom: '1px solid rgba(255,255,255,.12)' }}>
               {item.label}<Typography sx={{ color: 'rgba(255,255,255,.35)', fontSize: 10 }}>0{index + 1}</Typography>
             </Button>
