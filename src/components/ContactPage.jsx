@@ -16,11 +16,14 @@ const officeData = {
       country: 'Egypt',
       city: 'Cairo',
       label: 'Head office',
-      address: '17 Minuf St., Heliopolis, Cairo, Egypt',
-      destination: '17 Minuf St, Heliopolis, Cairo, Egypt',
+      address: '17 Menof St., Almazah, Heliopolis, Cairo, Egypt',
+      destination: 'BECT Engineering Consulting, 17 Menof, Almazah, Heliopolis, Cairo Governorate 4460293, Egypt',
       phone: '+20 (02) 24187866',
       phoneUrl: 'tel:+20224187866',
       locator: 'HELIOPOLIS / CAIRO',
+      mapEmbed: 'https://www.google.com/maps?q=BECT%20Engineering%20Consulting%2C%2017%20Menof%2C%20Almazah%2C%20Heliopolis%2C%20Cairo%20Governorate%204460293%2C%20Egypt&z=16&output=embed',
+      flagUrl: 'https://flagcdn.com/eg.svg',
+      flagAlt: 'Flag of Egypt',
     },
     {
       id: 'saudi',
@@ -33,6 +36,9 @@ const officeData = {
       phone: '+966 014535135',
       phoneUrl: 'tel:+966014535135',
       locator: 'AL MASEEF / RIYADH',
+      mapEmbed: 'https://www.google.com/maps?q=6071%20King%20Abdulaziz%20Road%2C%20Al%20Maseef%2C%20Riyadh%2C%20Saudi%20Arabia&z=14&output=embed',
+      flagUrl: 'https://flagcdn.com/sa.svg',
+      flagAlt: 'Flag of Saudi Arabia',
     },
   ],
   ar: [
@@ -42,11 +48,14 @@ const officeData = {
       country: 'مصر',
       city: 'القاهرة',
       label: 'المكتب الرئيسي',
-      address: '17 شارع منوف، مصر الجديدة، القاهرة، مصر',
-      destination: '17 Minuf St, Heliopolis, Cairo, Egypt',
+      address: '17 شارع منوف، الماظة، مصر الجديدة، القاهرة، مصر',
+      destination: 'BECT Engineering Consulting, 17 Menof, Almazah, Heliopolis, Cairo Governorate 4460293, Egypt',
       phone: '+20 (02) 24187866',
       phoneUrl: 'tel:+20224187866',
       locator: 'HELIOPOLIS / CAIRO',
+      mapEmbed: 'https://www.google.com/maps?q=BECT%20Engineering%20Consulting%2C%2017%20Menof%2C%20Almazah%2C%20Heliopolis%2C%20Cairo%20Governorate%204460293%2C%20Egypt&z=16&output=embed',
+      flagUrl: 'https://flagcdn.com/eg.svg',
+      flagAlt: 'علم مصر',
     },
     {
       id: 'saudi',
@@ -59,6 +68,9 @@ const officeData = {
       phone: '+966 014535135',
       phoneUrl: 'tel:+966014535135',
       locator: 'AL MASEEF / RIYADH',
+      mapEmbed: 'https://www.google.com/maps?q=6071%20King%20Abdulaziz%20Road%2C%20Al%20Maseef%2C%20Riyadh%2C%20Saudi%20Arabia&z=14&output=embed',
+      flagUrl: 'https://flagcdn.com/sa.svg',
+      flagAlt: 'علم المملكة العربية السعودية',
     },
   ],
 };
@@ -102,31 +114,6 @@ const pageCopy = {
   },
 };
 
-function EgyptFlag() {
-  return (
-    <svg viewBox="0 0 72 48" role="img" aria-label="Egypt flag">
-      <rect width="72" height="16" fill="#ce1126" />
-      <rect y="16" width="72" height="16" fill="#fff" />
-      <rect y="32" width="72" height="16" fill="#111" />
-      <path d="M36 19.1l2 2.5-.8 5.6H35l-.8-5.6 1.8-2.5z" fill="#c6a147" />
-    </svg>
-  );
-}
-
-function SaudiFlag() {
-  return (
-    <svg viewBox="0 0 72 48" role="img" aria-label="Saudi Arabia flag">
-      <rect width="72" height="48" fill="#006c35" />
-      <g fill="#fff">
-        <rect x="20" y="16" width="32" height="2" rx="1" />
-        <rect x="24" y="20" width="24" height="2" rx="1" />
-        <path d="M20 29h34c-5 4-12 5-20 5H20z" />
-        <rect x="28" y="34" width="25" height="1.8" rx=".9" />
-      </g>
-    </svg>
-  );
-}
-
 function getDirectionsUrl(destination) {
   const encoded = encodeURIComponent(destination);
   if (typeof navigator !== 'undefined' && /iPad|iPhone|iPod|Macintosh/i.test(navigator.userAgent)) {
@@ -138,20 +125,26 @@ function getDirectionsUrl(destination) {
 function OfficeMap({ office, mapLabel }) {
   return (
     <Box className={`office-map office-map-${office.id}`} aria-label={`${mapLabel}: ${office.city}`}>
-      <Box className="map-road map-road-a" />
-      <Box className="map-road map-road-b" />
-      <Box className="map-road map-road-c" />
-      <Box className="map-road map-road-d" />
-      <Box className="map-block map-block-a" />
-      <Box className="map-block map-block-b" />
-      <Box className="map-block map-block-c" />
-      <Box className="map-watermark">{office.city}</Box>
-      <Box className="map-pin">
-        <span><LocationOnRounded /></span>
-        <Typography>BECT</Typography>
+      <iframe
+        src={office.mapEmbed}
+        title={`${office.city} office map`}
+        loading="lazy"
+        referrerPolicy="no-referrer-when-downgrade"
+      />
+      <Box className="map-interface">
+        <Box className="map-location">
+          <span><LocationOnRounded /></span>
+          <Box>
+            <Typography>BECT OFFICE</Typography>
+            <strong>{office.city}</strong>
+          </Box>
+        </Box>
+        <Typography className="map-live-label"><i /> LIVE MAP</Typography>
       </Box>
-      <Typography className="map-coordinates" dir="ltr">{office.locator}</Typography>
-      <Typography className="map-caption">{mapLabel}</Typography>
+      <Box className="map-meta">
+        <Typography dir="ltr">{office.locator}</Typography>
+        <Typography>{mapLabel}</Typography>
+      </Box>
     </Box>
   );
 }
@@ -250,7 +243,7 @@ function ContactPage({ language = 'en', formText, formStatus, onSubmit }) {
               <Box component="article" className="office-card" key={office.id}>
                 <Box className="office-card-top">
                   <Box className="office-flag">
-                    {office.id === 'egypt' ? <EgyptFlag /> : <SaudiFlag />}
+                    <img src={office.flagUrl} alt={office.flagAlt} loading="lazy" />
                   </Box>
                   <Typography className="office-index">{office.index}</Typography>
                 </Box>
