@@ -1,0 +1,179 @@
+.about-page { overflow: hidden; color: #0b3449; background: #f3f0e9; }
+.about-shell { padding-inline: clamp(24px,5vw,84px) !important; }
+.about-kicker,.about-section-index { color: #58bfe2; font-size: 9px !important; font-weight: 900 !important; letter-spacing: .18em !important; text-transform: uppercase; }
+.about-hero { position: relative; min-height: 100svh; padding: 145px 0 0; color: white; background: radial-gradient(circle at 82% 18%,rgba(77,188,226,.18),transparent 27%),#06384f; }
+.about-hero::after { position: absolute; right: 0; bottom: 0; left: 0; height: 1px; content: ""; background: rgba(255,255,255,.13); }
+.about-hero-grid { display: grid !important; min-height: 620px; grid-template-columns: .82fr 1.18fr; align-items: center; gap: clamp(35px,5vw,80px); }
+.about-hero-copy h1 { max-width: 750px; margin-top: 16px !important; font-size: clamp(4rem,7vw,8rem) !important; font-weight: 500 !important; line-height: .88 !important; letter-spacing: -.075em !important; }
+.about-hero-copy h1 span { color: #77d0ed; }
+.about-hero-intro { max-width: 570px; margin-top: 30px !important; color: rgba(255,255,255,.65); font-size: 15px !important; line-height: 1.8 !important; }
+.about-hero-visual { position: relative; min-height: 590px; overflow: hidden; background: linear-gradient(rgba(119,208,237,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(119,208,237,.045) 1px,transparent 1px); background-size: 42px 42px; }
+.about-hero-visual::before { position: absolute; inset: 5% 2%; content: ""; border: 1px solid rgba(119,208,237,.12); border-radius: 47% 53% 45% 55% / 55% 42% 58% 45%; transform: rotate(-2deg); }
+.about-journey-note { position: absolute; top: 4%; left: 8%; color: #ed6e49; font: 700 clamp(20px,2vw,29px)/1 "Caveat",cursive !important; transform: rotate(-4deg); }
+.about-hero-route { position: absolute; inset: 4% 0 1%; width: 100%; height: 95%; overflow: visible; }
+.about-hero-route path { fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.route-shadow { stroke: rgba(119,208,237,.17); stroke-width: 10; }
+.route-main { stroke: #77d0ed; stroke-width: 3; stroke-dasharray: .018 .014; animation: routeDraw 1.7s ease-out both; }
+.route-arrow { stroke: #ed6e49; stroke-width: 4; }
+.route-markers circle:nth-child(odd) { fill: #06384f; stroke: rgba(237,110,73,.2); stroke-width: 8; }
+.route-markers circle:nth-child(even) { fill: #ed6e49; }
+.about-hero-milestone { position: absolute; z-index: 2; width: 145px; }
+.about-hero-milestone strong { display: block; color: white; font: 700 clamp(22px,2.2vw,32px)/1 "Caveat",cursive; letter-spacing: .02em; }
+.about-hero-milestone p { max-width: 135px; margin-top: 5px !important; color: rgba(255,255,255,.58); font-size: 8px !important; font-weight: 700 !important; line-height: 1.45 !important; }
+.hero-stop-1 { top: 50%; left: 77%; transform: rotate(-2deg); }
+.hero-stop-2 { top: 31%; left: 56%; transform: rotate(2deg); }
+.hero-stop-3 { top: 47%; left: 35%; transform: rotate(-3deg); }
+.hero-stop-4 { top: 63%; left: 24%; transform: rotate(2deg); }
+.about-route-endpoint { position: absolute; z-index: 3; display: grid; }
+.about-route-endpoint span { color: #ed6e49; font: 700 clamp(20px,2vw,28px)/.9 "Caveat",cursive; transform: rotate(-6deg); }
+.about-route-endpoint strong { color: white; font: 700 clamp(36px,4vw,58px)/.9 "Caveat",cursive; letter-spacing: -.02em; }
+.endpoint-from { top: 2%; right: 4%; text-align: end; }
+.endpoint-to { bottom: 0; left: 12%; padding-top: 15px; }
+.endpoint-to span { transform: rotate(6deg); }
+.about-stat-rail { display: grid !important; grid-template-columns: repeat(6,1fr); border-top: 1px solid rgba(255,255,255,.13); }
+.about-stat-rail > div { display: flex; min-height: 112px; align-items: center; gap: 11px; padding-inline: 18px; border-inline-end: 1px solid rgba(255,255,255,.1); }
+.about-stat-rail strong { color: #77d0ed; font-size: 28px; font-weight: 600; }
+.about-stat-rail span { color: rgba(255,255,255,.48); font-size: 8px; font-weight: 800; line-height: 1.4; text-transform: uppercase; letter-spacing: .08em; }
+.about-story { padding: clamp(90px,10vw,160px) 0; background: #f5f3ed; }
+.about-story-grid { display: grid !important; grid-template-columns: .85fr 1.15fr; gap: clamp(55px,9vw,150px); }
+.about-story h2,.about-section-heading h2,.about-journey h2,.about-leadership h2,.about-practice h2,.about-organization h2,.about-offices h2,.about-network h2 { margin-top: 17px !important; font-size: clamp(3rem,5vw,6rem) !important; font-weight: 500 !important; line-height: .94 !important; letter-spacing: -.065em !important; }
+.about-story-copy { display: grid; gap: 26px; padding-top: 30px; }
+.about-story-copy p { color: #586e79; font-size: 15px !important; line-height: 1.9 !important; }
+.about-principles { padding: clamp(80px,9vw,140px) 0; background: white; }
+.about-section-heading { display: grid; max-width: 900px; grid-template-columns: 1fr; }
+.about-section-heading > p:last-child { max-width: 550px; margin-top: 19px !important; color: #6d7e86; line-height: 1.7; }
+.about-principle-grid { display: grid; grid-template-columns: repeat(5,1fr); margin-top: 64px; border-top: 1px solid #d9e0e2; border-bottom: 1px solid #d9e0e2; }
+.about-principle-grid > div { min-height: 205px; padding: 27px 23px; border-inline-end: 1px solid #d9e0e2; transition: color .3s,background .3s,transform .3s; }
+.about-principle-grid > div:hover { color: white; background: #0a5678; transform: translateY(-8px); }
+.about-principle-grid span { color: #ed6e49; font: 700 20px "Caveat",cursive; }
+.about-principle-grid h3 { margin-top: 38px !important; font-size: 17px !important; font-weight: 650 !important; line-height: 1.45 !important; }
+.about-journey { padding: clamp(85px,9vw,140px) 0; color: white; background: radial-gradient(circle at 85% 8%,rgba(94,197,231,.16),transparent 28%),#06384f; }
+.about-journey-heading { display: flex; align-items: end; justify-content: space-between; gap: 45px; }
+.about-journey-feature { max-width: 410px; padding-inline-start: 28px; border-inline-start: 1px solid rgba(255,255,255,.18); animation: aboutFade .4s ease; }
+.about-journey-feature strong { color: #77d0ed; font-size: 42px; font-weight: 500; }
+.about-journey-feature p { margin-top: 5px !important; color: rgba(255,255,255,.65); line-height: 1.6; }
+.about-milestone-track { display: flex; overflow-x: auto; margin-top: 72px; padding: 0 0 24px; scrollbar-color: #5fbddc transparent; }
+.about-milestone-track button { position: relative; min-width: 180px; min-height: 155px; padding: 0 20px; color: white; font: inherit; text-align: start; border: 0; border-top: 1px solid rgba(255,255,255,.28); background: transparent; cursor: pointer; }
+.about-milestone-track button i { position: absolute; top: -5px; left: 20px; width: 9px; height: 9px; border: 2px solid #77d0ed; border-radius: 50%; background: #06384f; }
+[dir="rtl"] .about-milestone-track button i { right: 20px; left: auto; }
+.about-milestone-track button span { display: block; margin-top: 23px; color: #77d0ed; font-size: 18px; font-weight: 800; }
+.about-milestone-track button small { display: block; margin-top: 13px; color: rgba(255,255,255,.52); font-size: 10px; line-height: 1.5; }
+.about-milestone-track button.is-active { background: rgba(119,208,237,.08); }
+.about-milestone-track button.is-active i { background: #77d0ed; box-shadow: 0 0 0 8px rgba(119,208,237,.12); }
+.about-milestone-track button.is-active small { color: white; }
+.about-leadership { padding: clamp(90px,10vw,155px) 0 clamp(80px,9vw,135px); background: #f5f3ed; }
+.about-leadership-heading { max-width: 850px; }
+.about-leadership-heading > p:last-child { max-width: 620px; margin-top: 20px !important; color: #657780; line-height: 1.75; }
+.about-leadership-stage { position: relative; display: grid; grid-template-columns: minmax(0,.9fr) minmax(280px,1.15fr) minmax(0,.9fr); align-items: center; gap: clamp(18px,2.4vw,38px); margin-top: 55px; }
+.about-leadership-portrait { position: relative; align-self: stretch; min-height: 570px; overflow: hidden; border-radius: 220px 220px 12px 12px; background: linear-gradient(180deg,#dfeaec 0%,#f5f3ed 77%); }
+.about-leadership-portrait::before { position: absolute; top: 10%; left: 50%; width: 78%; aspect-ratio: 1; content: ""; border: 1px dashed rgba(22,128,169,.3); border-radius: 50%; transform: translateX(-50%); }
+.about-leadership-portrait img { position: absolute; right: 0; bottom: 18px; left: 0; width: 100%; max-height: 545px; object-fit: contain; object-position: bottom center; filter: drop-shadow(0 30px 35px rgba(5,43,62,.12)); }
+.about-leadership-portrait p { position: absolute; right: 22px; bottom: 18px; z-index: 2; color: #ed6e49; font: 700 20px/1 "Caveat",cursive !important; transform: rotate(-3deg); }
+.about-leader-note { position: relative; padding: 34px 30px; border-top: 1px solid #cad7da; border-bottom: 1px solid #cad7da; background: rgba(255,255,255,.62); }
+.about-leader-note::after { position: absolute; top: -1px; width: 45px; height: 3px; content: ""; background: #77d0ed; }
+.about-leader-note > span { color: #ed6e49; font: 700 20px "Caveat",cursive; }
+.about-leader-note h3 { margin-top: 4px !important; font-size: 24px !important; font-weight: 650 !important; }
+.about-leader-role { margin-top: 3px !important; color: #1680a9; font-size: 9px !important; font-weight: 900 !important; letter-spacing: .1em !important; text-transform: uppercase; }
+.about-leader-note > p:last-child { margin-top: 14px !important; color: #637680; font-size: 12px !important; line-height: 1.75 !important; }
+.about-practice { padding: clamp(90px,10vw,155px) 0; background: white; }
+.about-practice-grid { display: grid !important; grid-template-columns: .85fr 1.15fr; align-items: center; gap: clamp(50px,8vw,130px); }
+.about-practice-visual { position: relative; min-height: 610px; }
+.about-practice-image { position: absolute; inset: 0 12% 8% 0; border-radius: 8px 180px 8px 8px; background: linear-gradient(180deg,transparent 55%,rgba(3,45,66,.68)),url('/projects/profile/91-port-said-tunnels.jpg') center/cover; }
+[dir="rtl"] .about-practice-image { inset: 0 0 8% 12%; border-radius: 180px 8px 8px 8px; }
+.about-practice-visual > p { position: absolute; right: 0; bottom: 0; padding: 18px; color: white; font-size: 8px !important; font-weight: 900 !important; letter-spacing: .15em !important; background: #ed6e49; writing-mode: vertical-rl; }
+.about-practice-intro { margin-top: 20px !important; color: #657780; }
+.about-discipline-list { margin-top: 38px; border-top: 1px solid #dbe2e4; }
+.about-discipline-list > div { display: grid; min-height: 66px; grid-template-columns: 42px 1fr auto; align-items: center; gap: 14px; border-bottom: 1px solid #dbe2e4; }
+.about-discipline-list svg { color: #1680a9; font-size: 22px; }
+.about-discipline-list p { font-size: 14px; font-weight: 700; }
+.about-discipline-list small { color: #a3adb1; font-size: 8px; }
+.about-associates { padding: clamp(85px,9vw,140px) 0; color: white; background: #075579; }
+.about-section-heading-light > p:last-child { color: rgba(255,255,255,.6); }
+.about-associate-grid { display: grid; grid-template-columns: repeat(3,1fr); margin-top: 60px; border-top: 1px solid rgba(255,255,255,.18); }
+.about-associate-grid > div { min-height: 330px; padding: 30px; border-inline-end: 1px solid rgba(255,255,255,.18); }
+.about-associate-grid > div > span { color: #79d0ec; font: 700 20px "Caveat",cursive; }
+.about-associate-grid h3 { margin-top: 55px !important; font-size: clamp(2.3rem,4vw,4rem) !important; font-weight: 700 !important; letter-spacing: -.05em !important; }
+.about-associate-origin { margin-top: 3px !important; color: #79d0ec; font-size: 9px !important; font-weight: 900 !important; letter-spacing: .1em !important; text-transform: uppercase; }
+.about-associate-grid > div > p:last-child { margin-top: 22px !important; color: rgba(255,255,255,.67); font-size: 12px !important; line-height: 1.75 !important; }
+.about-organization { padding: clamp(85px,8vw,125px) 0 clamp(70px,7vw,105px); background: #f5f3ed; }
+.about-organization-grid { display: grid !important; grid-template-columns: 1fr; gap: 42px; }
+.about-organization-heading { max-width: 820px; }
+.about-organization-heading > p:last-child { max-width: 620px; margin-top: 18px !important; color: #657780; line-height: 1.75; }
+.about-member-list { display: grid; grid-template-columns: repeat(2,1fr); column-gap: clamp(28px,5vw,80px); border-top: 1px solid #cdd7da; }
+.about-member-list > div { display: grid; min-height: 90px; grid-template-columns: 48px 1fr; align-items: center; gap: 18px; border-bottom: 1px solid #cdd7da; transition: padding .25s,background .25s; }
+.about-member-list > div:hover { padding-inline: 16px; background: white; }
+.about-member-list > div > span { color: #ed6e49; font: 700 20px "Caveat",cursive; }
+.about-member-list h3 { font-size: 17px !important; font-weight: 700 !important; }
+.about-member-list p { margin-top: 3px !important; color: #73838a; font-size: 10px !important; }
+.about-offices { padding: clamp(85px,9vw,140px) 0; color: white; background: radial-gradient(circle at 50% 100%,rgba(98,199,231,.18),transparent 34%),#06384f; }
+.about-office-grid { display: grid; grid-template-columns: 1fr 1fr; margin-top: 55px; border-top: 1px solid rgba(255,255,255,.16); }
+.about-office-grid > div { min-height: 260px; padding: 35px; border-inline-end: 1px solid rgba(255,255,255,.16); }
+.about-office-grid span { color: #79d0ec; font-size: 9px; font-weight: 900; letter-spacing: .12em; }
+.about-office-grid h3 { margin: 70px 0 12px !important; font-size: 25px !important; }
+.about-office-grid p { color: rgba(255,255,255,.58); font-size: 12px !important; line-height: 1.7 !important; }
+.about-network { padding: clamp(90px,10vw,145px) 0 clamp(72px,8vw,110px); background: white; }
+.about-network-heading > p:last-child { max-width: 600px; margin-top: 18px !important; color: #657780; line-height: 1.7; }
+.about-partner-cloud { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 55px; }
+.about-partner-cloud span { padding: 11px 15px; color: #45606c; font-size: 10px; font-weight: 700; border: 1px solid #dbe2e4; border-radius: 999px; background: #f8faf9; transition: transform .2s,color .2s,border-color .2s; }
+.about-partner-cloud span:hover { color: #075579; border-color: #75cae7; transform: translateY(-3px); }
+.about-partner-cloud .tone-1 { background: #eef7f8; }.about-partner-cloud .tone-2 { background: #faf5ed; }.about-partner-cloud .tone-3 { background: #f4f1fa; }
+@keyframes aboutFade { from { opacity: 0; transform: translateY(8px); } }
+@keyframes routeDraw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+@media (max-width: 1050px) {
+  .about-hero-grid,.about-story-grid,.about-practice-grid,.about-organization-grid { grid-template-columns: 1fr; }
+  .about-hero-visual { min-height: 520px; }
+  .about-stat-rail { grid-template-columns: repeat(3,1fr); }
+  .about-principle-grid { grid-template-columns: repeat(2,1fr); }
+  .about-leadership-stage { grid-template-columns: minmax(0,1fr) minmax(250px,1fr) minmax(0,1fr); gap: 14px; }
+  .about-leadership-portrait { min-height: 500px; }
+  .about-leader-note { padding: 28px 22px; }
+}
+@media (max-width: 760px) {
+  .about-shell { padding-inline: 24px !important; }
+  .about-hero { min-height: auto; padding-top: 125px; }
+  .about-hero-grid { min-height: 0; }
+  .about-hero-copy h1 { font-size: clamp(3.7rem,15vw,5.5rem) !important; }
+  .about-hero-visual { min-height: 620px; margin-top: 25px; background-size: 32px 32px; }
+  .about-journey-note { top: 2%; left: 5%; font-size: 20px !important; }
+  .about-hero-route { inset: 5% -9% 0; width: 118%; height: 90%; opacity: .8; }
+  .about-hero-milestone { width: 43%; }
+  .about-hero-milestone strong { font-size: 24px; }
+  .about-hero-milestone p { max-width: 125px; font-size: 7px !important; }
+  .hero-stop-1 { top: 45%; left: 67%; }
+  .hero-stop-2 { top: 30%; left: 49%; }
+  .hero-stop-3 { top: 46%; left: 23%; }
+  .hero-stop-4 { top: 61%; left: 32%; }
+  .about-route-endpoint strong { font-size: 38px; }
+  .endpoint-from { top: 1%; right: 3%; }
+  .endpoint-to { bottom: 0; left: 15%; }
+  .about-stat-rail { grid-template-columns: repeat(2,1fr); }
+  .about-stat-rail > div { min-height: 88px; }
+  .about-story h2,.about-section-heading h2,.about-journey h2,.about-leadership h2,.about-practice h2,.about-organization h2,.about-offices h2,.about-network h2 { font-size: clamp(2.7rem,12vw,4.3rem) !important; }
+  .about-principle-grid { grid-template-columns: 1fr; margin-top: 42px; }
+  .about-principle-grid > div { min-height: 150px; }
+  .about-principle-grid h3 { margin-top: 25px !important; }
+  .about-journey-heading { align-items: flex-start; flex-direction: column; }
+  .about-milestone-track { margin-top: 45px; }
+  .about-leadership-stage { min-height: 0; grid-template-columns: 1fr; gap: 18px; }
+  .about-leadership-portrait { min-height: 490px; grid-row: 1; }
+  .about-leadership-stage > .about-leader-note:first-child { grid-row: 2; }
+  .about-leadership-stage > .about-leader-note:last-child { grid-row: 3; }
+  .about-leader-note { padding: 24px 22px; }
+  .about-practice-visual { min-height: 430px; }
+  .about-associate-grid { grid-template-columns: 1fr; }
+  .about-associate-grid > div { min-height: 250px; border-bottom: 1px solid rgba(255,255,255,.18); }
+  .about-associate-grid h3 { margin-top: 35px !important; }
+  .about-office-grid { grid-template-columns: 1fr; }
+  .about-office-grid > div { min-height: 220px; border-bottom: 1px solid rgba(255,255,255,.16); }
+  .about-office-grid h3 { margin-top: 45px !important; }
+  .about-member-list { grid-template-columns: 1fr; }
+}
+@media (max-width: 430px) {
+  .about-shell { padding-inline: 18px !important; }
+  .about-stat-rail strong { font-size: 22px; }
+  .about-stat-rail span { font-size: 7px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .about-principle-grid > div,.about-member-list > div,.about-partner-cloud span { transition: none; }
+  .route-main { animation: none; }
+}
