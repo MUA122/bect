@@ -26,6 +26,7 @@ import ServicesSection from './components/ServicesSection';
 import ExpertisePage from './components/ExpertisePage';
 import ProjectsPage from './components/ProjectsPage';
 import AboutPage from './components/AboutPage';
+import ContactPage from './components/ContactPage';
 import ExperienceTimeline from './components/ExperienceTimeline';
 import LeadershipSection from './components/LeadershipSection';
 import CertificationsSection from './components/CertificationsSection';
@@ -325,6 +326,7 @@ function App() {
       if (window.location.hash.startsWith('#expertise')) return 'expertise';
       if (window.location.hash.startsWith('#projects')) return 'projects';
       if (window.location.hash.startsWith('#about')) return 'about';
+      if (window.location.hash.startsWith('#contact')) return 'contact';
       return 'home';
     },
   );
@@ -362,6 +364,8 @@ function App() {
           ? 'projects'
           : hash.startsWith('#about')
             ? 'about'
+            : hash.startsWith('#contact')
+              ? 'contact'
           : 'home';
 
       if (nextPage === currentPageRef.current) return;
@@ -503,7 +507,7 @@ function App() {
                   key={item.label}
                   href={item.href}
                   sx={{
-                    color: (currentPage === 'expertise' ? index === 1 : currentPage === 'projects' ? index === 2 : currentPage === 'about' ? index === 3 : index === 0) ? '#00639a' : '#183447',
+                    color: (currentPage === 'expertise' ? index === 1 : currentPage === 'projects' ? index === 2 : currentPage === 'about' ? index === 3 : currentPage === 'contact' ? index === 4 : index === 0) ? '#00639a' : '#183447',
                     minWidth: 0,
                     px: 0.5,
                     fontSize: { md: 12, lg: 13 },
@@ -574,6 +578,22 @@ function App() {
             onContactClick={() => {
               setFormStatus('idle');
               setContactOpen(true);
+            }}
+          />
+        </>
+      ) : currentPage === 'contact' ? (
+        <>
+          <ContactPage
+            language={language}
+            formText={text.form}
+            formStatus={formStatus}
+            onSubmit={handleContactSubmit}
+          />
+          <SiteFooter
+            language={language}
+            onContactClick={() => {
+              setFormStatus('idle');
+              document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }}
           />
         </>
