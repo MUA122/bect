@@ -7,14 +7,12 @@ import Instagram from '@mui/icons-material/Instagram';
 import LinkedIn from '@mui/icons-material/LinkedIn';
 import LocationOnRounded from '@mui/icons-material/LocationOnRounded';
 import PhoneRounded from '@mui/icons-material/PhoneRounded';
-import X from '@mui/icons-material/X';
 import './SiteFooter.css';
 
 const socials = [
   { label: 'LinkedIn', href: 'https://www.linkedin.com/company/bectconsulting/', icon: LinkedIn },
   { label: 'Instagram', href: 'https://www.instagram.com/bect_consult/', icon: Instagram },
-  { label: 'Facebook', href: 'https://www.facebook.com/BECT_consulting/', icon: FacebookRounded },
-  { label: 'X', href: 'https://www.twitter.com/BECT_consulting/', icon: X },
+  { label: 'Facebook', href: 'https://www.facebook.com/bectconsulting/', icon: FacebookRounded },
 ];
 
 const offices = {

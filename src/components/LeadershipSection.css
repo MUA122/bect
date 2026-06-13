@@ -3,9 +3,7 @@
   overflow: hidden;
   padding: clamp(62px, 6vw, 96px) 0 0;
   color: #0a3853;
-  background:
-    radial-gradient(circle at 76% 20%, rgba(86, 188, 225, .13), transparent 24%),
-    linear-gradient(135deg, #f7f8f7, #eef2f3);
+  background: linear-gradient(135deg, #f7f8f7, #eef2f3);
 }
 
 .leadership-section::before {
@@ -126,7 +124,7 @@
   position: absolute;
   top: -20px;
   left: 24px;
-  content: "“";
+  content: none;
   color: rgba(8, 116, 167, .17);
   font-size: 78px;
   font-weight: 700;
@@ -218,6 +216,15 @@
 [dir="rtl"] .leadership-caption { right: auto; left: 12px; }
 .leadership-caption span:first-child { color: #74cbe9; font-size: 10px; font-weight: 800; letter-spacing: .12em; }
 .leadership-caption span:last-child { font-size: 10px; }
+
+.leadership-divider {
+  position: relative;
+  z-index: 4;
+  width: calc(100% - clamp(48px, 10vw, 168px));
+  height: 1px;
+  margin: 0 auto;
+  background: linear-gradient(90deg, transparent, rgba(8, 85, 124, .3) 12%, rgba(8, 85, 124, .3) 88%, transparent);
+}
 
 @media (max-width: 900px) {
   .leadership-shell { grid-template-columns: 1fr; }
