@@ -8,12 +8,11 @@ import expertiseLogo from '../assets/certifications/expertise-house.svg';
 import qualityLogo from '../assets/certifications/quality-management.svg';
 import './CertificationsSection.css';
 
-// Replace each value with its public Google Drive certificate URL.
-export const CERTIFICATE_DRIVE_LINKS = {
+export const CERTIFICATE_LINKS = {
   ida: '',
-  iso: '',
-  expertise: '',
-  quality: '',
+  iso: '/certificates/iso-quality-management.pdf',
+  expertise: '/certificates/expertise-house-register.pdf',
+  quality: '/certificates/iso-quality-management.pdf',
 };
 
 const certificateLogos = {
@@ -29,28 +28,24 @@ const certificates = [
     code: 'IDA',
     title: { en: 'Accreditation by IDA', ar: 'اعتماد هيئة التنمية الصناعية' },
     detail: { en: 'Industrial Development Authority', ar: 'هيئة التنمية الصناعية' },
-    logo: 'https://www.bect.net/media/images/%D8%A7%D9%84%D9%87%D9%8A%D8%A6%D8%A9_%D8%A7%D9%84%D8%B9%D8%A7%D9%85%D8%A9_%D9%84%D9%84%D8%AA%D9%86%D9%85%D9%8A%D8%A9_%D8%A7%D9%84%D8%B5%D9%86%D8%A7%D8%B9%D9%8A%D8%A9_%D9%85%D8%B5%D8%B1_1_h9WrDE4.png',
   },
   {
     id: 'iso',
     code: 'ISO 9001',
     title: { en: 'ISO 9001:2015', ar: 'شهادة ISO 9001:2015' },
     detail: { en: 'Quality Management System', ar: 'نظام إدارة الجودة' },
-    logo: isoLogo,
   },
   {
     id: 'expertise',
     code: 'EHEC',
     title: { en: 'Expertise House', ar: 'بيت الخبرة الهندسي' },
     detail: { en: 'Engineering Consultant Certification', ar: 'اعتماد الاستشارات الهندسية' },
-    logo: expertiseLogo,
   },
   {
     id: 'quality',
     code: 'QMS',
     title: { en: 'Quality Management Policy', ar: 'سياسة إدارة الجودة' },
     detail: { en: 'Governance, quality and performance', ar: 'الحوكمة والجودة والأداء' },
-    logo: qualityLogo,
   },
 ];
 
@@ -82,12 +77,14 @@ function CertificationsSection({ language = 'en' }) {
   useEffect(() => {
     const section = sectionRef.current;
     if (!section) return undefined;
+
     const observer = new IntersectionObserver(([entry]) => {
       if (entry.isIntersecting) {
         setVisible(true);
         observer.disconnect();
       }
     }, { threshold: 0.15 });
+
     observer.observe(section);
     return () => observer.disconnect();
   }, []);
@@ -110,7 +107,8 @@ function CertificationsSection({ language = 'en' }) {
 
         <Box className="certifications-grid">
           {certificates.map((certificate, index) => {
-            const href = CERTIFICATE_DRIVE_LINKS[certificate.id];
+            const href = CERTIFICATE_LINKS[certificate.id];
+
             return (
               <Box
                 component={href ? 'a' : 'article'}
@@ -123,7 +121,9 @@ function CertificationsSection({ language = 'en' }) {
                 aria-label={href ? `${text.aria} ${certificate.title[language]}` : undefined}
               >
                 <Box className="certificate-topline">
-                  <Typography>{String(index + 1).padStart(2, '0')} / 04</Typography>
+                  <Typography>
+                    {String(index + 1).padStart(2, '0')} / {String(certificates.length).padStart(2, '0')}
+                  </Typography>
                   <VerifiedRounded />
                 </Box>
 
