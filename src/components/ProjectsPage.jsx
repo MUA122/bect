@@ -156,7 +156,31 @@ function CountryFlag({ code }) {
   return <span className="country-flag-fallback">{code}</span>;
 }
 
-const featuredProjectPages = [18, 50, 61, 79, 88, 70, 40, 53, 91, 25, 85, 71];
+const fallbackProjectImage = '/projects/profile/18-half-moon-bay.jpg';
+
+const getProjectSortValue = (project) => {
+  const year = String(project.year || '').toLowerCase();
+
+  if (year.includes('in progress')) return 3000;
+  if (year.includes('expected')) {
+    const expectedYear = Number.parseInt(year.match(/\d{4}/)?.[0], 10);
+    return Number.isNaN(expectedYear) ? 2990 : expectedYear + 0.5;
+  }
+
+  const numericYear = Number.parseInt(year.match(/\d{4}/)?.[0], 10);
+  return Number.isNaN(numericYear) ? 0 : numericYear;
+};
+
+const sortNewestFirst = (items) => [...items].sort((a, b) => {
+  const dateDiff = getProjectSortValue(b) - getProjectSortValue(a);
+  if (dateDiff !== 0) return dateDiff;
+  return (a.sourcePage || 0) - (b.sourcePage || 0);
+});
+
+const handleProjectImageError = (event) => {
+  if (event.currentTarget.src.endsWith(fallbackProjectImage)) return;
+  event.currentTarget.src = fallbackProjectImage;
+};
 
 function CategoryMark({ category }) {
   return (
@@ -244,6 +268,8 @@ function ProjectsPage({ language = 'en', onContactClick }) {
     [],
   );
 
+  const newestProjects = useMemo(() => sortNewestFirst(projects), []);
+
   const countryOptions = useMemo(() => {
     const countries = [...new Map(projects.map((project) => [
       project.country,
@@ -277,45 +303,9 @@ function ProjectsPage({ language = 'en', onContactClick }) {
     ];
   }, [language, text.allYears]);
 
-  const curatedProjects = useMemo(() => {
-    const featured = featuredProjectPages
-      .map((page) => projects.find((project) => project.sourcePage === page))
-      .filter(Boolean);
-    const featuredIds = new Set(featured.map((project) => project.id));
-    const categoryPools = Object.fromEntries(
-      projectCategories.map((item) => [
-        item.id,
-        projects.filter(
-          (project) => project.category === item.id && !featuredIds.has(project.id)
-        ),
-      ])
-    );
-    const mixedRemainder = [];
-    let hasProjects = true;
-
-    while (hasProjects) {
-      hasProjects = false;
-      projectCategories.forEach((item) => {
-        const nextProject = categoryPools[item.id].shift();
-        if (nextProject) {
-          mixedRemainder.push(nextProject);
-          hasProjects = true;
-        }
-      });
-    }
-
-    return [...featured, ...mixedRemainder];
-  }, []);
-
   const filtered = useMemo(() => {
     const search = query.trim().toLocaleLowerCase();
-    const isDefaultView = category === 'all'
-      && country === 'all'
-      && year === 'all'
-      && !search;
-    const sourceProjects = isDefaultView ? curatedProjects : projects;
-
-    return sourceProjects.filter((project) => {
+    return newestProjects.filter((project) => {
       const matchesSearch = !search || [
         project.name,
         project.location,
@@ -331,7 +321,7 @@ function ProjectsPage({ language = 'en', onContactClick }) {
         && (country === 'all' || project.country === country)
         && (year === 'all' || project.year === year);
     });
-  }, [category, country, curatedProjects, language, query, year]);
+  }, [category, country, language, newestProjects, query, year]);
 
   useEffect(() => setVisibleCount(12), [category, country, query, year]);
 
@@ -367,16 +357,16 @@ function ProjectsPage({ language = 'en', onContactClick }) {
             <Box className="projects-atlas" aria-hidden="true">
               <Box className="projects-atlas-blueprint" />
               <Box className="projects-atlas-card projects-atlas-card-main">
-                <img src={heroProjects[0].image} alt="" />
+                <img src={heroProjects[0].image} alt="" onError={handleProjectImageError} />
                 <span>01</span>
                 <b>{heroProjects[0].name}</b>
               </Box>
               <Box className="projects-atlas-card projects-atlas-card-water">
-                <img src={heroProjects[1].image} alt="" />
+                <img src={heroProjects[1].image} alt="" onError={handleProjectImageError} />
                 <span>02</span>
               </Box>
               <Box className="projects-atlas-card projects-atlas-card-industry">
-                <img src={heroProjects[2].image} alt="" />
+                <img src={heroProjects[2].image} alt="" onError={handleProjectImageError} />
                 <span>03</span>
               </Box>
               <Box className="projects-atlas-stamp">
@@ -484,7 +474,13 @@ function ProjectsPage({ language = 'en', onContactClick }) {
                       onClick={() => setSelected(project)}
                     >
                       <Box className="project-card-visual">
-                        <img src={project.image} alt={projectName} loading={index > 3 ? 'lazy' : 'eager'} />
+                        <img
+                          src={project.image}
+                          alt={projectName}
+                          loading={index > 7 ? 'lazy' : 'eager'}
+                          decoding="async"
+                          onError={handleProjectImageError}
+                        />
                         <Box className="project-card-shade" />
                         <Box className="project-card-number">{String(index + 1).padStart(2, '0')}</Box>
                         <Box className="project-card-badge"><CategoryMark category={itemCategory} />{itemCategory.label[language]}</Box>
@@ -495,6 +491,10 @@ function ProjectsPage({ language = 'en', onContactClick }) {
                       <Box className="project-card-body">
                         <Box className="project-card-meta">
                           <span><CountryFlag code={project.countryCode} />{projectLocation}</span><i /><span>{projectYear}</span>
+                        </Box>
+                        <Box className="project-card-sector">
+                          <CategoryMark category={itemCategory} />
+                          <span>{itemCategory.label[language]}</span>
                         </Box>
                         <Typography component="h3">{projectName}</Typography>
                         <Typography>{projectDescription}</Typography>
@@ -554,7 +554,7 @@ function ProjectsPage({ language = 'en', onContactClick }) {
           return (
             <DialogContent className="project-dialog-content" style={{ '--category': itemCategory.color }}>
               <IconButton className="project-dialog-close" onClick={() => setSelected(null)} aria-label={text.close}><CloseRounded /></IconButton>
-              <Box className="project-dialog-image"><img src={selected.image} alt={projectName} /></Box>
+              <Box className="project-dialog-image"><img src={selected.image} alt={projectName} onError={handleProjectImageError} /></Box>
               <Box className="project-dialog-copy">
                 <Box className="project-dialog-badge"><CategoryMark category={itemCategory} />{itemCategory.label[language]}</Box>
                 <Typography component="h2">{projectName}</Typography>

@@ -455,6 +455,10 @@ a { color: inherit; }
   .impact-stat:nth-child(n+4) { margin-top: 22px; }
 }
 
+@media (min-width: 900px) {
+  .hero-actions { transform: translateY(clamp(90px, 13vh, 150px)); }
+}
+
 @media (max-width: 899px) {
   .glass-header { min-height: 64px !important; padding: 0 16px !important; border-radius: 15px; }
   .hero-layout { padding-top: 112px !important; padding-bottom: 22px !important; }
@@ -535,6 +539,10 @@ a { color: inherit; }
   .hero-body { margin-top: 17px !important; }
   .hero-actions { margin-top: 20px; }
   .primary-cta, .secondary-cta { min-height: 48px; }
+}
+
+@media (max-height: 760px) and (min-width: 900px) {
+  .hero-actions { transform: translateY(clamp(54px, 9vh, 82px)); }
 }
 
 @media (prefers-reduced-motion: reduce) {
