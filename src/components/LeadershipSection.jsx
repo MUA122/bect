@@ -85,7 +85,7 @@ function LeadershipSection({ language = 'en' }) {
         <Box className="leadership-portrait">
           <Box
             component="img"
-            src="https://www.bect.net/static/bosses3.png"
+            src="/about/co-ceos.png"
             alt={`${leaders[0].name[language]} & ${leaders[1].name[language]}`}
           />
         </Box>

@@ -153,6 +153,7 @@
 .leadership-portrait img {
   position: absolute;
   z-index: 2;
+  display: block;
   right: 0;
   bottom: 0;
   width: min(100%, 720px);
@@ -247,8 +248,22 @@
   .leader-linkedin { width: 39px; height: 39px; }
   .leadership-quote { margin-top: 26px; }
   .leadership-quote p { font-size: 12px; line-height: 1.75; }
-  .leadership-portrait { min-height: 340px; }
-  .leadership-portrait img { max-height: 340px; }
+  .leadership-portrait {
+    min-height: 0;
+    aspect-ratio: 1.08;
+  }
+  .leadership-portrait img {
+    right: 50%;
+    bottom: 0;
+    width: min(112%, 420px);
+    max-height: 100%;
+    transform: translateX(50%);
+  }
+  [dir="rtl"] .leadership-portrait img {
+    right: auto;
+    left: 50%;
+    transform: translateX(-50%);
+  }
   .leadership-caption { right: 0; bottom: 12px; }
   [dir="rtl"] .leadership-caption { right: auto; left: 0; }
 }
