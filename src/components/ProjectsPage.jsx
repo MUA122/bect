@@ -369,21 +369,15 @@ function ProjectsPage({ language = 'en', onContactClick }) {
                 <img src={heroProjects[2].image} alt="" onError={handleProjectImageError} />
                 <span>03</span>
               </Box>
-              <Box className="projects-atlas-stamp">
-                <strong>{projects.length}</strong>
-                <span>PROJECT<br />STORIES</span>
-              </Box>
               <Typography className="projects-atlas-hand">{text.atlasNote}</Typography>
               <svg className="projects-atlas-sketch" viewBox="0 0 230 130" fill="none">
                 <path d="M8 104C52 122 78 54 123 71c32 12 40 43 99 13" />
                 <path d="m208 75 15 9-12 12" />
               </svg>
-              <Box className="projects-atlas-caption">{text.atlasLabel} / 2026</Box>
             </Box>
           </Box>
 
           <Box className="projects-hero-metrics">
-            <Box><strong>{projects.length}</strong><span>{text.metricProjects}</span></Box>
             <Box><strong>{projectCategories.length}</strong><span>{text.metricCategories}</span></Box>
           </Box>
         </Container>

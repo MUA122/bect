@@ -116,26 +116,6 @@
 .projects-atlas:hover .projects-atlas-card-main { transform: rotate(0) translateY(-6px); }
 .projects-atlas:hover .projects-atlas-card-water { transform: rotate(-2deg) translate(-5px,5px); }
 .projects-atlas:hover .projects-atlas-card-industry { transform: rotate(-4deg) translate(-4px,-5px); }
-.projects-atlas-stamp {
-  position: absolute;
-  z-index: 6;
-  right: 0;
-  bottom: 8%;
-  display: flex;
-  width: 145px;
-  height: 145px;
-  align-items: center;
-  justify-content: center;
-  gap: 9px;
-  border: 1px solid rgba(121,206,233,.48);
-  border-radius: 50%;
-  background: rgba(3,38,56,.88);
-  box-shadow: 0 20px 50px rgba(0,12,20,.3);
-  backdrop-filter: blur(14px);
-}
-.projects-atlas-stamp::before { position: absolute; inset: 9px; content: ""; border: 1px dashed #ff7048; border-radius: 50%; animation: stampSpin 18s linear infinite; }
-.projects-atlas-stamp strong { color: #79cee9; font-size: 35px; font-weight: 500; letter-spacing: -.06em; }
-.projects-atlas-stamp span { color: rgba(255,255,255,.72); font-size: 8px; font-weight: 800; line-height: 1.45; letter-spacing: .12em; }
 .projects-atlas-hand {
   position: absolute;
   z-index: 7;
@@ -148,14 +128,12 @@
 }
 .projects-atlas-sketch { position: absolute; z-index: 7; top: 5%; right: -2%; width: 210px; height: 120px; overflow: visible; }
 .projects-atlas-sketch path { stroke: #ffba6b; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 5 7; }
-.projects-atlas-caption { position: absolute; z-index: 6; right: 24%; bottom: 0; color: rgba(255,255,255,.38); font-size: 8px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
 [dir="rtl"] .projects-atlas { direction: ltr; }
 
 .projects-hero-metrics {
   position: relative;
   z-index: 4;
-  display: grid;
-  grid-template-columns: auto auto 1fr;
+  display: flex;
   align-items: center;
   gap: 45px;
   padding-top: 28px;
@@ -544,10 +522,8 @@
   .projects-atlas-card-main { right: 8%; width: 64%; height: 64%; }
   .projects-atlas-card-water { left: 2%; width: 43%; height: 34%; }
   .projects-atlas-card-industry { left: 5%; width: 36%; height: 29%; }
-  .projects-atlas-stamp { right: 5%; bottom: 4%; width: 108px; height: 108px; }
-  .projects-atlas-stamp strong { font-size: 28px; }
   .projects-atlas-hand, .projects-atlas-sketch { display: none; }
-  .projects-hero-metrics { grid-template-columns: 1fr 1fr; gap: 20px; }
+  .projects-hero-metrics { gap: 20px; }
   .projects-hero-metrics > div { grid-template-columns: auto 1fr; }
   .projects-filter-panel, .projects-grid, .projects-contact { width: calc(100vw - 48px); max-width: calc(100vw - 48px); }
   .projects-color-key { width: 100%; max-width: none; }
@@ -586,9 +562,6 @@
   .projects-atlas-card-main { right: 10%; width: 62%; }
   .projects-atlas-card-water { left: 4%; width: 41%; }
   .projects-atlas-card-industry { left: 7%; width: 34%; }
-  .projects-atlas-stamp { width: 96px; height: 96px; }
-  .projects-atlas-stamp span { font-size: 6px; }
-  .projects-atlas-caption { right: 28%; }
   .projects-hero-metrics strong { font-size: 24px; }
   .projects-hero-metrics span { font-size: 8px; }
   .projects-filter-panel, .projects-grid, .projects-contact { width: calc(100vw - 36px); max-width: calc(100vw - 36px); }
@@ -598,6 +571,6 @@
   .project-dialog-facts { grid-template-columns: 1fr; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .projects-atlas, .projects-atlas-stamp::before, .project-card { animation: none; }
+  .projects-atlas, .project-card { animation: none; }
   .projects-atlas-card, .project-card, .project-card-visual img, .project-card-open { transition: none; }
 }
