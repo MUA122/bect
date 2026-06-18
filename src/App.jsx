@@ -149,8 +149,8 @@ const copy = {
   en: {
     kicker: 'Architects & Engineers',
     impact: '35+ years of impact',
-    headline: 'Expertise you can trust.',
-    subhead: 'Solutions that empower you.',
+    headline: '35+ years',
+    subhead: 'of impact',
     body: 'We shape places, systems and infrastructure that move communities forward.',
     explore: 'Explore project',
     contact: 'Start a conversation',
@@ -181,8 +181,8 @@ const copy = {
   ar: {
     kicker: 'معماريون ومهندسون',
     impact: 'أكثر من 35 عامًا من التأثير',
-    headline: 'خبرة تستحق ثقتك.',
-    subhead: 'حلول تمكّنك من التقدم.',
+    headline: 'أكثر من 35 عامًا',
+    subhead: 'من التأثير',
     body: 'نصمم الأماكن والأنظمة والبنية التحتية التي تدفع المجتمعات نحو المستقبل.',
     explore: 'استكشف المشروع',
     contact: 'ابدأ محادثة',
@@ -626,7 +626,7 @@ function App() {
             </Typography>
             <Typography className="hero-body">{text.body}</Typography>
             <Stack direction={{ xs: 'column', sm: 'row' }} className="hero-actions">
-              <Button variant="contained" size="large" endIcon={<ArrowOutwardRounded />} className="primary-cta">{text.explore}</Button>
+              <Button href="#projects" variant="contained" size="large" endIcon={<ArrowOutwardRounded />} className="primary-cta">{text.explore}</Button>
               <Button variant="outlined" size="large" className="secondary-cta" onClick={() => { setFormStatus('idle'); setContactOpen(true); }}>{text.contact}</Button>
             </Stack>
           </Box>

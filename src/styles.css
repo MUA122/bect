@@ -119,12 +119,13 @@ a { color: inherit; }
   z-index: 1;
   display: flex !important;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
+  gap: clamp(34px, 5vh, 62px);
   min-height: 100svh;
   padding-top: 145px !important;
   padding-bottom: 28px !important;
 }
-.hero-copy { width: min(700px, 57%); margin: auto 0; padding: 24px 0 34px; color: white; }
+.hero-copy { width: min(700px, 57%); margin: 0; padding: 24px 0 0; color: white; }
 .impact-label { font-size: 11px !important; font-weight: 700 !important; letter-spacing: .16em !important; text-transform: uppercase; }
 .hero-title {
   max-width: 760px;
@@ -477,7 +478,7 @@ a { color: inherit; }
   .language-button { padding: 7px 9px !important; font-size: 12px !important; }
   .hero-shade, .hero-shade.rtl { background: linear-gradient(0deg, rgba(2,27,43,.97) 0%, rgba(2,31,49,.73) 68%, rgba(2,20,31,.28) 100%); }
   .hero-image { background-position: 62% center; }
-  .hero-layout { min-height: 100svh; padding-top: 102px !important; padding-bottom: 18px !important; }
+  .hero-layout { min-height: 100svh; justify-content: space-between; gap: 18px; padding-top: 102px !important; padding-bottom: 18px !important; }
   .hero-copy { display: flex; flex: 1; flex-direction: column; justify-content: center; padding: 16px 0 28px; }
   .impact-label { font-size: 9px !important; }
   .hero-title { font-size: clamp(2.75rem, 13.5vw, 4rem) !important; line-height: 1 !important; }
