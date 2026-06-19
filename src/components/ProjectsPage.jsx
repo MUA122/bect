@@ -391,7 +391,11 @@ function ProjectsPage({ language = 'en', onContactClick }) {
                 <Typography className="projects-filter-kicker">{text.eyebrow}</Typography>
                 <Typography id="projects-filter-title" component="h2">{text.filterTitle}</Typography>
               </Box>
-              <Typography>{text.showing} <strong>{Math.min(visibleCount, filtered.length)}</strong> {text.of} {filtered.length} {text.results}</Typography>
+              {category !== 'all' && (
+                <Typography>
+                  {text.showing} <strong>{Math.min(visibleCount, filtered.length)}</strong> {text.of} {filtered.length} {text.results}
+                </Typography>
+              )}
             </Box>
 
             <Box className="projects-category-reset">
