@@ -204,6 +204,62 @@ function AboutPage({ language = 'en', onContactClick }) {
             <Typography className="about-hero-intro">{text.intro}</Typography>
           </Box>
           <Box className="about-hero-visual">
+            <Box className="about-engineering-board" aria-hidden="true">
+              <Box className="about-board-header">
+                <span>BECT / TECHNICAL OFFICE</span>
+                <strong>Integrated engineering</strong>
+              </Box>
+              <svg className="about-engineering-drawing" viewBox="0 0 760 560" role="presentation">
+                <defs>
+                  <linearGradient id="aboutBeamGradient" x1="0" x2="1">
+                    <stop offset="0" stopColor="#77d0ed" stopOpacity=".2" />
+                    <stop offset=".48" stopColor="#77d0ed" stopOpacity=".9" />
+                    <stop offset="1" stopColor="#ed6e49" stopOpacity=".9" />
+                  </linearGradient>
+                </defs>
+                <g className="drawing-grid">
+                  {Array.from({ length: 8 }).map((_, index) => (
+                    <path key={`v-${index}`} d={`M${92 + index * 82} 42 V520`} />
+                  ))}
+                  {Array.from({ length: 6 }).map((_, index) => (
+                    <path key={`h-${index}`} d={`M54 ${82 + index * 78} H705`} />
+                  ))}
+                </g>
+                <g className="drawing-tower">
+                  <path d="M210 454 L286 116 L362 454 Z" />
+                  <path d="M244 304 H328 M230 372 H342 M264 214 H308" />
+                  <path d="M210 454 L328 304 L286 116 L244 304 L362 454" />
+                  <path d="M179 454 H394" />
+                </g>
+                <g className="drawing-bridge">
+                  <path d="M382 352 C455 270 548 266 626 352" />
+                  <path d="M392 352 H682" />
+                  <path d="M424 352 V314 M474 352 V287 M524 352 V279 M574 352 V303 M624 352 V348" />
+                </g>
+                <g className="drawing-network">
+                  <path d="M122 168 C190 96 288 76 388 112 C495 151 552 91 645 122" />
+                  <path d="M124 168 L214 454 M388 112 L524 352 M645 122 L682 352" />
+                  <circle cx="122" cy="168" r="10" />
+                  <circle cx="388" cy="112" r="10" />
+                  <circle cx="645" cy="122" r="10" />
+                  <circle cx="524" cy="352" r="10" />
+                </g>
+                <g className="drawing-measurements">
+                  <path d="M118 502 H641" />
+                  <path d="M118 490 V514 M641 490 V514" />
+                  <path d="M90 116 V454" />
+                  <path d="M78 116 H102 M78 454 H102" />
+                </g>
+              </svg>
+              <Box className="about-engineering-chip chip-architecture">ARCH</Box>
+              <Box className="about-engineering-chip chip-structure">STRUCTURE</Box>
+              <Box className="about-engineering-chip chip-mep">MEP</Box>
+              <Box className="about-engineering-chip chip-infra">INFRA</Box>
+              <Box className="about-engineering-stamp">
+                <span>ISO</span>
+                <strong>9001</strong>
+              </Box>
+            </Box>
             <Typography className="about-journey-note">{isArabic ? 'رحلة مستمرة من الفكرة إلى الأثر' : 'a journey from ideas to impact'}</Typography>
             <svg className="about-hero-route" viewBox="0 0 760 560" role="presentation">
               <path className="route-shadow" d="M718 82 C628 113 635 214 574 283 C488 380 494 249 405 202 C315 155 318 346 225 350 C116 354 142 475 44 492" />
@@ -326,7 +382,6 @@ function AboutPage({ language = 'en', onContactClick }) {
             </Box>
             <Box className="about-leadership-portrait">
               <Box component="img" src="/about/co-ceos.png" alt={`${leaders[0].name[language]} & ${leaders[1].name[language]}`} />
-              <Typography>{isArabic ? 'رؤية مشتركة، ممارسة واحدة' : 'two perspectives, one practice'}</Typography>
             </Box>
             <Box className="about-leader-note">
               <span>02</span>

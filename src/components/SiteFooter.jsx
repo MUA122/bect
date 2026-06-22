@@ -19,8 +19,8 @@ const offices = {
   en: [
     {
       name: 'Riyadh, KSA',
-      address: '11 Al Masif district, Riyadh, KSA',
-      mapUrl: 'https://maps.google.com/?q=11+Al+Masif+district+Riyadh+KSA',
+      address: '6071 King Abdelaziz Rd., Al Maseef District, Riyadh, KSA',
+      mapUrl: 'https://maps.google.com/?q=6071+King+Abdelaziz+Rd+Al+Maseef+District+Riyadh+KSA',
       phone: '+966 014535135',
       phoneUrl: 'tel:+966014535135',
     },
@@ -36,7 +36,7 @@ const offices = {
     {
       name: 'الرياض، المملكة العربية السعودية',
       address: 'حي المصيف، شارع رقم 11، الرياض، المملكة العربية السعودية',
-      mapUrl: 'https://maps.google.com/?q=11+Al+Masif+district+Riyadh+KSA',
+      mapUrl: 'https://maps.google.com/?q=6071+King+Abdelaziz+Rd+Al+Maseef+District+Riyadh+KSA',
       phone: '+966 014535135',
       phoneUrl: 'tel:+966014535135',
     },
