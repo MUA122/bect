@@ -27,7 +27,6 @@ const copy = {
       "A living archive of places, systems, and infrastructure shaped across regions, scales, and disciplines.",
     metricProjects: "projects in the portfolio",
     metricCategories: "connected fields",
-    atlasNote: "Built across borders",
     atlasLabel: "Selected project atlas",
     legend: "Follow the Colors",
     legendIntro: "A quick color key for the portfolio.",
@@ -56,7 +55,6 @@ const copy = {
       "أرشيف حي للأماكن والأنظمة والبنية التحتية التي صممناها عبر مناطق ومقاييس وتخصصات متعددة.",
     metricProjects: "مشروعاً في محفظة الأعمال",
     metricCategories: "مجالات مترابطة",
-    atlasNote: "نبني عبر الحدود",
     atlasLabel: "أطلس المشروعات المختارة",
     legend: "اتبع اللون",
     legendIntro:
@@ -451,17 +449,6 @@ function ProjectsPage({ language = "en", onContactClick }) {
                 />
                 <span>03</span>
               </Box>
-              <Typography className="projects-atlas-hand">
-                {text.atlasNote}
-              </Typography>
-              <svg
-                className="projects-atlas-sketch"
-                viewBox="0 0 230 130"
-                fill="none"
-              >
-                <path d="M8 104C52 122 78 54 123 71c32 12 40 43 99 13" />
-                <path d="m208 75 15 9-12 12" />
-              </svg>
             </Box>
           </Box>
 
