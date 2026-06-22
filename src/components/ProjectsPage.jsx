@@ -15,6 +15,7 @@ import CloseRounded from "@mui/icons-material/CloseRounded";
 import KeyboardArrowDownRounded from "@mui/icons-material/KeyboardArrowDownRounded";
 import PublicRounded from "@mui/icons-material/PublicRounded";
 import SearchRounded from "@mui/icons-material/SearchRounded";
+import projectsHeroCollage from "../assets/projects/projects-hero-collage.png";
 import { projectCategories, projects } from "../data/projects";
 import "./ProjectsPage.css";
 
@@ -386,12 +387,6 @@ function ProjectsPage({ language = "en", onContactClick }) {
 
   useEffect(() => setVisibleCount(12), [category, country, query, year]);
 
-  const heroProjects = [
-    projects.find((project) => project.sourcePage === 18),
-    projects.find((project) => project.sourcePage === 50),
-    projects.find((project) => project.sourcePage === 79),
-  ];
-
   const clearFilters = () => {
     setCategory("all");
     setCountry("all");
@@ -423,32 +418,11 @@ function ProjectsPage({ language = "en", onContactClick }) {
             </Box>
 
             <Box className="projects-atlas" aria-hidden="true">
-              <Box className="projects-atlas-blueprint" />
-              <Box className="projects-atlas-card projects-atlas-card-main">
-                <img
-                  src={heroProjects[0].image}
-                  alt=""
-                  onError={handleProjectImageError}
-                />
-                <span>01</span>
-                <b>{heroProjects[0].name}</b>
-              </Box>
-              <Box className="projects-atlas-card projects-atlas-card-water">
-                <img
-                  src={heroProjects[1].image}
-                  alt=""
-                  onError={handleProjectImageError}
-                />
-                <span>02</span>
-              </Box>
-              <Box className="projects-atlas-card projects-atlas-card-industry">
-                <img
-                  src={heroProjects[2].image}
-                  alt=""
-                  onError={handleProjectImageError}
-                />
-                <span>03</span>
-              </Box>
+              <img
+                className="projects-atlas-image"
+                src={projectsHeroCollage}
+                alt=""
+              />
             </Box>
           </Box>
 

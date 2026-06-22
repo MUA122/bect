@@ -79,43 +79,21 @@
 .projects-hero-link:hover { color: #79cee9; }
 .projects-hero-link:hover svg { transform: translate(4px, -4px); }
 
-.projects-atlas { position: relative; min-height: 520px; perspective: 1400px; animation: atlasIn 1s cubic-bezier(.22,1,.36,1) both; }
-.projects-atlas-blueprint {
-  position: absolute;
-  inset: 4% 2% 6% 8%;
-  border: 1px solid rgba(121,206,233,.22);
-  background:
-    linear-gradient(rgba(121,206,233,.08) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(121,206,233,.08) 1px, transparent 1px);
-  background-size: 36px 36px;
-  transform: rotate(3deg);
+.projects-atlas {
+  position: relative;
+  display: flex;
+  min-height: 560px;
+  align-items: center;
+  justify-content: center;
+  animation: atlasIn 1s cubic-bezier(.22,1,.36,1) both;
 }
-.projects-atlas-blueprint::before, .projects-atlas-blueprint::after {
-  position: absolute;
-  content: "";
-  border: 1px solid rgba(255,255,255,.18);
-  border-radius: 50%;
+.projects-atlas-image {
+  display: block;
+  width: min(100%, 650px);
+  max-height: 620px;
+  object-fit: contain;
+  filter: drop-shadow(0 34px 55px rgba(0,13,22,.34));
 }
-.projects-atlas-blueprint::before { top: 12%; right: 10%; width: 140px; height: 140px; }
-.projects-atlas-blueprint::after { bottom: 8%; left: 8%; width: 78px; height: 78px; }
-.projects-atlas-card {
-  position: absolute;
-  overflow: hidden;
-  border: 1px solid rgba(255,255,255,.25);
-  background: #0a3348;
-  box-shadow: 0 28px 65px rgba(0,13,22,.38);
-  transition: transform .55s cubic-bezier(.22,1,.36,1);
-}
-.projects-atlas-card img { width: 100%; height: 100%; object-fit: cover; }
-.projects-atlas-card::after { position: absolute; inset: 0; content: ""; background: linear-gradient(180deg, transparent 48%, rgba(1,22,34,.72)); }
-.projects-atlas-card span { position: absolute; z-index: 2; top: 14px; left: 16px; color: white; font-size: 9px; font-weight: 800; letter-spacing: .14em; }
-.projects-atlas-card b { position: absolute; z-index: 2; right: 18px; bottom: 17px; left: 18px; color: white; font-size: 12px; letter-spacing: .04em; }
-.projects-atlas-card-main { z-index: 3; top: 8%; right: 10%; width: 68%; height: 72%; transform: rotate(2deg); clip-path: polygon(0 0, 100% 0, 100% 88%, 88% 100%, 0 100%); }
-.projects-atlas-card-water { z-index: 4; bottom: 3%; left: 2%; width: 42%; height: 38%; transform: rotate(-5deg); }
-.projects-atlas-card-industry { z-index: 2; top: 0; left: 5%; width: 34%; height: 36%; transform: rotate(-8deg); }
-.projects-atlas:hover .projects-atlas-card-main { transform: rotate(0) translateY(-6px); }
-.projects-atlas:hover .projects-atlas-card-water { transform: rotate(-2deg) translate(-5px,5px); }
-.projects-atlas:hover .projects-atlas-card-industry { transform: rotate(-4deg) translate(-4px,-5px); }
 [dir="rtl"] .projects-atlas { direction: ltr; }
 
 .projects-hero-metrics {
@@ -491,6 +469,7 @@
 @media (max-width: 1100px) {
   .projects-hero-grid { grid-template-columns: minmax(0,1fr) minmax(390px,.8fr); }
   .projects-atlas { min-height: 450px; }
+  .projects-atlas-image { width: min(100%, 540px); }
   .projects-color-key-heading { flex-basis: 170px; }
   .projects-color-key-list {
     justify-content: flex-start;
@@ -512,10 +491,7 @@
   .projects-hero-copy, .projects-title, .projects-intro { width: calc(100vw - 48px); max-width: calc(100vw - 48px); overflow-wrap: anywhere; }
   .projects-title { font-size: clamp(2.65rem,10.8vw,4rem) !important; }
   .projects-atlas { min-height: 410px; margin-top: 40px; }
-  .projects-atlas-blueprint { inset: 7% 0 8% 6%; }
-  .projects-atlas-card-main { right: 8%; width: 64%; height: 64%; }
-  .projects-atlas-card-water { left: 2%; width: 43%; height: 34%; }
-  .projects-atlas-card-industry { left: 5%; width: 36%; height: 29%; }
+  .projects-atlas-image { width: min(100%, 480px); max-height: 440px; }
   .projects-hero-metrics { gap: 20px; }
   .projects-hero-metrics > div { grid-template-columns: auto 1fr; }
   .projects-filter-panel, .projects-grid, .projects-contact { width: calc(100vw - 48px); max-width: calc(100vw - 48px); }
@@ -551,10 +527,7 @@
   .projects-title { font-size: clamp(2.55rem,10.3vw,3.5rem) !important; }
   .projects-intro { font-size: .92rem !important; }
   .projects-atlas { min-height: 350px; width: calc(100vw - 36px); }
-  .projects-atlas-blueprint { right: 4%; }
-  .projects-atlas-card-main { right: 10%; width: 62%; }
-  .projects-atlas-card-water { left: 4%; width: 41%; }
-  .projects-atlas-card-industry { left: 7%; width: 34%; }
+  .projects-atlas-image { width: min(100%, 390px); max-height: 380px; }
   .projects-hero-metrics strong { font-size: 24px; }
   .projects-hero-metrics span { font-size: 8px; }
   .projects-filter-panel, .projects-grid, .projects-contact { width: calc(100vw - 36px); max-width: calc(100vw - 36px); }
@@ -565,5 +538,5 @@
 }
 @media (prefers-reduced-motion: reduce) {
   .projects-atlas, .project-card { animation: none; }
-  .projects-atlas-card, .project-card, .project-card-visual img, .project-card-open { transition: none; }
+  .project-card, .project-card-visual img, .project-card-open { transition: none; }
 }
