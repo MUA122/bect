@@ -31,7 +31,6 @@ const copy = {
     atlasLabel: "Selected project atlas",
     legend: "Follow the Colors",
     legendIntro: "A quick color key for the portfolio.",
-    legendNote: "portfolio key",
     filterTitle: "Explore the full archive",
     all: "All projects",
     allLocations: "All locations",
@@ -40,9 +39,6 @@ const copy = {
     date: "Date",
     search: "Search by project, place, or keyword",
     clear: "Clear filters",
-    showing: "Showing",
-    of: "of",
-    results: "projects",
     noResults: "No projects match these filters.",
     reset: "Reset the view",
     view: "View project",
@@ -65,7 +61,6 @@ const copy = {
     legend: "اتبع اللون",
     legendIntro:
       "يمثل كل شريط مجالاً من مجالات المشروعات. اختر أحدها لتتبع أعماله داخل الأرشيف.",
-    legendNote: "اختر شريطاً",
     filterTitle: "استكشف الأرشيف الكامل",
     all: "كل المشروعات",
     allLocations: "كل المواقع",
@@ -74,9 +69,6 @@ const copy = {
     date: "التاريخ",
     search: "ابحث بالمشروع أو الموقع أو كلمة مفتاحية",
     clear: "مسح الفلاتر",
-    showing: "عرض",
-    of: "من",
-    results: "مشروعاً",
     noResults: "لا توجد مشروعات تطابق هذه الفلاتر.",
     reset: "إعادة ضبط العرض",
     view: "عرض المشروع",
@@ -326,17 +318,6 @@ function ProjectsPage({ language = "en", onContactClick }) {
   const text = copy[language];
   const isArabic = language === "ar";
 
-  const categoryCounts = useMemo(
-    () =>
-      Object.fromEntries(
-        projectCategories.map((item) => [
-          item.id,
-          projects.filter((project) => project.category === item.id).length,
-        ]),
-      ),
-    [],
-  );
-
   const newestProjects = useMemo(() => sortNewestFirst(projects), []);
 
   const countryOptions = useMemo(() => {
@@ -503,13 +484,6 @@ function ProjectsPage({ language = "en", onContactClick }) {
                   {text.filterTitle}
                 </Typography>
               </Box>
-              {category !== "all" && (
-                <Typography>
-                  {text.showing}{" "}
-                  <strong>{Math.min(visibleCount, filtered.length)}</strong>{" "}
-                  {text.of} {filtered.length} {text.results}
-                </Typography>
-              )}
             </Box>
 
             <Box className="projects-category-reset">
@@ -528,9 +502,6 @@ function ProjectsPage({ language = "en", onContactClick }) {
               aria-labelledby="projects-legend-title"
             >
               <Box className="projects-color-key-heading">
-                <Typography className="projects-color-key-note">
-                  {text.legendNote}
-                </Typography>
                 <Typography id="projects-legend-title" component="h2">
                   {text.legend}
                 </Typography>
@@ -550,10 +521,6 @@ function ProjectsPage({ language = "en", onContactClick }) {
                   >
                     <i aria-hidden="true" />
                     <span>{item.label[language]}</span>
-                    <small>
-                      {categoryCounts[item.id]}{" "}
-                      {isArabic ? "مشروع" : "projects"}
-                    </small>
                   </button>
                 ))}
               </Box>
