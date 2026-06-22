@@ -138,8 +138,6 @@ const copy = {
     heroAccent: 'places that endure.',
     intro: 'Explore the disciplines we bring together and the sectors where that expertise creates lasting value.',
     explore: 'Explore our expertise',
-    disciplines: 'Integrated disciplines',
-    sectorsCount: 'Specialized sectors',
     services: 'Services',
     sectors: 'Sectors',
     serviceLabel: 'What we do',
@@ -155,8 +153,6 @@ const copy = {
     heroAccent: 'أماكن تدوم.',
     intro: 'استكشف التخصصات التي نجمعها والقطاعات التي تصنع فيها خبراتنا قيمة مستدامة.',
     explore: 'استكشف خبراتنا',
-    disciplines: 'تخصصات متكاملة',
-    sectorsCount: 'قطاعات متخصصة',
     services: 'الخدمات',
     sectors: 'القطاعات',
     serviceLabel: 'ماذا نقدم',
@@ -256,16 +252,6 @@ function ExpertisePage({ language = 'en', onContactClick }) {
                 <span>{text.explore}</span>
                 <i className="expertise-arrow expertise-arrow-out" />
               </a>
-              <Box className="expertise-hero-metrics">
-                <Box>
-                  <strong>07</strong>
-                  <span>{text.disciplines}</span>
-                </Box>
-                <Box>
-                  <strong>06</strong>
-                  <span>{text.sectorsCount}</span>
-                </Box>
-              </Box>
             </Box>
 
             <Box className="expertise-hero-visual" aria-hidden="true">
@@ -328,10 +314,6 @@ function ExpertisePage({ language = 'en', onContactClick }) {
                 );
               })}
             </Box>
-            <Typography>
-              <span>{String(items.length).padStart(2, '0')}</span>
-              {mode === 'services' ? text.disciplines : text.sectorsCount}
-            </Typography>
           </Box>
 
           <Box className={`expertise-mosaic expertise-mosaic-${mode}`}>

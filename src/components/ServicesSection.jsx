@@ -4,67 +4,70 @@ import ArrowBackRounded from '@mui/icons-material/ArrowBackRounded';
 import ArrowForwardRounded from '@mui/icons-material/ArrowForwardRounded';
 import ArrowOutwardRounded from '@mui/icons-material/ArrowOutwardRounded';
 import './ServicesSection.css';
-import halfMoonImage from '../assets/projects/half-moon.png';
-import helioImage from '../assets/projects/helio.jpg';
-import metroImage from '../assets/projects/metro.jpg';
-import schneiderImage from '../assets/projects/schneider.jpeg';
-import utopiaImage from '../assets/projects/utopia.jpeg';
-import wadiDayqahImage from '../assets/projects/wadi-dayqah.jpeg';
 
 const services = [
   {
-    title: { en: 'Architecture & Interior Design', ar: 'العمارة والتصميم الداخلي' },
+    title: { en: 'Architecture', ar: 'العمارة' },
     short: { en: 'Architecture', ar: 'العمارة' },
     description: {
-      en: 'Our multidisciplinary capabilities give us the freedom to create architecture that is distinctive, responsive and deeply connected to each client’s vision. We bring together spatial clarity, innovative materials and human experience to shape places with lasting value.',
-      ar: 'تمنحنا خبراتنا متعددة التخصصات الحرية لابتكار عمارة مميزة ومتجاوبة ترتبط بعمق برؤية كل عميل. نجمع بين وضوح الفراغ والمواد المبتكرة والتجربة الإنسانية لصياغة أماكن ذات قيمة مستدامة.',
+      en: 'We design spaces that serve communities, respond to client needs and create memorable experiences. Good architecture balances function, context and a rich human experience.',
+      ar: 'نصمم مساحات تخدم المجتمعات وتستجيب لاحتياجات العملاء وتقدم تجارب مميزة. فالعمارة الجيدة توازن بين الوظيفة والسياق والتجربة الإنسانية الغنية.',
     },
-    image: helioImage,
+    image: '/projects/profile/69-nat-office-complex.jpg',
   },
   {
-    title: { en: 'Civil & Structural Design', ar: 'التصميم المدني والإنشائي' },
-    short: { en: 'Structures', ar: 'الإنشاءات' },
-    description: {
-      en: 'BECT’s civil and structural engineers design and supervise complex projects and systems including roads, bridges, buildings, airports, tunnels, dams, water networks and wastewater infrastructure, balancing resilience, efficiency and constructability.',
-      ar: 'يصمم مهندسو BECT المدنيون والإنشائيون المشروعات والأنظمة المعقدة ويشرفون عليها، بما يشمل الطرق والجسور والمباني والمطارات والأنفاق والسدود وشبكات المياه والصرف، مع تحقيق التوازن بين المتانة والكفاءة وقابلية التنفيذ.',
-    },
-    image: wadiDayqahImage,
-  },
-  {
-    title: { en: 'Landscape Design', ar: 'تصميم المناظر الطبيعية' },
+    title: { en: 'Landscape', ar: 'تنسيق المواقع' },
     short: { en: 'Landscape', ar: 'تنسيق المواقع' },
     description: {
-      en: 'Thoughtful landscapes invite people in, encourage movement and offer moments of relief from the pace of modern life. Our designs respond to climate, culture and ecology to create generous public realms that feel rooted in place.',
-      ar: 'تدعو المناظر الطبيعية المدروسة الناس إلى التفاعل والحركة، وتوفر لحظات من الهدوء بعيدًا عن إيقاع الحياة الحديثة. تستجيب تصاميمنا للمناخ والثقافة والبيئة لتكوين مساحات عامة رحبة تنتمي إلى مكانها.',
+      en: 'Outdoor arrangement and design sit at the heart of many projects, encouraging social interaction and everyday comfort. Our landscapes combine aesthetic quality with functional purpose.',
+      ar: 'يمثل تنسيق المواقع وتصميم المساحات الخارجية جزءاً أساسياً من العديد من المشروعات، إذ يشجع التفاعل الاجتماعي والراحة اليومية. تجمع أعمالنا بين القيمة الجمالية والوظيفة العملية.',
     },
-    image: halfMoonImage,
+    image: '/projects/profile/40-People-Square.png',
   },
   {
-    title: { en: 'Urban Design & Planning', ar: 'التصميم والتخطيط العمراني' },
-    short: { en: 'Urbanism', ar: 'العمران' },
+    title: { en: 'Planning & Urban Design', ar: 'التخطيط والتصميم العمراني' },
+    short: { en: 'Planning & Urban Design', ar: 'التخطيط العمراني' },
     description: {
-      en: 'Our urban planning services span metropolitan and regional development, infrastructure planning and major urban renewal. We connect land use, mobility, public space and economic opportunity into clear frameworks for long-term growth.',
-      ar: 'تشمل خدماتنا في التخطيط العمراني التنمية الحضرية والإقليمية، وتخطيط البنية التحتية، وتجديد المدن الكبرى. نربط استخدامات الأراضي والحركة والفراغات العامة والفرص الاقتصادية ضمن أطر واضحة للنمو طويل المدى.',
+      en: 'We build solid urban frameworks with no future restrictions to development and expansion. Our services cover metropolitan and regional development, master planning and major urban upgrades.',
+      ar: 'نبني أطرًا عمرانية راسخة تتيح التطوير والتوسع المستقبلي. وتشمل خدماتنا التنمية الحضرية والإقليمية والمخططات العامة والتطوير العمراني واسع النطاق.',
     },
-    image: metroImage,
+    image: '/projects/profile/14-al-mukaymen-city.jpg',
   },
   {
-    title: { en: 'MEP & Firefighting', ar: 'الأعمال الكهروميكانيكية ومكافحة الحريق' },
-    short: { en: 'MEP Systems', ar: 'الأنظمة الكهروميكانيكية' },
+    title: { en: 'Structure', ar: 'التصميم الإنشائي' },
+    short: { en: 'Structure', ar: 'الإنشاءات' },
     description: {
-      en: 'Mechanical, electrical and plumbing systems are essential to safe, efficient and comfortable environments. Our integrated expertise covers HVAC, lighting, firefighting, fire alarm, water supply, sanitation and intelligent building systems.',
-      ar: 'تمثل الأنظمة الميكانيكية والكهربائية والصحية أساس البيئات الآمنة والكفؤة والمريحة. تغطي خبراتنا المتكاملة التكييف والإضاءة ومكافحة وإنذار الحريق وإمدادات المياه والصرف وأنظمة المباني الذكية.',
+      en: 'We ensure the safety and endurance of every design, supporting architecture from concept to delivery. Our teams work across all structural building types and levels of complexity.',
+      ar: 'نضمن سلامة التصميم واستدامته، وندعم العمارة من الفكرة حتى التنفيذ. تعمل فرقنا على مختلف أنواع المباني الإنشائية وبدرجات تعقيد متعددة.',
     },
-    image: schneiderImage,
+    image: '/projects/profile/15-state-security-headquarters.jpg',
   },
   {
-    title: { en: 'Project Management & Site Supervision', ar: 'إدارة المشروعات والإشراف على المواقع' },
-    short: { en: 'Management', ar: 'إدارة المشروعات' },
+    title: { en: 'Project Management and Supervision', ar: 'إدارة المشروعات والإشراف' },
+    short: { en: 'Project Management', ar: 'إدارة المشروعات' },
     description: {
-      en: 'Our experienced teams monitor, coordinate and guide every project activity with strong technical discipline. We protect quality, safety, programme and environmental performance from early planning through delivery.',
-      ar: 'تراقب فرقنا ذات الخبرة جميع أنشطة المشروع وتنسقها وتوجهها بانضباط تقني راسخ. نحافظ على الجودة والسلامة والبرنامج الزمني والأداء البيئي منذ التخطيط المبكر وحتى التسليم.',
+      en: 'Close follow-up between the design team and site supervision team is essential to reach optimum time, cost, quality and performance on every project.',
+      ar: 'يمثل التنسيق المستمر بين فريق التصميم وفريق الإشراف على الموقع عاملاً أساسياً لتحقيق أفضل نتائج في الوقت والتكلفة والجودة والأداء.',
     },
-    image: utopiaImage,
+    image: '/projects/profile/16-ministry-of-hajj-and-umrah.jpg',
+  },
+  {
+    title: { en: 'Civil', ar: 'الأعمال المدنية' },
+    short: { en: 'Civil', ar: 'المدني' },
+    description: {
+      en: 'Our civil work covers roads, bridges, buildings, airports, tunnels, dams, irrigation systems, and water and wastewater networks.',
+      ar: 'تشمل أعمالنا المدنية الطرق والجسور والمباني والمطارات والأنفاق والسدود وأنظمة الري وشبكات المياه والصرف الصحي.',
+    },
+    image: '/projects/profile/91-port-said-tunnels.jpg',
+  },
+  {
+    title: { en: 'MEP', ar: 'الأعمال الكهروميكانيكية' },
+    short: { en: 'MEP', ar: 'الكهروميكانيكا' },
+    description: {
+      en: 'MEP covers the building services associated with safe and comfortable environments, including HVAC, plumbing, lighting, firefighting, fire alarm, water supply and sanitary systems.',
+      ar: 'تشمل الأعمال الكهروميكانيكية خدمات المباني المرتبطة ببيئات آمنة ومريحة، ومنها التكييف والسباكة والإضاءة ومكافحة وإنذار الحريق وإمدادات المياه والصرف الصحي.',
+    },
+    image: '/projects/profile/85-schneider-factory.jpg',
   },
 ];
 
@@ -72,7 +75,7 @@ const sectionCopy = {
   en: {
     eyebrow: 'Integrated expertise',
     title: 'Our services',
-    intro: 'Six disciplines. One coordinated vision. Explore how our teams turn complexity into places and systems that perform beautifully.',
+    intro: 'Seven disciplines. One coordinated vision. Explore how our teams turn complexity into places and systems that perform beautifully.',
     explore: 'Explore expertise',
     previous: 'Previous service',
     next: 'Next service',
@@ -80,7 +83,7 @@ const sectionCopy = {
   ar: {
     eyebrow: 'خبرات متكاملة',
     title: 'خدماتنا',
-    intro: 'ستة تخصصات برؤية واحدة متكاملة. اكتشف كيف تحول فرقنا التعقيد إلى أماكن وأنظمة تجمع بين جمال التصميم وكفاءة الأداء.',
+    intro: 'سبعة تخصصات برؤية واحدة متكاملة. اكتشف كيف تحول فرقنا التعقيد إلى أماكن وأنظمة تجمع بين جمال التصميم وكفاءة الأداء.',
     explore: 'استكشف خبراتنا',
     previous: 'الخدمة السابقة',
     next: 'الخدمة التالية',
