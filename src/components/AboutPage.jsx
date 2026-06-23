@@ -86,6 +86,7 @@ const partners = [
 const associates = [
   {
     name: 'ARTELIA',
+    logo: '/about/associates/artelia.png',
     origin: { en: 'France · Global', ar: 'فرنسا · عالمي' },
     text: {
       en: 'A leading multidisciplinary engineering and project management group with deep expertise in mobility, water, energy, buildings, and industry.',
@@ -94,6 +95,7 @@ const associates = [
   },
   {
     name: 'AREP',
+    logo: '/about/associates/arep.svg',
     origin: { en: 'France · Mobility', ar: 'فرنسا · النقل' },
     text: {
       en: 'An international practice renowned for architecture, urban planning, mobility, and sustainable, people-centred public environments.',
@@ -102,6 +104,7 @@ const associates = [
   },
   {
     name: 'DOHWA',
+    logo: '/about/associates/dohwa.png',
     origin: { en: 'South Korea · Infrastructure', ar: 'كوريا الجنوبية · البنية التحتية' },
     text: {
       en: 'South Korea’s largest civil engineering consultancy, delivering transportation, water, environmental, and urban development programmes worldwide.',
@@ -124,7 +127,7 @@ const copy = {
     principles: 'Principles in practice',
     principlesIntro: 'The standards behind every decision, drawing, and delivery.',
     journey: 'A practice shaped over time',
-    leadership: 'Leadership with a long view',
+    leadership: "Our CEO's",
     leadershipIntro: 'Two careers spanning design, academia, urban development, and the delivery of complex projects.',
     expertise: 'One coordinated practice',
     expertiseIntro: 'Specialist teams connected by one project culture.',
@@ -319,10 +322,53 @@ function AboutPage({ language = 'en', onContactClick }) {
         </Container>
       </section>
 
+      <section className="about-leadership">
+        <Container maxWidth="xl" className="about-shell">
+          <Box className="about-leadership-heading">
+            <Typography className="about-section-index">02 / Leadership & Team</Typography>
+            <Typography component="h2">{text.leadership}</Typography>
+            <Typography>{text.leadershipIntro}</Typography>
+          </Box>
+          <Box className="about-leadership-stage">
+            <Box className="about-leader-note">
+              <span>01</span>
+              <Typography component="h3">{leaders[0].name[language]}</Typography>
+              <Typography className="about-leader-role">{leaders[0].role[language]}</Typography>
+              <Typography>{leaders[0].text[language]}</Typography>
+            </Box>
+            <Box className="about-leadership-portrait">
+              <Box component="img" src="/about/co-ceos.png" alt={`${leaders[0].name[language]} & ${leaders[1].name[language]}`} />
+            </Box>
+            <Box className="about-leader-note">
+              <span>02</span>
+              <Typography component="h3">{leaders[1].name[language]}</Typography>
+              <Typography className="about-leader-role">{leaders[1].role[language]}</Typography>
+              <Typography>{leaders[1].text[language]}</Typography>
+            </Box>
+          </Box>
+
+          <Box className="about-leadership-team">
+            <Typography className="about-section-index">{text.organization}</Typography>
+            <Typography>{text.organizationIntro}</Typography>
+          </Box>
+          <Box className="about-member-list">
+            {members.slice(2).map((member, index) => (
+              <Box key={member[0]}>
+                <span>{String(index + 3).padStart(2, '0')}</span>
+                <Box>
+                  <Typography component="h3">{isArabic ? member[2] : member[0]}</Typography>
+                  <Typography>{isArabic ? member[3] : member[1]}</Typography>
+                </Box>
+              </Box>
+            ))}
+          </Box>
+        </Container>
+      </section>
+
       <section className="about-principles">
         <Container maxWidth="xl" className="about-shell">
           <Box className="about-section-heading">
-            <Typography className="about-section-index">02 / {text.figures}</Typography>
+            <Typography className="about-section-index">03 / {text.figures}</Typography>
             <Typography component="h2">{text.principles}</Typography>
             <Typography>{text.principlesIntro}</Typography>
           </Box>
@@ -341,7 +387,7 @@ function AboutPage({ language = 'en', onContactClick }) {
         <Container maxWidth="xl" className="about-shell">
           <Box className="about-journey-heading">
             <Box>
-              <Typography className="about-section-index">03 / 1989—2025</Typography>
+              <Typography className="about-section-index">04 / 1989—2025</Typography>
               <Typography component="h2">{text.journey}</Typography>
             </Box>
             <Box className="about-journey-feature" key={activeMilestone}>
@@ -362,33 +408,6 @@ function AboutPage({ language = 'en', onContactClick }) {
                 <small>{item[language]}</small>
               </button>
             ))}
-          </Box>
-        </Container>
-      </section>
-
-      <section className="about-leadership">
-        <Container maxWidth="xl" className="about-shell">
-          <Box className="about-leadership-heading">
-            <Typography className="about-section-index">04 / Co-CEOs</Typography>
-            <Typography component="h2">{text.leadership}</Typography>
-            <Typography>{text.leadershipIntro}</Typography>
-          </Box>
-          <Box className="about-leadership-stage">
-            <Box className="about-leader-note">
-              <span>01</span>
-              <Typography component="h3">{leaders[0].name[language]}</Typography>
-              <Typography className="about-leader-role">{leaders[0].role[language]}</Typography>
-              <Typography>{leaders[0].text[language]}</Typography>
-            </Box>
-            <Box className="about-leadership-portrait">
-              <Box component="img" src="/about/co-ceos.png" alt={`${leaders[0].name[language]} & ${leaders[1].name[language]}`} />
-            </Box>
-            <Box className="about-leader-note">
-              <span>02</span>
-              <Typography component="h3">{leaders[1].name[language]}</Typography>
-              <Typography className="about-leader-role">{leaders[1].role[language]}</Typography>
-              <Typography>{leaders[1].text[language]}</Typography>
-            </Box>
           </Box>
         </Container>
       </section>
@@ -425,7 +444,7 @@ function AboutPage({ language = 'en', onContactClick }) {
           </Box>
           <Box className="about-associate-grid">
             {associates.map((associate, index) => (
-              <Box key={associate.name}>
+              <Box key={associate.name} style={{ '--associate-logo': `url("${associate.logo}")` }}>
                 <span>0{index + 1}</span>
                 <Typography component="h3">{associate.name}</Typography>
                 <Typography className="about-associate-origin">{associate.origin[language]}</Typography>
@@ -436,31 +455,10 @@ function AboutPage({ language = 'en', onContactClick }) {
         </Container>
       </section>
 
-      <section className="about-organization">
-        <Container maxWidth="xl" className="about-shell about-organization-grid">
-          <Box className="about-organization-heading">
-            <Typography className="about-section-index">07 / Organization</Typography>
-            <Typography component="h2">{text.organization}</Typography>
-            <Typography>{text.organizationIntro}</Typography>
-          </Box>
-          <Box className="about-member-list">
-            {members.map((member, index) => (
-              <Box key={member[0]}>
-                <span>{String(index + 1).padStart(2, '0')}</span>
-                <Box>
-                  <Typography component="h3">{isArabic ? member[2] : member[0]}</Typography>
-                  <Typography>{isArabic ? member[3] : member[1]}</Typography>
-                </Box>
-              </Box>
-            ))}
-          </Box>
-        </Container>
-      </section>
-
       <section className="about-offices">
         <Container maxWidth="xl" className="about-shell">
           <Box className="about-offices-heading">
-            <Typography className="about-section-index">08 / Locations</Typography>
+            <Typography className="about-section-index">07 / Locations</Typography>
             <Typography component="h2">{text.footprint}</Typography>
           </Box>
           <Box className="about-office-grid">
@@ -483,7 +481,7 @@ function AboutPage({ language = 'en', onContactClick }) {
       <section className="about-network">
         <Container maxWidth="xl" className="about-shell">
           <Box className="about-network-heading">
-            <Typography className="about-section-index">09 / Partners</Typography>
+            <Typography className="about-section-index">08 / Partners</Typography>
             <Typography component="h2">{text.network}</Typography>
             <Typography>{text.networkIntro}</Typography>
           </Box>
