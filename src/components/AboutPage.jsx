@@ -311,7 +311,12 @@ function AboutPage({ language = 'en', onContactClick }) {
         <Container maxWidth="xl" className="about-shell about-story-grid">
           <Box>
             <Typography className="about-section-index">01 / {text.storyLabel}</Typography>
-            <Typography component="h2">{text.storyTitle}</Typography>
+            <Typography component="h2">
+              {isArabic ? 'فهم محلي.' : 'Local intelligence.'}
+              <Box component="span" className="about-story-title-accent">
+                {isArabic ? 'معايير دولية.' : 'International standards.'}
+              </Box>
+            </Typography>
           </Box>
           <Box className="about-story-copy">
             <Typography>{text.storyOne}</Typography>

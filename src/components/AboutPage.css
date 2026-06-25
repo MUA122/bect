@@ -71,11 +71,74 @@
 .about-stat-rail strong { color: #77d0ed; font-size: 28px; font-weight: 600; }
 .about-stat-rail span { color: rgba(255,255,255,.48); font-size: 8px; font-weight: 800; line-height: 1.4; text-transform: uppercase; letter-spacing: .08em; }
 .about-hero { display: none; }
-.about-story { padding: clamp(155px,13vw,215px) 0 clamp(90px,10vw,160px); background: #f5f3ed; }
-.about-story-grid { display: grid !important; grid-template-columns: .85fr 1.15fr; gap: clamp(55px,9vw,150px); }
+.about-story {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: clamp(125px,10vw,170px) 0 clamp(62px,6vw,92px);
+  background:
+    linear-gradient(rgba(7,56,79,.035) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(7,56,79,.035) 1px,transparent 1px),
+    radial-gradient(circle at 83% 18%,rgba(119,208,237,.13),transparent 28%),
+    #f5f3ed;
+  background-size: 56px 56px,56px 56px,auto,auto;
+}
+.about-story::before {
+  position: absolute;
+  inset: clamp(72px,7vw,112px) clamp(24px,5vw,84px) auto;
+  height: 1px;
+  content: "";
+  background: linear-gradient(90deg,#77d0ed 0 42px,#cdd7da 42px 38%,transparent 38% 50%,#cdd7da 50% 100%);
+  z-index: -1;
+}
+.about-story-grid { position: relative; display: grid !important; grid-template-columns: .85fr 1.15fr; align-items: start; gap: clamp(55px,9vw,150px); }
+.about-story-grid > div:first-child {
+  position: relative;
+}
 .about-story h2,.about-section-heading h2,.about-journey h2,.about-leadership h2,.about-organization h2,.about-offices h2,.about-network h2 { margin-top: 17px !important; font-size: clamp(3rem,5vw,6rem) !important; font-weight: 500 !important; line-height: .94 !important; letter-spacing: -.065em !important; }
-.about-story-copy { display: grid; gap: 26px; padding-top: 30px; }
-.about-story-copy p { color: #586e79; font-size: 15px !important; line-height: 1.9 !important; }
+.about-story-title-accent { display: block; color: #cf876f; }
+.about-story-copy {
+  position: relative;
+  display: grid;
+  gap: 0;
+  padding: clamp(28px,3.2vw,46px);
+  border: 1px solid #d7e0e2;
+  background: rgba(255,255,255,.58);
+  box-shadow: 0 24px 70px rgba(7,48,70,.07);
+  backdrop-filter: blur(8px);
+}
+.about-story-copy::before {
+  position: absolute;
+  top: -1px;
+  right: 32px;
+  width: 58px;
+  height: 3px;
+  content: "";
+  background: #77d0ed;
+}
+[dir="rtl"] .about-story-copy::before { right: auto; left: 32px; }
+.about-story-copy p {
+  position: relative;
+  color: #586e79;
+  font-size: 15px !important;
+  line-height: 1.9 !important;
+}
+.about-story-copy p + p {
+  margin-top: 30px !important;
+  padding-top: 30px;
+  border-top: 1px solid #dce4e6;
+}
+.about-story-copy p::before {
+  position: absolute;
+  top: .65em;
+  left: -18px;
+  width: 6px;
+  height: 6px;
+  content: "";
+  border: 1px solid #77d0ed;
+  transform: rotate(45deg);
+}
+[dir="rtl"] .about-story-copy p::before { right: -18px; left: auto; }
 .about-principles { padding: clamp(80px,9vw,140px) 0; background: white; }
 .about-section-heading { display: grid; max-width: 900px; grid-template-columns: 1fr; }
 .about-section-heading > p:last-child { max-width: 550px; margin-top: 19px !important; color: #6d7e86; line-height: 1.7; }
@@ -221,6 +284,11 @@
   .about-stat-rail { grid-template-columns: repeat(2,1fr); }
   .about-stat-rail > div { min-height: 88px; }
   .about-story h2,.about-section-heading h2,.about-journey h2,.about-leadership h2,.about-organization h2,.about-offices h2,.about-network h2 { font-size: clamp(2.7rem,12vw,4.3rem) !important; }
+  .about-story { padding-top: 108px; padding-bottom: 58px; background-size: 38px 38px,38px 38px,auto,auto; }
+  .about-story::before { top: 58px; }
+  .about-story-copy { padding: 26px 28px; }
+  .about-story-copy p::before { left: -14px; }
+  [dir="rtl"] .about-story-copy p::before { right: -14px; left: auto; }
   .about-principle-grid { grid-template-columns: 1fr; margin-top: 42px; }
   .about-principle-grid > div { min-height: 150px; }
   .about-principle-grid h3 { margin-top: 25px !important; }
