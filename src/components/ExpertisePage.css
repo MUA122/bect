@@ -232,16 +232,18 @@
   align-items: flex-end;
   color: #0a6f9f;
   pointer-events: none;
-  transform: translateX(-50%) rotate(-2deg);
+  transform: translateX(-50%);
   transform-origin: center bottom;
 }
 
 .expertise-hand-note span {
-  padding-bottom: 16px;
-  font-family: "Segoe Print", "Bradley Hand", cursive;
-  font-size: 23px;
-  font-weight: 600;
-  line-height: 1;
+  padding-bottom: 15px;
+  font-family: "Barlow Condensed", "DM Sans", Arial, sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: .95;
+  letter-spacing: .14em;
+  text-transform: uppercase;
   white-space: nowrap;
 }
 
@@ -259,13 +261,16 @@
 [dir="rtl"] .expertise-hand-note {
   right: auto;
   left: 50%;
-  transform: translateX(-50%) rotate(2deg);
+  transform: translateX(-50%);
   transform-origin: center bottom;
 }
 
 [dir="rtl"] .expertise-hand-note span {
   font-family: "Noto Kufi Arabic", sans-serif;
-  font-size: 19px;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: none;
 }
 
 [dir="rtl"] .expertise-hand-note svg {
