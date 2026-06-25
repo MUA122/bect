@@ -62,7 +62,7 @@
   letter-spacing: -.072em !important;
 }
 
-.expertise-page-title span { display: block; color: #ff7048; }
+.expertise-page-title span { display: block; color: #d98a72; }
 [dir="rtl"] .expertise-page-title {
   font-family: "Noto Kufi Arabic", sans-serif;
   font-size: clamp(2.8rem, 4.6vw, 5.3rem) !important;
@@ -172,12 +172,12 @@
   position: absolute;
   inset: 9px;
   content: "";
-  border-top: 1px solid #ff7048;
+  border-top: 1px solid #d98a72;
   border-radius: 50%;
   animation: expertiseOrbit 8s linear infinite;
 }
 
-.expertise-hero-orbit span { position: absolute; top: -4px; width: 8px; height: 8px; border-radius: 50%; background: #ff7048; }
+.expertise-hero-orbit span { position: absolute; top: -4px; width: 8px; height: 8px; border-radius: 50%; background: #d98a72; }
 .expertise-hero-orbit p { font-size: 13px; font-weight: 800; letter-spacing: .12em; }
 .expertise-hero-caption {
   position: absolute;
@@ -250,7 +250,7 @@
   height: 38px;
   margin-left: 4px;
   overflow: visible;
-  stroke: #ff6c43;
+  stroke: #d6856c;
   stroke-width: 2;
   stroke-linecap: round;
   stroke-linejoin: round;

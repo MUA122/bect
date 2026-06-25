@@ -33,26 +33,26 @@
 .drawing-tower path:nth-child(2),.drawing-tower path:nth-child(3) { stroke: rgba(119,208,237,.82); stroke-width: 2; }
 .drawing-bridge path { stroke: url(#aboutBeamGradient); stroke-width: 3; }
 .drawing-bridge path:first-child { stroke-width: 5; }
-.drawing-network path { stroke: rgba(237,110,73,.82); stroke-width: 2.6; stroke-dasharray: 10 10; animation: routeDraw 2.1s ease-out both; }
-.drawing-network circle { fill: #ed6e49; stroke: rgba(237,110,73,.22); stroke-width: 10; }
+.drawing-network path { stroke: rgba(207,135,111,.82); stroke-width: 2.6; stroke-dasharray: 10 10; animation: routeDraw 2.1s ease-out both; }
+.drawing-network circle { fill: #cf876f; stroke: rgba(207,135,111,.22); stroke-width: 10; }
 .drawing-measurements path { stroke: rgba(255,255,255,.3); stroke-width: 1.4; }
 .about-engineering-chip { position: absolute; z-index: 6; padding: 10px 13px; color: white; font-size: 9px; font-weight: 900; letter-spacing: .12em; border: 1px solid rgba(255,255,255,.14); background: rgba(5,64,91,.72); backdrop-filter: blur(10px); }
 .chip-architecture { top: 27%; left: 11%; }
 .chip-structure { top: 18%; right: 15%; color: #07384f; background: #77d0ed; }
 .chip-mep { right: 10%; bottom: 27%; }
-.chip-infra { bottom: 14%; left: 18%; color: #07384f; background: #ed6e49; }
+.chip-infra { bottom: 14%; left: 18%; color: #07384f; background: #cf876f; }
 .about-engineering-stamp { position: absolute; right: 10%; bottom: 10%; z-index: 5; display: grid; width: 118px; height: 118px; place-items: center; color: rgba(255,255,255,.75); border: 1px solid rgba(119,208,237,.34); border-radius: 50%; transform: rotate(-8deg); }
 .about-engineering-stamp span { align-self: end; color: #77d0ed; font-size: 10px; font-weight: 900; letter-spacing: .16em; }
 .about-engineering-stamp strong { align-self: start; color: white; font-size: 31px; font-weight: 500; letter-spacing: -.04em; }
 .about-journey-note,.about-hero-route,.about-hero-milestone,.about-route-endpoint { display: none !important; }
-.about-journey-note { position: absolute; top: 4%; left: 8%; color: #ed6e49; font: 700 clamp(20px,2vw,29px)/1 "Caveat",cursive !important; transform: rotate(-4deg); }
+.about-journey-note { position: absolute; top: 4%; left: 8%; color: #cf876f; font: 700 clamp(20px,2vw,29px)/1 "Caveat",cursive !important; transform: rotate(-4deg); }
 .about-hero-route { position: absolute; inset: 4% 0 1%; width: 100%; height: 95%; overflow: visible; }
 .about-hero-route path { fill: none; stroke-linecap: round; stroke-linejoin: round; }
 .route-shadow { stroke: rgba(119,208,237,.17); stroke-width: 10; }
 .route-main { stroke: #77d0ed; stroke-width: 3; stroke-dasharray: .018 .014; animation: routeDraw 1.7s ease-out both; }
-.route-arrow { stroke: #ed6e49; stroke-width: 4; }
-.route-markers circle:nth-child(odd) { fill: #06384f; stroke: rgba(237,110,73,.2); stroke-width: 8; }
-.route-markers circle:nth-child(even) { fill: #ed6e49; }
+.route-arrow { stroke: #cf876f; stroke-width: 4; }
+.route-markers circle:nth-child(odd) { fill: #06384f; stroke: rgba(207,135,111,.2); stroke-width: 8; }
+.route-markers circle:nth-child(even) { fill: #cf876f; }
 .about-hero-milestone { position: absolute; z-index: 2; width: 145px; }
 .about-hero-milestone strong { display: block; color: white; font: 700 clamp(22px,2.2vw,32px)/1 "Caveat",cursive; letter-spacing: .02em; }
 .about-hero-milestone p { max-width: 135px; margin-top: 5px !important; color: rgba(255,255,255,.58); font-size: 8px !important; font-weight: 700 !important; line-height: 1.45 !important; }
@@ -61,7 +61,7 @@
 .hero-stop-3 { top: 47%; left: 35%; transform: rotate(-3deg); }
 .hero-stop-4 { top: 63%; left: 24%; transform: rotate(2deg); }
 .about-route-endpoint { position: absolute; z-index: 3; display: grid; }
-.about-route-endpoint span { color: #ed6e49; font: 700 clamp(20px,2vw,28px)/.9 "Caveat",cursive; transform: rotate(-6deg); }
+.about-route-endpoint span { color: #cf876f; font: 700 clamp(20px,2vw,28px)/.9 "Caveat",cursive; transform: rotate(-6deg); }
 .about-route-endpoint strong { color: white; font: 700 clamp(36px,4vw,58px)/.9 "Caveat",cursive; letter-spacing: -.02em; }
 .endpoint-from { top: 2%; right: 4%; text-align: end; }
 .endpoint-to { bottom: 0; left: 12%; padding-top: 15px; }
@@ -73,7 +73,7 @@
 .about-hero { display: none; }
 .about-story { padding: clamp(155px,13vw,215px) 0 clamp(90px,10vw,160px); background: #f5f3ed; }
 .about-story-grid { display: grid !important; grid-template-columns: .85fr 1.15fr; gap: clamp(55px,9vw,150px); }
-.about-story h2,.about-section-heading h2,.about-journey h2,.about-leadership h2,.about-practice h2,.about-organization h2,.about-offices h2,.about-network h2 { margin-top: 17px !important; font-size: clamp(3rem,5vw,6rem) !important; font-weight: 500 !important; line-height: .94 !important; letter-spacing: -.065em !important; }
+.about-story h2,.about-section-heading h2,.about-journey h2,.about-leadership h2,.about-organization h2,.about-offices h2,.about-network h2 { margin-top: 17px !important; font-size: clamp(3rem,5vw,6rem) !important; font-weight: 500 !important; line-height: .94 !important; letter-spacing: -.065em !important; }
 .about-story-copy { display: grid; gap: 26px; padding-top: 30px; }
 .about-story-copy p { color: #586e79; font-size: 15px !important; line-height: 1.9 !important; }
 .about-principles { padding: clamp(80px,9vw,140px) 0; background: white; }
@@ -82,7 +82,7 @@
 .about-principle-grid { display: grid; grid-template-columns: repeat(5,1fr); margin-top: 64px; border-top: 1px solid #d9e0e2; border-bottom: 1px solid #d9e0e2; }
 .about-principle-grid > div { min-height: 205px; padding: 27px 23px; border-inline-end: 1px solid #d9e0e2; transition: color .3s,background .3s,transform .3s; }
 .about-principle-grid > div:hover { color: white; background: #0a5678; transform: translateY(-8px); }
-.about-principle-grid span { color: #ed6e49; font-size: 11px; font-weight: 900; letter-spacing: .16em; }
+.about-principle-grid span { color: #cf876f; font-size: 11px; font-weight: 900; letter-spacing: .16em; }
 .about-principle-grid h3 { margin-top: 38px !important; font-size: 17px !important; font-weight: 650 !important; line-height: 1.45 !important; }
 .about-journey { padding: clamp(85px,9vw,140px) 0; color: white; background: radial-gradient(circle at 85% 8%,rgba(94,197,231,.16),transparent 28%),#06384f; }
 .about-journey-heading { display: flex; align-items: end; justify-content: space-between; gap: 45px; }
@@ -108,7 +108,7 @@
   content: "";
   background:
     linear-gradient(90deg,transparent 0,#cdd7da 10%,#cdd7da 42%,transparent 42% 58%,#cdd7da 58%,#cdd7da 90%,transparent 100%),
-    linear-gradient(90deg,transparent 0,#ed6e49 0 34px,transparent 34px calc(100% - 34px),#77d0ed calc(100% - 34px) 100%);
+    linear-gradient(90deg,transparent 0,#cf876f 0 34px,transparent 34px calc(100% - 34px),#77d0ed calc(100% - 34px) 100%);
   background-position: 0 38px,0 50px;
   background-size: 100% 1px,100% 3px;
   background-repeat: no-repeat;
@@ -140,7 +140,7 @@
 .about-leadership-portrait img { position: absolute; right: 0; bottom: 0; left: 0; width: 100%; height: 100%; object-fit: contain; object-position: center bottom; filter: drop-shadow(0 30px 35px rgba(5,43,62,.12)); }
 .about-leader-note { position: relative; padding: 34px 30px; border-top: 1px solid #cad7da; border-bottom: 1px solid #cad7da; background: rgba(255,255,255,.62); }
 .about-leader-note::after { position: absolute; top: -1px; width: 45px; height: 3px; content: ""; background: #77d0ed; }
-.about-leader-note > span { color: #ed6e49; font-size: 11px; font-weight: 900; letter-spacing: .16em; }
+.about-leader-note > span { color: #cf876f; font-size: 11px; font-weight: 900; letter-spacing: .16em; }
 .about-leader-note h3 { margin-top: 4px !important; font-size: 24px !important; font-weight: 650 !important; }
 .about-leader-role { margin-top: 3px !important; color: #1680a9; font-size: 9px !important; font-weight: 900 !important; letter-spacing: .1em !important; text-transform: uppercase; }
 .about-leader-note > p:last-child { margin-top: 14px !important; color: #637680; font-size: 12px !important; line-height: 1.75 !important; }
@@ -148,13 +148,6 @@
 .about-leadership-team .about-section-index { color: #0b3449; font-size: clamp(1.75rem,3vw,3.35rem) !important; font-weight: 650 !important; line-height: 1 !important; letter-spacing: -.055em !important; text-transform: none; }
 .about-leadership-team > p:last-child { max-width: 620px; color: #657780; line-height: 1.75; }
 .about-leadership .about-member-list { margin-top: 26px; }
-.about-practice { padding: clamp(90px,10vw,155px) 0; background: white; }
-.about-practice-grid { display: grid !important; grid-template-columns: .85fr 1.15fr; align-items: center; gap: clamp(50px,8vw,130px); }
-.about-practice-visual { position: relative; min-height: 610px; }
-.about-practice-image { position: absolute; inset: 0 12% 8% 0; border-radius: 8px 180px 8px 8px; background: linear-gradient(180deg,transparent 55%,rgba(3,45,66,.68)),url('/projects/profile/91-port-said-tunnels.jpg') center/cover; }
-[dir="rtl"] .about-practice-image { inset: 0 0 8% 12%; border-radius: 180px 8px 8px 8px; }
-.about-practice-visual > p { position: absolute; right: 0; bottom: 0; padding: 18px; color: white; font-size: 8px !important; font-weight: 900 !important; letter-spacing: .15em !important; background: #ed6e49; writing-mode: vertical-rl; }
-.about-practice-intro { margin-top: 20px !important; color: #657780; }
 .about-discipline-list { margin-top: 38px; border-top: 1px solid #dbe2e4; }
 .about-discipline-list > div { display: grid; min-height: 66px; grid-template-columns: 42px 1fr auto; align-items: center; gap: 14px; border-bottom: 1px solid #dbe2e4; }
 .about-discipline-list svg { color: #1680a9; font-size: 22px; }
@@ -180,7 +173,7 @@
 .about-member-list { display: grid; grid-template-columns: repeat(2,1fr); column-gap: clamp(28px,5vw,80px); border-top: 1px solid #cdd7da; }
 .about-member-list > div { display: grid; min-height: 90px; grid-template-columns: 48px 1fr; align-items: center; gap: 18px; border-bottom: 1px solid #cdd7da; transition: padding .25s,background .25s; }
 .about-member-list > div:hover { padding-inline: 16px; background: white; }
-.about-member-list > div > span { color: #ed6e49; font-size: 11px; font-weight: 900; letter-spacing: .16em; }
+.about-member-list > div > span { color: #cf876f; font-size: 11px; font-weight: 900; letter-spacing: .16em; }
 .about-member-list h3 { font-size: 17px !important; font-weight: 700 !important; }
 .about-member-list p { margin-top: 3px !important; color: #73838a; font-size: 10px !important; }
 .about-offices { padding: clamp(85px,9vw,140px) 0; color: white; background: radial-gradient(circle at 50% 100%,rgba(98,199,231,.18),transparent 34%),#06384f; }
@@ -198,7 +191,7 @@
 @keyframes aboutFade { from { opacity: 0; transform: translateY(8px); } }
 @keyframes routeDraw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
 @media (max-width: 1050px) {
-  .about-hero-grid,.about-story-grid,.about-practice-grid,.about-organization-grid { grid-template-columns: 1fr; }
+  .about-hero-grid,.about-story-grid,.about-organization-grid { grid-template-columns: 1fr; }
   .about-hero-visual { min-height: 520px; }
   .about-stat-rail { grid-template-columns: repeat(3,1fr); }
   .about-principle-grid { grid-template-columns: repeat(2,1fr); }
@@ -227,7 +220,7 @@
   .endpoint-to { bottom: 0; left: 15%; }
   .about-stat-rail { grid-template-columns: repeat(2,1fr); }
   .about-stat-rail > div { min-height: 88px; }
-  .about-story h2,.about-section-heading h2,.about-journey h2,.about-leadership h2,.about-practice h2,.about-organization h2,.about-offices h2,.about-network h2 { font-size: clamp(2.7rem,12vw,4.3rem) !important; }
+  .about-story h2,.about-section-heading h2,.about-journey h2,.about-leadership h2,.about-organization h2,.about-offices h2,.about-network h2 { font-size: clamp(2.7rem,12vw,4.3rem) !important; }
   .about-principle-grid { grid-template-columns: 1fr; margin-top: 42px; }
   .about-principle-grid > div { min-height: 150px; }
   .about-principle-grid h3 { margin-top: 25px !important; }
@@ -239,7 +232,6 @@
   .about-leadership-stage > .about-leader-note:first-child { grid-row: 2; }
   .about-leadership-stage > .about-leader-note:last-child { grid-row: 3; }
   .about-leader-note { padding: 24px 22px; }
-  .about-practice-visual { min-height: 430px; }
   .about-associate-grid { grid-template-columns: 1fr; }
   .about-associate-grid > div { min-height: 250px; border-bottom: 1px solid rgba(255,255,255,.18); }
   .about-associate-grid h3 { margin-top: 35px !important; }

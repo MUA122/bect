@@ -32,11 +32,11 @@ const officeData = {
       city: 'Riyadh',
       label: 'Global office',
       address: '6071 King Abdelaziz Rd., Al Maseef District, Riyadh, KSA',
-      destination: '6071 King Abdulaziz Road, Al Maseef, Riyadh, Saudi Arabia',
+      destination: 'BECT - KSA Engineering Consulting Company, QM3G+HQV Office No. 11, King Abdulaziz Rd, Almasiaf, Riyadh 12465, Saudi Arabia',
       phone: '+966 014535135',
       phoneUrl: 'tel:+966014535135',
       locator: 'AL MASEEF / RIYADH',
-      mapEmbed: 'https://www.google.com/maps?q=6071%20King%20Abdulaziz%20Road%2C%20Al%20Maseef%2C%20Riyadh%2C%20Saudi%20Arabia&z=14&output=embed',
+      mapEmbed: 'https://www.google.com/maps?q=BECT%20-%20KSA%20Engineering%20Consulting%20Company%2C%20QM3G%2BHQV%20Office%20No.%2011%2C%20King%20Abdulaziz%20Rd%2C%20Almasiaf%2C%20Riyadh%2012465%2C%20Saudi%20Arabia&z=16&output=embed',
       flagUrl: 'https://flagcdn.com/sa.svg',
       flagAlt: 'Flag of Saudi Arabia',
     },
@@ -63,12 +63,12 @@ const officeData = {
       country: 'المملكة العربية السعودية',
       city: 'الرياض',
       label: 'المكتب العالمي',
-      address: '6071 طريق الملك عبدالعزيز، حي المصيف، الرياض، السعودية',
-      destination: '6071 King Abdulaziz Road, Al Maseef, Riyadh, Saudi Arabia',
+      address: '6071 King Abdelaziz Rd., Al Maseef District, Riyadh, KSA',
+      destination: 'BECT - KSA Engineering Consulting Company, QM3G+HQV Office No. 11, King Abdulaziz Rd, Almasiaf, Riyadh 12465, Saudi Arabia',
       phone: '+966 014535135',
       phoneUrl: 'tel:+966014535135',
       locator: 'AL MASEEF / RIYADH',
-      mapEmbed: 'https://www.google.com/maps?q=6071%20King%20Abdulaziz%20Road%2C%20Al%20Maseef%2C%20Riyadh%2C%20Saudi%20Arabia&z=14&output=embed',
+      mapEmbed: 'https://www.google.com/maps?q=BECT%20-%20KSA%20Engineering%20Consulting%20Company%2C%20QM3G%2BHQV%20Office%20No.%2011%2C%20King%20Abdulaziz%20Rd%2C%20Almasiaf%2C%20Riyadh%2012465%2C%20Saudi%20Arabia&z=16&output=embed',
       flagUrl: 'https://flagcdn.com/sa.svg',
       flagAlt: 'علم المملكة العربية السعودية',
     },
@@ -84,6 +84,7 @@ const pageCopy = {
     response: 'Our team responds within two business days.',
     emailLabel: 'New business & general enquiries',
     phoneLabel: 'Speak with our Cairo office',
+    ksaPhoneLabel: 'Speak with our Riyadh office',
     formEyebrow: 'Start a conversation',
     formTitle: 'Tell us what you are building.',
     formIntro: 'Share the essentials. We will connect you with the people best suited to your project.',
@@ -181,6 +182,14 @@ function ContactPage({ language = 'en', formText, formStatus, onSubmit }) {
                   <Box>
                     <Typography>{text.phoneLabel}</Typography>
                     <strong dir="ltr">+20 (02) 24187866</strong>
+                  </Box>
+                  <ArrowOutwardRounded />
+                </a>
+                <a href="tel:+966014535135">
+                  <span><PhoneRounded /></span>
+                  <Box>
+                    <Typography>{text.ksaPhoneLabel || 'Speak with our Riyadh office'}</Typography>
+                    <strong dir="ltr">+966 014535135</strong>
                   </Box>
                   <ArrowOutwardRounded />
                 </a>

@@ -26,9 +26,9 @@
 .projects-hero-grid {
   display: grid;
   min-height: 520px;
-  grid-template-columns: minmax(0, .88fr) minmax(500px, 1.12fr);
+  grid-template-columns: minmax(0, .78fr) minmax(560px, 1.22fr);
   align-items: center;
-  gap: clamp(55px, 7vw, 120px);
+  gap: clamp(44px, 5.5vw, 96px);
 }
 .projects-hero-copy { position: relative; z-index: 4; }
 .projects-eyebrow, .projects-filter-kicker {
@@ -46,7 +46,7 @@
   line-height: .92 !important;
   letter-spacing: -.075em !important;
 }
-.projects-title span { display: block; color: #ff7048; }
+.projects-title span { display: block; color: #d98a72; }
 [dir="rtl"] .projects-title {
   font-family: "Noto Kufi Arabic", sans-serif;
   font-size: clamp(2.8rem, 4.7vw, 5.35rem) !important;
@@ -82,15 +82,15 @@
 .projects-atlas {
   position: relative;
   display: flex;
-  min-height: 560px;
+  min-height: 610px;
   align-items: center;
   justify-content: center;
   animation: atlasIn 1s cubic-bezier(.22,1,.36,1) both;
 }
 .projects-atlas-image {
   display: block;
-  width: min(100%, 650px);
-  max-height: 620px;
+  width: min(112%, 790px);
+  max-height: 720px;
   object-fit: contain;
   filter: drop-shadow(0 34px 55px rgba(0,13,22,.34));
 }
@@ -267,7 +267,7 @@
   backdrop-filter: blur(18px);
 }
 .premium-select.is-open .premium-select-menu { visibility: visible; opacity: 1; transform: none; }
-.premium-select-menu-line { height: 3px; margin: -3px 3px 7px; border-radius: 99px; background: linear-gradient(90deg,#ff7048,#58b8de,#7568d8); }
+.premium-select-menu-line { height: 3px; margin: -3px 3px 7px; border-radius: 99px; background: linear-gradient(90deg,#d98a72,#58b8de,#7568d8); }
 .premium-select-menu > button {
   display: grid;
   width: 100%;
@@ -442,7 +442,7 @@
 .projects-contact h2 { font-size: clamp(2rem,3.6vw,4rem) !important; font-weight: 500 !important; line-height: 1 !important; letter-spacing: -.055em !important; }
 .projects-contact p { margin-top: 12px !important; color: rgba(255,255,255,.58); font-size: 13px !important; }
 .projects-contact button { flex: 0 0 auto; padding: 13px 20px; color: #073a55; border-radius: 999px; background: white; }
-.projects-contact button:hover { color: white; background: #ff7048; }
+.projects-contact button:hover { color: white; background: #d98a72; }
 
 .project-dialog-paper { overflow: hidden !important; border-radius: 24px !important; background: #f4f1eb !important; }
 .project-dialog-content { position: relative; display: grid; grid-template-columns: 1.12fr .88fr; min-height: 620px; padding: 0 !important; }
@@ -467,9 +467,9 @@
 @keyframes projectCardIn { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: none; } }
 
 @media (max-width: 1100px) {
-  .projects-hero-grid { grid-template-columns: minmax(0,1fr) minmax(390px,.8fr); }
-  .projects-atlas { min-height: 450px; }
-  .projects-atlas-image { width: min(100%, 540px); }
+  .projects-hero-grid { grid-template-columns: minmax(0,1fr) minmax(430px,.9fr); gap: clamp(32px, 4vw, 56px); }
+  .projects-atlas { min-height: 480px; }
+  .projects-atlas-image { width: min(108%, 610px); max-height: 560px; }
   .projects-color-key-heading { flex-basis: 170px; }
   .projects-color-key-list {
     justify-content: flex-start;

@@ -30,7 +30,7 @@ const leaders = [
     name: { en: 'Dr. Omar El Husseiny', ar: 'د. عمر الحسيني' },
     role: { en: 'Co-Founder & Co-CEO', ar: 'الشريك المؤسس والرئيس التنفيذي المشارك' },
     text: {
-      en: 'Prof. Omar El Hosseiny brings nearly four decades of distinguished experience in architecture and urban design. After earning his MSc and PhD in France, he returned to Egypt and built a career leading major projects from master planning through execution. His expertise spans architectural design, urban development, and comprehensive project management.',
+      en: 'Prof. Omar El Husseiny, Co-Founder of BECT, brings nearly 40 years of distinguished experience in architecture and urban design. After earning his MSc and PhD in France, he returned to Egypt and built a notable career leading large-scale projects from master planning to execution. His expertise spans architectural design, urban development, and comprehensive project management.',
       ar: 'يمتلك الأستاذ الدكتور عمر الحسيني ما يقارب أربعة عقود من الخبرة المتميزة في العمارة والتصميم الحضري. بعد حصوله على درجتي الماجستير والدكتوراه من فرنسا، عاد إلى مصر وقاد مشروعات كبرى من التخطيط العام حتى التنفيذ. وتشمل خبراته التصميم المعماري والتطوير الحضري والإدارة المتكاملة للمشروعات.',
     },
   },
@@ -38,7 +38,7 @@ const leaders = [
     name: { en: 'Dr. Osama El Husseiny', ar: 'د. أسامة الحسيني' },
     role: { en: 'Co-Founder & Co-CEO', ar: 'الشريك المؤسس والرئيس التنفيذي المشارك' },
     text: {
-      en: 'Prof. Ossama El Hosseiny has balanced a professional career in design and project management with academic work at the Faculty of Engineering. His PhD studies in France expanded his expertise, which he brought back to Egypt to lead significant local and international projects across multiple sectors.',
+      en: 'Prof. Ossama has successfully balanced his professional career between design and project management within the private sector and academic work at the Faculty of Engineering. He expanded his expertise during his PhD studies in France and further enriched it upon returning to Egypt, leading major projects both locally and internationally across various sectors.',
       ar: 'جمع الأستاذ الدكتور أسامة الحسيني بين مسيرته المهنية في التصميم وإدارة المشروعات وعمله الأكاديمي بكلية الهندسة. وقد وسعت دراسته للدكتوراه في فرنسا خبراته التي عاد بها إلى مصر لقيادة مشروعات محلية ودولية مهمة في قطاعات متعددة.',
     },
   },
@@ -129,8 +129,6 @@ const copy = {
     journey: 'A practice shaped over time',
     leadership: "Our CEO's",
     leadershipIntro: 'Two careers spanning design, academia, urban development, and the delivery of complex projects.',
-    expertise: 'One coordinated practice',
-    expertiseIntro: 'Specialist teams connected by one project culture.',
     associates: 'International associates',
     associatesIntro: 'Longstanding collaboration extends our perspective and delivery capacity.',
     organization: 'The people behind the practice',
@@ -217,7 +215,7 @@ function AboutPage({ language = 'en', onContactClick }) {
                   <linearGradient id="aboutBeamGradient" x1="0" x2="1">
                     <stop offset="0" stopColor="#77d0ed" stopOpacity=".2" />
                     <stop offset=".48" stopColor="#77d0ed" stopOpacity=".9" />
-                    <stop offset="1" stopColor="#ed6e49" stopOpacity=".9" />
+                    <stop offset="1" stopColor="#cf876f" stopOpacity=".9" />
                   </linearGradient>
                 </defs>
                 <g className="drawing-grid">
@@ -408,29 +406,6 @@ function AboutPage({ language = 'en', onContactClick }) {
                 <small>{item[language]}</small>
               </button>
             ))}
-          </Box>
-        </Container>
-      </section>
-
-      <section className="about-practice">
-        <Container maxWidth="xl" className="about-shell about-practice-grid">
-          <Box className="about-practice-visual">
-            <Box className="about-practice-image" />
-            <Typography>DESIGN / ENGINEERING / DELIVERY</Typography>
-          </Box>
-          <Box>
-            <Typography className="about-section-index">05 / Expertise</Typography>
-            <Typography component="h2">{text.expertise}</Typography>
-            <Typography className="about-practice-intro">{text.expertiseIntro}</Typography>
-            <Box className="about-discipline-list">
-              {disciplines.map((item, index) => (
-                <Box key={item.en}>
-                  <span>{item.icon}</span>
-                  <Typography>{item[language]}</Typography>
-                  <small>0{index + 1}</small>
-                </Box>
-              ))}
-            </Box>
           </Box>
         </Container>
       </section>

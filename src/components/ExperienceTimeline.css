@@ -61,7 +61,7 @@
   letter-spacing: -.055em !important;
 }
 
-.experience-title span { color: #ff7043; }
+.experience-title span { color: #d98970; }
 
 [dir="rtl"] .experience-title {
   font-family: "Noto Kufi Arabic", sans-serif;
@@ -193,7 +193,7 @@
 
 .timeline-row-bottom .timeline-year { margin-top: 24px; }
 .timeline-milestone.is-active .timeline-node {
-  background: #ff7043;
+  background: #d98970;
   box-shadow: 0 0 0 9px rgba(255, 112, 67, .16);
 }
 
@@ -214,7 +214,7 @@
 }
 
 .timeline-feature p:first-child {
-  color: #ff8a64;
+  color: #dc9a82;
   font-size: 17px;
   font-weight: 700;
 }
@@ -283,7 +283,7 @@
   }
   .timeline-mobile-card strong {
     margin-top: auto;
-    color: #ff8560;
+    color: #db967e;
     font-size: 30px;
     line-height: 1;
     letter-spacing: -.05em;
