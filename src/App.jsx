@@ -31,6 +31,7 @@ import ExperienceTimeline from "./components/ExperienceTimeline";
 import LeadershipSection from "./components/LeadershipSection";
 import CertificationsSection from "./components/CertificationsSection";
 import GlobalPresenceSection from "./components/GlobalPresenceSection";
+import HomeFlyerSection from "./components/HomeFlyerSection";
 import SiteFooter from "./components/SiteFooter";
 import halfMoonImage from "./assets/projects/half-moon.png";
 import helioImage from "./assets/projects/helio.jpg";
@@ -984,6 +985,7 @@ function App() {
           <ExperienceTimeline language={language} />
           {/* <LeadershipSection language={language} /> */}
           <CertificationsSection language={language} />
+          <HomeFlyerSection />
           <GlobalPresenceSection language={language} />
           <SiteFooter
             language={language}
