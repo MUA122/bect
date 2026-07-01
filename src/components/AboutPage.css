@@ -197,10 +197,10 @@
 }
 .about-leadership-heading { max-width: 850px; }
 .about-leadership-heading > p:last-child { max-width: 620px; margin-top: 20px !important; color: #657780; line-height: 1.75; }
-.about-leadership-stage { position: relative; display: grid; grid-template-columns: minmax(0,.9fr) minmax(280px,1.15fr) minmax(0,.9fr); align-items: center; gap: clamp(18px,2.4vw,38px); margin-top: 55px; }
-.about-leadership-portrait { position: relative; align-self: center; min-height: 390px; overflow: hidden; border-radius: 220px 220px 12px 12px; background: transparent; }
+.about-leadership-stage { position: relative; display: grid; grid-template-columns: minmax(0,.9fr) minmax(280px,1.15fr) minmax(0,.9fr); align-items: start; gap: clamp(18px,2.4vw,38px); margin-top: 55px; }
+.about-leadership-portrait { position: relative; align-self: start; min-height: 390px; overflow: visible; border-radius: 220px 220px 12px 12px; background: transparent; transform: translateY(16px); }
 .about-leadership-portrait::before { display: none; }
-.about-leadership-portrait img { position: absolute; right: 0; bottom: 0; left: 0; width: 100%; height: 100%; object-fit: contain; object-position: center bottom; filter: drop-shadow(0 30px 35px rgba(5,43,62,.12)); }
+.about-leadership-portrait img { position: absolute; right: 0; bottom: 0; left: 0; width: 100%; height: 100%; object-fit: contain; object-position: center top; filter: drop-shadow(0 30px 35px rgba(5,43,62,.12)); }
 .about-leader-note { position: relative; padding: 34px 30px; border-top: 1px solid #cad7da; border-bottom: 1px solid #cad7da; background: rgba(255,255,255,.62); }
 .about-leader-note::after { position: absolute; top: -1px; width: 45px; height: 3px; content: ""; background: #77d0ed; }
 .about-leader-note > span { color: #cf876f; font-size: 11px; font-weight: 900; letter-spacing: .16em; }
@@ -296,7 +296,8 @@
   .about-milestone-track { margin-top: 45px; }
   .about-leadership-team { margin-top: 46px; padding-top: 28px; }
   .about-leadership-stage { min-height: 0; grid-template-columns: 1fr; gap: 18px; }
-  .about-leadership-portrait { min-height: 490px; grid-row: 1; }
+  .about-leadership-portrait { min-height: 490px; grid-row: 1; overflow: hidden; transform: none; }
+  .about-leadership-portrait img { height: 100%; object-position: center bottom; }
   .about-leadership-stage > .about-leader-note:first-child { grid-row: 2; }
   .about-leadership-stage > .about-leader-note:last-child { grid-row: 3; }
   .about-leader-note { padding: 24px 22px; }
