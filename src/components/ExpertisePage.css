@@ -391,16 +391,16 @@
 .expertise-tile-shade {
   z-index: -1;
   background:
-    linear-gradient(180deg, rgba(3, 31, 48, .2), rgba(3, 27, 43, .88)),
-    linear-gradient(90deg, rgba(3, 30, 46, .58), transparent 65%);
+    linear-gradient(90deg, rgba(2, 25, 39, .9) 0%, rgba(2, 30, 47, .56) 46%, rgba(2, 29, 45, .12) 82%),
+    linear-gradient(0deg, rgba(2, 24, 37, .84), rgba(2, 24, 37, .2) 58%, rgba(2, 24, 37, .08));
   transition: background .5s ease;
 }
 
-.expertise-tile:hover .expertise-tile-image { filter: saturate(1.08) contrast(1.03); transform: scale(1.1); }
+.expertise-tile:hover .expertise-tile-image { filter: saturate(1.08) contrast(1.03); transform: scale(1.08); }
 .expertise-tile:hover .expertise-tile-shade {
   background:
-    linear-gradient(180deg, rgba(3, 31, 48, .05), rgba(3, 27, 43, .92)),
-    linear-gradient(90deg, rgba(3, 30, 46, .7), transparent 70%);
+    linear-gradient(90deg, rgba(2, 25, 39, .86) 0%, rgba(2, 30, 47, .5) 44%, rgba(2, 29, 45, .08) 82%),
+    linear-gradient(0deg, rgba(2, 24, 37, .88), rgba(2, 24, 37, .16) 60%, rgba(2, 24, 37, .04));
 }
 
 .expertise-tile-top {

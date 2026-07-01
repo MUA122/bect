@@ -5,6 +5,7 @@ import halfMoonImage from '../assets/projects/half-moon.png';
 import helioImage from '../assets/projects/helio.jpg';
 import metroImage from '../assets/projects/metro.jpg';
 import schneiderImage from '../assets/projects/schneider.jpeg';
+import schneiderMepImage from '../assets/projects/schneider-mep-main.jpg';
 import utopiaImage from '../assets/projects/utopia.jpeg';
 import wadiDayqahImage from '../assets/projects/wadi-dayqah.jpeg';
 
@@ -15,7 +16,7 @@ const services = [
       en: 'Focuses on serving the community as well as providing an unforgettable experience. We live in spaces that should accommodate and serve our needs. A good design responds to its users while providing them with a rich experience.',
       ar: 'نركز على خدمة المجتمع وصناعة تجربة لا تنسى. نصمم مساحات تستوعب احتياجات مستخدميها وتخدمهم، وتستجيب لهم مع تقديم تجربة مكانية غنية وملهمة.',
     },
-    image: helioImage,
+    image: '/projects/profile/26-cairo-historic-panorama.jpg',
     code: 'AR',
   },
   {
@@ -24,7 +25,7 @@ const services = [
       en: 'Outdoor arrangement and design is at the heart of many projects, allowing for social interactions. BECT landscape designs balance aesthetic character with functional purpose.',
       ar: 'يشكل تنظيم وتصميم المساحات الخارجية قلب العديد من المشروعات، ويتيح التفاعل الاجتماعي. توازن تصاميمنا بين الطابع الجمالي والهدف الوظيفي.',
     },
-    image: halfMoonImage,
+    image: '/projects/profile/40-People-Square.png',
     code: 'LD',
   },
   {
@@ -33,7 +34,7 @@ const services = [
       en: 'Focuses on building a solid urban fabric with no futuristic restrictions to development and expansion. Our experience spans metropolitan and regional development, master planning and major urban upgrades.',
       ar: 'نبني نسيجًا عمرانيًا متماسكًا يتيح التطور والتوسع مستقبلًا. تمتد خبرتنا عبر التنمية الحضرية والإقليمية والمخططات العامة ومشروعات الارتقاء العمراني الكبرى.',
     },
-    image: metroImage,
+    image: '/projects/profile/14-al-mukaymen-city.jpg',
     code: 'UP',
   },
   {
@@ -42,7 +43,7 @@ const services = [
       en: 'Ensures the safety and endurance of the design while supporting architecture to reach its best outcome. Our team is well acquainted with structural building types of varying complexity.',
       ar: 'نضمن سلامة التصميم واستدامته، وندعم الرؤية المعمارية للوصول إلى أفضل نتائجها. يمتلك فريقنا خبرة واسعة في الأنظمة الإنشائية بمختلف درجات تعقيدها.',
     },
-    image: wadiDayqahImage,
+    image: '/projects/profile/27-coc2-center-of-excellence.jpg',
     code: 'ST',
   },
   {
@@ -51,7 +52,7 @@ const services = [
       en: 'Following up between the design team and site supervision team is crucial to attain optimum time, cost and quality performance.',
       ar: 'يعد التنسيق المستمر بين فريق التصميم وفريق الإشراف بالموقع ضروريًا لتحقيق أفضل أداء ممكن من حيث الوقت والتكلفة والجودة.',
     },
-    image: utopiaImage,
+    image: '/projects/profile/15-state-security-headquarters.jpg',
     code: 'PM',
   },
   {
@@ -60,7 +61,7 @@ const services = [
       en: 'Covers a variety of projects including roads, bridges, buildings, airports, tunnels, dams, irrigation systems, and water and wastewater networks.',
       ar: 'تشمل خبراتنا مجموعة واسعة من المشروعات، منها الطرق والجسور والمباني والمطارات والأنفاق والسدود وشبكات الري والمياه والصرف الصحي.',
     },
-    image: wadiDayqahImage,
+    image: '/projects/profile/91-port-said-tunnels.jpg',
     code: 'CE',
   },
   {
@@ -69,7 +70,7 @@ const services = [
       en: 'The services associated with creating a safe and comfortable environment, covering HVAC, plumbing, lighting, firefighting, fire alarm, water supply, sanitation and more.',
       ar: 'خدمات متكاملة لصناعة بيئة آمنة ومريحة، تشمل التكييف والسباكة والإضاءة ومكافحة وإنذار الحريق وإمدادات المياه والصرف الصحي وغيرها.',
     },
-    image: schneiderImage,
+    image: schneiderMepImage,
     code: 'ME',
   },
 ];
@@ -325,9 +326,6 @@ function ExpertisePage({ language = 'en', onContactClick }) {
                   <Box className="expertise-tile-shade" />
                   <Box className="expertise-tile-top">
                     <span>{String(index + 1).padStart(2, '0')}</span>
-                    <Box className="expertise-discipline-mark" aria-hidden="true">
-                      <ExpertiseIcon name={entry.code} />
-                    </Box>
                   </Box>
                   <Box className="expertise-tile-copy">
                     <Typography component="h2">{entry.title[language]}</Typography>
