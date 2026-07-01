@@ -6,6 +6,14 @@ import GroupsRounded from "@mui/icons-material/GroupsRounded";
 import LanguageRounded from "@mui/icons-material/LanguageRounded";
 import LocationOnRounded from "@mui/icons-material/LocationOnRounded";
 import VerifiedRounded from "@mui/icons-material/VerifiedRounded";
+import archAshrafImage from "../assets/team/arch-ashraf.png";
+import drHayssamImage from "../assets/team/dr-hayssam.png";
+import engGalalImage from "../assets/team/eng-galal.png";
+import engHeshamImage from "../assets/team/eng-hisham.png";
+import engHodaImage from "../assets/team/eng-hoda.png";
+import engRamiImage from "../assets/team/eng-rami.png";
+import engShabanImage from "../assets/team/eng-shaban.png";
+import mrHossamImage from "../assets/team/mr-hossam.png";
 import "./AboutPage.css";
 
 const milestones = [
@@ -201,6 +209,17 @@ const members = [
     "مدير الشؤون المالية والإدارية",
   ],
 ];
+
+const memberImages = {
+  "Dr. Hayssam Elhusseiny": drHayssamImage,
+  "Arch. Ashraf Elsawah": archAshrafImage,
+  "Eng. Rami Elhusseiny": engRamiImage,
+  "Eng. Hesham Badr": engHeshamImage,
+  "Eng. Hoda Lotfi": engHodaImage,
+  "Eng. Shaban Elkhatab": engShabanImage,
+  "Arch. Galal Awad": engGalalImage,
+  "Mr. Hossam El Khashab": mrHossamImage,
+};
 
 const partners = [
   "World Bank Group",
@@ -585,6 +604,13 @@ function AboutPage({ language = "en", onContactClick }) {
             {members.slice(2).map((member, index) => (
               <Box key={member[0]}>
                 <span>{String(index + 3).padStart(2, "0")}</span>
+                <Box className="about-member-photo">
+                  <Box
+                    component="img"
+                    src={memberImages[member[0]]}
+                    alt={isArabic ? member[2] : member[0]}
+                  />
+                </Box>
                 <Box>
                   <Typography component="h3">
                     {isArabic ? member[2] : member[0]}
