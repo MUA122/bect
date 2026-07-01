@@ -32,6 +32,7 @@ import LeadershipSection from "./components/LeadershipSection";
 import CertificationsSection from "./components/CertificationsSection";
 import GlobalPresenceSection from "./components/GlobalPresenceSection";
 import HomeFlyerSection from "./components/HomeFlyerSection";
+import PartnerLogoCarousel from "./components/PartnerLogoCarousel";
 import SiteFooter from "./components/SiteFooter";
 import halfMoonImage from "./assets/projects/half-moon.png";
 import helioImage from "./assets/projects/helio.jpg";
@@ -981,6 +982,7 @@ function App() {
           </Box>
 
           <ImpactSection language={language} />
+          <PartnerLogoCarousel language={language} />
           <ServicesSection language={language} />
           <ExperienceTimeline language={language} />
           {/* <LeadershipSection language={language} /> */}

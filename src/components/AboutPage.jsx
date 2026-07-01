@@ -14,6 +14,7 @@ import engHodaImage from "../assets/team/eng-hoda.png";
 import engRamiImage from "../assets/team/eng-rami.png";
 import engShabanImage from "../assets/team/eng-shaban.png";
 import mrHossamImage from "../assets/team/mr-hossam.png";
+import PartnerLogoCarousel from "./PartnerLogoCarousel";
 import "./AboutPage.css";
 
 const milestones = [
@@ -733,12 +734,8 @@ function AboutPage({ language = "en", onContactClick }) {
             <Typography component="h2">{text.network}</Typography>
             <Typography>{text.networkIntro}</Typography>
           </Box>
-          <Box className="about-partner-cloud">
-            {partners.map((partner, index) => (
-              <span key={partner} className={`tone-${index % 4}`}>
-                {partner}
-              </span>
-            ))}
+          <Box className="about-network-carousel">
+            <PartnerLogoCarousel />
           </Box>
         </Container>
       </section>

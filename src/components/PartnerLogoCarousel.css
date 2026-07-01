@@ -1,0 +1,202 @@
+.partner-logos-section {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: clamp(46px, 5vw, 74px) 0;
+  background:
+    linear-gradient(180deg, rgba(245, 251, 253, .98), rgba(235, 246, 249, .98)),
+    #eef7fa;
+}
+
+.partner-logos-section::before,
+.partner-logos-section::after {
+  position: absolute;
+  right: 0;
+  left: 0;
+  height: 1px;
+  content: "";
+  background: linear-gradient(90deg, transparent, rgba(8, 116, 167, .18), rgba(114, 202, 232, .34), transparent);
+}
+
+.partner-logos-section::before { top: 0; }
+.partner-logos-section::after { bottom: 0; }
+
+.partner-logos-section::before {
+  box-shadow: 0 38px 80px rgba(8, 116, 167, .08);
+}
+
+.partner-logo-marquee {
+  --logo-gap: clamp(18px, 2.15vw, 36px);
+  --logo-speed: 46s;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  gap: var(--logo-gap);
+  width: 100%;
+  overflow: hidden;
+  mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+}
+
+.partner-logo-marquee::before {
+  position: absolute;
+  z-index: -1;
+  top: 50%;
+  right: 0;
+  left: 0;
+  height: 112px;
+  content: "";
+  background:
+    linear-gradient(90deg, transparent, rgba(255, 255, 255, .72) 14%, rgba(255, 255, 255, .72) 86%, transparent);
+  transform: translateY(-50%);
+}
+
+.partner-logo-marquee:hover .partner-logo-track {
+  animation-play-state: paused;
+}
+
+.partner-logo-track {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: var(--logo-gap);
+  min-width: max-content;
+  animation: partnerLogoScroll var(--logo-speed) linear infinite;
+  will-change: transform;
+}
+
+[dir="rtl"] .partner-logo-track {
+  animation-name: partnerLogoScrollRtl;
+}
+
+.partner-logo-card {
+  display: grid;
+  width: clamp(158px, 11.8vw, 214px);
+  height: clamp(76px, 6vw, 96px);
+  place-items: center;
+  padding: 14px clamp(18px, 1.7vw, 28px);
+  color: rgba(8, 41, 58, .42);
+  opacity: .84;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  transition:
+    color .25s ease,
+    opacity .25s ease,
+    border-color .25s ease,
+    background .25s ease,
+    box-shadow .25s ease,
+    transform .25s ease;
+}
+
+.partner-logo-card.is-wide {
+  width: clamp(210px, 16vw, 292px);
+}
+
+.partner-logo-card:hover {
+  color: var(--brand-color);
+  opacity: 1;
+  border-color: rgba(8, 116, 167, .13);
+  background: rgba(255, 255, 255, .52);
+  box-shadow: 0 22px 58px rgba(4, 48, 73, .09);
+  transform: translateY(-3px);
+}
+
+.partner-logo-card img {
+  display: block;
+  width: auto;
+  max-width: min(100%, 170px);
+  max-height: 52px;
+  object-fit: contain;
+  filter:
+    grayscale(1)
+    saturate(0)
+    contrast(.62)
+    brightness(.78)
+    sepia(.08)
+    hue-rotate(158deg);
+  transition: filter .25s ease, transform .25s ease;
+}
+
+.partner-logo-card:hover img {
+  filter: none;
+  transform: scale(1.04);
+}
+
+@keyframes partnerLogoScroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(calc(-100% - var(--logo-gap))); }
+}
+
+@keyframes partnerLogoScrollRtl {
+  from { transform: translateX(calc(-100% - var(--logo-gap))); }
+  to { transform: translateX(0); }
+}
+
+@media (max-width: 899px) {
+  .partner-logos-section {
+    padding: 42px 0;
+  }
+
+  .partner-logo-marquee {
+    --logo-gap: 16px;
+    --logo-speed: 40s;
+  }
+
+  .partner-logo-marquee::before {
+    height: 96px;
+  }
+
+  .partner-logo-card {
+    width: 154px;
+    height: 78px;
+    padding: 13px 16px;
+  }
+
+  .partner-logo-card.is-wide {
+    width: 204px;
+  }
+
+  .partner-logo-card img {
+    max-width: 138px;
+    max-height: 44px;
+  }
+}
+
+@media (max-width: 599px) {
+  .partner-logos-section {
+    padding: 34px 0;
+  }
+
+  .partner-logo-marquee {
+    --logo-gap: 10px;
+    --logo-speed: 34s;
+    mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  }
+
+  .partner-logo-marquee::before {
+    height: 82px;
+  }
+
+  .partner-logo-card {
+    width: 132px;
+    height: 66px;
+    padding: 10px 13px;
+    border-radius: 8px;
+  }
+
+  .partner-logo-card.is-wide {
+    width: 174px;
+  }
+
+  .partner-logo-card img {
+    max-width: 112px;
+    max-height: 36px;
+  }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .partner-logo-track {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}

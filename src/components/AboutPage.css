@@ -1052,6 +1052,13 @@
   color: #657780;
   line-height: 1.7;
 }
+.about-network-carousel {
+  margin-top: clamp(36px, 4vw, 54px);
+}
+.about-network-carousel .partner-logos-section {
+  margin-inline: calc(clamp(24px, 5vw, 84px) * -1);
+  padding: clamp(38px, 4.5vw, 64px) 0;
+}
 .about-partner-cloud {
   display: flex;
   flex-wrap: wrap;
