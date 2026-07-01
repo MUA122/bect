@@ -287,13 +287,6 @@ function ExpertisePage({ language = 'en', onContactClick }) {
                 const optionCount = option === 'services' ? services.length : sectors.length;
                 return (
                   <Box className="expertise-mode-option" key={option}>
-                    <Box className="expertise-hand-note" aria-hidden="true">
-                      <span>{option === 'services' ? text.serviceLabel : text.sectorLabel}</span>
-                      <svg viewBox="0 0 92 42" fill="none">
-                        <path d="M4 7c24 0 47 3 58 14 7 7 2 14-11 13" />
-                        <path d="m57 28-7 6 8 3" />
-                      </svg>
-                    </Box>
                     <button
                       type="button"
                       role="tab"

@@ -985,7 +985,7 @@ function App() {
           <ExperienceTimeline language={language} />
           {/* <LeadershipSection language={language} /> */}
           <CertificationsSection language={language} />
-          <HomeFlyerSection />
+          {/* <HomeFlyerSection /> */}
           <GlobalPresenceSection language={language} />
           <SiteFooter
             language={language}

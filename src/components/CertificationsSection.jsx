@@ -9,7 +9,7 @@ import qualityLogo from '../assets/certifications/quality-management.svg';
 import './CertificationsSection.css';
 
 export const CERTIFICATE_LINKS = {
-  ida: '',
+  ida: '/certificates/IDA.pdf',
   iso: '/certificates/iso-quality-management.pdf',
   expertise: '/certificates/expertise-house-register.pdf',
   quality: '/certificates/iso-quality-management.pdf',

@@ -217,7 +217,7 @@
   width: min(100%, 720px);
   grid-template-columns: 1fr 1fr;
   gap: 18px;
-  padding-top: 56px;
+  padding-top: 0;
 }
 
 .expertise-mode-option {
@@ -785,7 +785,7 @@
   .expertise-mode-switch {
     width: 100%;
     gap: 8px;
-    padding-top: 49px;
+    padding-top: 0;
   }
   .expertise-hand-note { left: 50%; }
   .expertise-hand-note span {
