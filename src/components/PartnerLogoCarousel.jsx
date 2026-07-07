@@ -48,10 +48,20 @@ function LogoStrip() {
   );
 }
 
-function PartnerLogoCarousel() {
+function PartnerLogoCarousel({ language = "en" }) {
+  const isArabic = language === "ar";
+
   return (
-    <Box component="section" className="partner-logos-section">
-      <Box className="partner-logo-marquee" aria-label="Partner and client logo carousel">
+    <Box
+      component="section"
+      className="partner-logos-section"
+      dir={isArabic ? "rtl" : "ltr"}
+    >
+      <Box
+        className={`partner-logo-marquee ${isArabic ? "is-rtl" : ""}`}
+        aria-label="Partner and client logo carousel"
+        dir="ltr"
+      >
         <LogoStrip />
         <LogoStrip />
       </Box>

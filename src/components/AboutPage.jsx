@@ -735,7 +735,7 @@ function AboutPage({ language = "en", onContactClick }) {
             <Typography>{text.networkIntro}</Typography>
           </Box>
           <Box className="about-network-carousel">
-            <PartnerLogoCarousel />
+            <PartnerLogoCarousel language={language} />
           </Box>
         </Container>
       </section>
