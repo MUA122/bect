@@ -947,7 +947,7 @@ function App() {
                     {slide.category[language]}
                   </Typography>
                 </Box>
-                <Stack direction="row" spacing={1} sx={{ flexShrink: 0 }}>
+                <Stack direction="row" className="project-controls">
                   <IconButton
                     onClick={() => changeSlide(-1)}
                     aria-label="Previous project"

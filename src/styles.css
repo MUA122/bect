@@ -162,6 +162,13 @@ a { color: inherit; }
 }
 .project-bar > div:first-child { text-align: right; }
 [dir="rtl"] .project-bar > div:first-child { text-align: left; }
+.project-controls {
+  flex-shrink: 0;
+  gap: 9px;
+}
+.project-controls .MuiIconButton-root {
+  flex: 0 0 auto;
+}
 .selected-label { margin-bottom: 6px !important; color: rgba(255,255,255,.52); font-size: 9px !important; font-weight: 700 !important; letter-spacing: .16em !important; text-transform: uppercase; }
 .project-title { overflow: hidden; font-size: clamp(1.3rem, 2vw, 1.8rem) !important; font-weight: 500 !important; line-height: 1.15 !important; text-overflow: ellipsis; white-space: nowrap; }
 .project-category { margin-top: 5px !important; color: #76c9e7; font-size: 11px !important; font-weight: 700 !important; }
@@ -460,6 +467,7 @@ a { color: inherit; }
 
 @media (min-width: 900px) {
   .hero-actions { transform: translateY(clamp(130px, 18vh, 170px)); }
+  [dir="rtl"] .hero-actions { transform: none; }
 }
 
 @media (max-width: 899px) {
@@ -493,9 +501,14 @@ a { color: inherit; }
   .hero-body { margin-top: 19px !important; font-size: 14px !important; line-height: 1.55 !important; }
   .hero-actions { width: 100%; margin-top: 24px; align-items: stretch; }
   .primary-cta, .secondary-cta { min-height: 49px; width: 100%; }
+  .primary-cta .MuiButton-endIcon {
+    flex-shrink: 0;
+  }
   [dir="rtl"] .hero-actions { gap: 12px; }
-  .project-bar { gap: 12px; padding-top: 16px; }
-  .project-title { max-width: 210px; font-size: 17px !important; }
+  .project-bar { gap: 14px; padding-top: 16px; }
+  .project-bar > div:first-child { min-width: 0; }
+  .project-controls { gap: 8px; }
+  .project-title { max-width: min(210px, calc(100vw - 154px)); font-size: 17px !important; }
   .project-category { font-size: 10px !important; }
   .loading-screen { gap: 42px; }
   .loader-orbit { width: 128px; height: 128px; }
@@ -546,6 +559,7 @@ a { color: inherit; }
 
 @media (max-height: 760px) and (min-width: 900px) {
   .hero-actions { transform: translateY(clamp(132px, 19vh, 160px)); }
+  [dir="rtl"] .hero-actions { transform: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {
