@@ -276,6 +276,11 @@ function ExpertisePage({ language = 'en', onContactClick }) {
                 Architecture / Engineering / Planning
               </Typography>
             </Box>
+
+            <a className="expertise-hero-link expertise-hero-link-mobile" href="#expertise-gallery">
+              <span>{text.explore}</span>
+              <i className="expertise-arrow expertise-arrow-out" />
+            </a>
           </Box>
         </Container>
       </Box>

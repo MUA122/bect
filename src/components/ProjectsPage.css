@@ -78,6 +78,7 @@
 .projects-hero-link svg { width: 18px; transition: transform .3s ease; }
 .projects-hero-link:hover { color: #79cee9; }
 .projects-hero-link:hover svg { transform: translate(4px, -4px); }
+.projects-hero-link-mobile { display: none; }
 
 .projects-atlas {
   position: relative;
@@ -486,11 +487,22 @@
 }
 @media (max-width: 760px) {
   .projects-shell { width: 100% !important; max-width: 100vw !important; box-sizing: border-box; }
-  .projects-hero { min-height: auto; padding: 125px 0 45px; }
-  .projects-hero-grid { display: block; min-height: 0; }
+  .projects-hero { min-height: auto; padding: 125px 0 40px; }
+  .projects-hero-grid {
+    display: flex;
+    min-height: 0;
+    flex-direction: column;
+    gap: 0;
+  }
+  .projects-hero-copy > .projects-hero-link { display: none; }
+  .projects-hero-link-mobile {
+    display: flex;
+    align-self: flex-start;
+    margin-top: 34px;
+  }
   .projects-hero-copy, .projects-title, .projects-intro { width: calc(100vw - 48px); max-width: calc(100vw - 48px); overflow-wrap: anywhere; }
   .projects-title { font-size: clamp(2.65rem,10.8vw,4rem) !important; }
-  .projects-atlas { min-height: 410px; margin-top: 40px; }
+  .projects-atlas { min-height: 370px; margin-top: 28px; }
   .projects-atlas-image { width: min(100%, 480px); max-height: 440px; }
   .projects-hero-metrics { gap: 20px; }
   .projects-hero-metrics > div { grid-template-columns: auto 1fr; }
@@ -542,7 +554,7 @@
   .projects-hero-copy, .projects-title, .projects-intro { width: calc(100vw - 36px); max-width: calc(100vw - 36px); }
   .projects-title { font-size: clamp(2.55rem,10.3vw,3.5rem) !important; }
   .projects-intro { font-size: .92rem !important; }
-  .projects-atlas { min-height: 350px; width: calc(100vw - 36px); }
+  .projects-atlas { min-height: 320px; width: calc(100vw - 36px); }
   .projects-atlas-image { width: min(100%, 390px); max-height: 380px; }
   .projects-hero-metrics strong { font-size: 24px; }
   .projects-hero-metrics span { font-size: 8px; }

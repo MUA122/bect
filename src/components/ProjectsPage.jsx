@@ -424,6 +424,11 @@ function ProjectsPage({ language = "en", onContactClick }) {
                 alt=""
               />
             </Box>
+
+            <a href="#projects-collection" className="projects-hero-link projects-hero-link-mobile">
+              <span>{text.filterTitle}</span>
+              <ArrowOutwardRounded />
+            </a>
           </Box>
 
           <Box className="projects-hero-metrics"></Box>

@@ -1264,11 +1264,14 @@
     min-height: 0;
     grid-template-columns: 1fr;
     gap: 18px;
+    margin-top: 32px;
   }
   .about-leadership-portrait {
-    min-height: 490px;
+    min-height: 0;
+    aspect-ratio: 592 / 340;
     grid-row: 1;
-    overflow: hidden;
+    overflow: visible;
+    border-radius: 0;
     transform: none;
   }
   .about-leadership-portrait img {
