@@ -106,34 +106,6 @@ const leaders = [
   },
 ];
 
-const principles = [
-  {
-    n: "01",
-    en: "Integrated delivery that serves communities",
-    ar: "تنفيذ متكامل يخدم المجتمعات",
-  },
-  {
-    n: "02",
-    en: "Creative concepts that turn visions into reality",
-    ar: "أفكار إبداعية تحول الرؤى إلى واقع",
-  },
-  {
-    n: "03",
-    en: "Controlled quality at every project stage",
-    ar: "جودة منضبطة في كل مراحل المشروع",
-  },
-  {
-    n: "04",
-    en: "Continuous improvement of people and methods",
-    ar: "تطوير مستمر للكوادر والمنهجيات",
-  },
-  {
-    n: "05",
-    en: "Well-coordinated spaces shaped around purpose",
-    ar: "مساحات متكاملة ومنسقة حول الهدف",
-  },
-];
-
 const disciplines = [
   { icon: <ArchitectureRounded />, en: "Architecture", ar: "العمارة" },
   {
@@ -304,9 +276,6 @@ const copy = {
     storyTwo:
       "Our strength lies in assembling the right disciplines around each challenge. From early strategy and design to technical coordination, supervision, and handover, BECT combines rigorous engineering with an understanding of place, culture, and long-term value.",
     figures: "BECT at a glance",
-    principles: "Principles in practice",
-    principlesIntro:
-      "The standards behind every decision, drawing, and delivery.",
     journey: "A practice shaped over time",
     leadership: "Our CEO's",
     leadershipIntro:
@@ -349,8 +318,6 @@ const copy = {
     storyTwo:
       "تكمن قوتنا في جمع التخصصات المناسبة حول كل تحدٍ. فمن الاستراتيجية والتصميم إلى التنسيق الفني والإشراف والتسليم، تجمع BECT بين الدقة الهندسية وفهم المكان والثقافة والقيمة طويلة الأجل.",
     figures: "BECT في أرقام",
-    principles: "مبادئ نطبقها",
-    principlesIntro: "المعايير التي تقف خلف كل قرار ورسم وتسليم.",
     journey: "خبرة تشكلت عبر الزمن",
     leadership: "قيادة برؤية بعيدة",
     leadershipIntro:
@@ -688,26 +655,6 @@ function AboutPage({ language = "en", onContactClick }) {
                   </Typography>
                   <Typography>{isArabic ? member[3] : member[1]}</Typography>
                 </Box>
-              </Box>
-            ))}
-          </Box>
-        </Container>
-      </section>
-
-      <section className="about-principles">
-        <Container maxWidth="xl" className="about-shell">
-          <Box className="about-section-heading">
-            <Typography className="about-section-index">
-              03 / {text.figures}
-            </Typography>
-            <Typography component="h2">{text.principles}</Typography>
-            <Typography>{text.principlesIntro}</Typography>
-          </Box>
-          <Box className="about-principle-grid">
-            {principles.map((item) => (
-              <Box key={item.n}>
-                <span>{item.n}</span>
-                <Typography component="h3">{item[language]}</Typography>
               </Box>
             ))}
           </Box>
