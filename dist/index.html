@@ -9,6 +9,50 @@
     />
     <link rel="icon" type="image/svg+xml" href="/bect-favicon.svg" />
     <title>BECT | Architects & Engineers</title>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VR39BHGN26"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-VR39BHGN26');
+
+      (function () {
+        var measurementId = 'G-VR39BHGN26';
+        var currentPage =
+          window.location.pathname + window.location.search + window.location.hash;
+
+        function trackPageView() {
+          var nextPage =
+            window.location.pathname + window.location.search + window.location.hash;
+
+          if (nextPage === currentPage) return;
+          currentPage = nextPage;
+
+          gtag('config', measurementId, {
+            page_path: nextPage,
+          });
+        }
+
+        var originalPushState = history.pushState;
+        var originalReplaceState = history.replaceState;
+
+        history.pushState = function () {
+          originalPushState.apply(history, arguments);
+          window.dispatchEvent(new Event('analytics-route-change'));
+        };
+
+        history.replaceState = function () {
+          originalReplaceState.apply(history, arguments);
+          window.dispatchEvent(new Event('analytics-route-change'));
+        };
+
+        window.addEventListener('popstate', trackPageView);
+        window.addEventListener('hashchange', trackPageView);
+        window.addEventListener('analytics-route-change', trackPageView);
+      })();
+    </script>
     <script type="module" crossorigin src="/assets/index-CIoceAdG.js"></script>
     <link rel="stylesheet" crossorigin href="/assets/index-R08Hapk1.css">
   </head>
