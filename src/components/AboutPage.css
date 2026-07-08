@@ -1331,11 +1331,13 @@
   .about-leader-track {
     display: flex;
     width: 100%;
-    transform: translateX(calc(var(--active-leader, 0) * -100%));
-    transition: transform 0.35s ease;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
   }
-  [dir="rtl"] .about-leader-track {
-    transform: translateX(calc(var(--active-leader, 0) * 100%));
+  .about-leader-track::-webkit-scrollbar {
+    display: none;
   }
   .about-leader-track .about-leader-note:first-child,
   .about-leader-track .about-leader-note:last-child {
@@ -1347,9 +1349,7 @@
     min-height: 272px;
     border-top: 0;
     border-bottom: 0;
-  }
-  .about-leader-note:not(.is-active) {
-    visibility: hidden;
+    scroll-snap-align: start;
   }
   .about-leader-controls {
     display: flex;
@@ -1395,22 +1395,21 @@
     display: flex;
     width: 100%;
     grid-template-columns: none;
+    overflow-x: auto;
     margin-top: 42px;
     border-top: 1px solid rgba(255, 255, 255, 0.18);
-    transform: translateX(calc(var(--active-associate, 0) * -100%));
-    transition: transform 0.35s ease;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
   }
-  [dir="rtl"] .about-associate-grid {
-    transform: translateX(calc(var(--active-associate, 0) * 100%));
+  .about-associate-grid::-webkit-scrollbar {
+    display: none;
   }
   .about-associate-grid > div {
     flex: 0 0 100%;
     min-height: 318px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.18);
     scroll-snap-align: start;
-  }
-  .about-associate-grid > div:not(.is-active) {
-    visibility: hidden;
   }
   .about-associate-grid h3 {
     margin-top: 35px !important;

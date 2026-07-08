@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import ArrowBackRounded from "@mui/icons-material/ArrowBackRounded";
 import ArrowForwardRounded from "@mui/icons-material/ArrowForwardRounded";
 import { Box, Container, Typography } from "@mui/material";
@@ -386,19 +386,33 @@ function AboutPage({ language = "en", onContactClick }) {
   const [activeMilestone, setActiveMilestone] = useState(milestones.length - 1);
   const [activeLeader, setActiveLeader] = useState(0);
   const [activeAssociate, setActiveAssociate] = useState(0);
+  const leaderSliderRef = useRef(null);
+  const associateSliderRef = useRef(null);
   const isArabic = language === "ar";
   const text = copy[language];
+  const scrollSliderTo = (ref, index, setter) => {
+    setter(index);
+    ref.current?.children[index]?.scrollIntoView({
+      behavior: "smooth",
+      block: "nearest",
+      inline: "start",
+    });
+  };
   const showPreviousLeader = () => {
-    setActiveLeader((current) => (current + leaders.length - 1) % leaders.length);
+    const nextIndex = (activeLeader + leaders.length - 1) % leaders.length;
+    scrollSliderTo(leaderSliderRef, nextIndex, setActiveLeader);
   };
   const showNextLeader = () => {
-    setActiveLeader((current) => (current + 1) % leaders.length);
+    const nextIndex = (activeLeader + 1) % leaders.length;
+    scrollSliderTo(leaderSliderRef, nextIndex, setActiveLeader);
   };
   const showPreviousAssociate = () => {
-    setActiveAssociate((current) => (current + associates.length - 1) % associates.length);
+    const nextIndex = (activeAssociate + associates.length - 1) % associates.length;
+    scrollSliderTo(associateSliderRef, nextIndex, setActiveAssociate);
   };
   const showNextAssociate = () => {
-    setActiveAssociate((current) => (current + 1) % associates.length);
+    const nextIndex = (activeAssociate + 1) % associates.length;
+    scrollSliderTo(associateSliderRef, nextIndex, setActiveAssociate);
   };
 
   return (
@@ -593,7 +607,7 @@ function AboutPage({ language = "en", onContactClick }) {
               />
             </Box>
             <Box className="about-leader-slider" aria-live="polite">
-              <Box className="about-leader-track">
+              <Box className="about-leader-track" ref={leaderSliderRef}>
                 {leaders.map((leader, index) => (
                   <Box
                     key={leader.name.en}
@@ -631,7 +645,7 @@ function AboutPage({ language = "en", onContactClick }) {
                     key={leader.name.en}
                     type="button"
                     className={activeLeader === index ? "is-active" : ""}
-                    onClick={() => setActiveLeader(index)}
+                    onClick={() => scrollSliderTo(leaderSliderRef, index, setActiveLeader)}
                     aria-label={`Show ${leader.name[language]}`}
                     aria-selected={activeLeader === index}
                   />
@@ -742,7 +756,7 @@ function AboutPage({ language = "en", onContactClick }) {
             className="about-associate-stage"
             style={{ "--active-associate": activeAssociate }}
           >
-            <Box className="about-associate-grid" aria-live="polite">
+            <Box className="about-associate-grid" aria-live="polite" ref={associateSliderRef}>
               {associates.map((associate, index) => (
                 <Box
                   key={associate.name}
@@ -776,7 +790,7 @@ function AboutPage({ language = "en", onContactClick }) {
                     key={associate.name}
                     type="button"
                     className={activeAssociate === index ? "is-active" : ""}
-                    onClick={() => setActiveAssociate(index)}
+                    onClick={() => scrollSliderTo(associateSliderRef, index, setActiveAssociate)}
                     aria-label={`Show ${associate.name}`}
                     aria-selected={activeAssociate === index}
                   />
