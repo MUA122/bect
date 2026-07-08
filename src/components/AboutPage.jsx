@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import ArrowBackRounded from "@mui/icons-material/ArrowBackRounded";
+import ArrowForwardRounded from "@mui/icons-material/ArrowForwardRounded";
 import { Box, Container, Typography } from "@mui/material";
 import ArchitectureRounded from "@mui/icons-material/ArchitectureRounded";
 import BusinessRounded from "@mui/icons-material/BusinessRounded";
@@ -382,8 +384,22 @@ const copy = {
 
 function AboutPage({ language = "en", onContactClick }) {
   const [activeMilestone, setActiveMilestone] = useState(milestones.length - 1);
+  const [activeLeader, setActiveLeader] = useState(0);
+  const [activeAssociate, setActiveAssociate] = useState(0);
   const isArabic = language === "ar";
   const text = copy[language];
+  const showPreviousLeader = () => {
+    setActiveLeader((current) => (current + leaders.length - 1) % leaders.length);
+  };
+  const showNextLeader = () => {
+    setActiveLeader((current) => (current + 1) % leaders.length);
+  };
+  const showPreviousAssociate = () => {
+    setActiveAssociate((current) => (current + associates.length - 1) % associates.length);
+  };
+  const showNextAssociate = () => {
+    setActiveAssociate((current) => (current + 1) % associates.length);
+  };
 
   return (
     <Box component="main" className="about-page" dir={isArabic ? "rtl" : "ltr"}>
@@ -565,17 +581,10 @@ function AboutPage({ language = "en", onContactClick }) {
             <Typography component="h2">{text.leadership}</Typography>
             <Typography>{text.leadershipIntro}</Typography>
           </Box>
-          <Box className="about-leadership-stage">
-            <Box className="about-leader-note">
-              <span>01</span>
-              <Typography component="h3">
-                {leaders[0].name[language]}
-              </Typography>
-              <Typography className="about-leader-role">
-                {leaders[0].role[language]}
-              </Typography>
-              <Typography>{leaders[0].text[language]}</Typography>
-            </Box>
+          <Box
+            className="about-leadership-stage"
+            style={{ "--active-leader": activeLeader }}
+          >
             <Box className="about-leadership-portrait">
               <Box
                 component="img"
@@ -583,15 +592,62 @@ function AboutPage({ language = "en", onContactClick }) {
                 alt={`${leaders[0].name[language]} & ${leaders[1].name[language]}`}
               />
             </Box>
-            <Box className="about-leader-note">
-              <span>02</span>
-              <Typography component="h3">
-                {leaders[1].name[language]}
-              </Typography>
-              <Typography className="about-leader-role">
-                {leaders[1].role[language]}
-              </Typography>
-              <Typography>{leaders[1].text[language]}</Typography>
+            <Box className="about-leader-slider" aria-live="polite">
+              <Box className="about-leader-track">
+                {leaders.map((leader, index) => (
+                  <Box
+                    key={leader.name.en}
+                    className={`about-leader-note ${
+                      activeLeader === index ? "is-active" : ""
+                    }`}
+                  >
+                    <span>{String(index + 1).padStart(2, "0")}</span>
+                    <Typography component="h3">
+                      {leader.name[language]}
+                    </Typography>
+                    <Typography className="about-leader-role">
+                      {leader.role[language]}
+                    </Typography>
+                    <Typography>{leader.text[language]}</Typography>
+                  </Box>
+                ))}
+              </Box>
+            </Box>
+            <Box className="about-leader-controls">
+              <button
+                type="button"
+                onClick={isArabic ? showNextLeader : showPreviousLeader}
+                aria-label={isArabic ? "Next leader" : "Previous leader"}
+              >
+                {isArabic ? (
+                  <ArrowForwardRounded fontSize="small" />
+                ) : (
+                  <ArrowBackRounded fontSize="small" />
+                )}
+              </button>
+              <Box className="about-leader-dots" role="tablist" aria-label="Leadership slides">
+                {leaders.map((leader, index) => (
+                  <button
+                    key={leader.name.en}
+                    type="button"
+                    className={activeLeader === index ? "is-active" : ""}
+                    onClick={() => setActiveLeader(index)}
+                    aria-label={`Show ${leader.name[language]}`}
+                    aria-selected={activeLeader === index}
+                  />
+                ))}
+              </Box>
+              <button
+                type="button"
+                onClick={isArabic ? showPreviousLeader : showNextLeader}
+                aria-label={isArabic ? "Previous leader" : "Next leader"}
+              >
+                {isArabic ? (
+                  <ArrowBackRounded fontSize="small" />
+                ) : (
+                  <ArrowForwardRounded fontSize="small" />
+                )}
+              </button>
             </Box>
           </Box>
 
@@ -682,20 +738,62 @@ function AboutPage({ language = "en", onContactClick }) {
             <Typography component="h2">{text.associates}</Typography>
             <Typography>{text.associatesIntro}</Typography>
           </Box>
-          <Box className="about-associate-grid">
-            {associates.map((associate, index) => (
-              <Box
-                key={associate.name}
-                style={{ "--associate-logo": `url("${associate.logo}")` }}
+          <Box
+            className="about-associate-stage"
+            style={{ "--active-associate": activeAssociate }}
+          >
+            <Box className="about-associate-grid" aria-live="polite">
+              {associates.map((associate, index) => (
+                <Box
+                  key={associate.name}
+                  className={activeAssociate === index ? "is-active" : ""}
+                  style={{ "--associate-logo": `url("${associate.logo}")` }}
+                >
+                  <span>0{index + 1}</span>
+                  <Typography component="h3">{associate.name}</Typography>
+                  <Typography className="about-associate-origin">
+                    {associate.origin[language]}
+                  </Typography>
+                  <Typography>{associate.text[language]}</Typography>
+                </Box>
+              ))}
+            </Box>
+            <Box className="about-associate-controls">
+              <button
+                type="button"
+                onClick={isArabic ? showNextAssociate : showPreviousAssociate}
+                aria-label={isArabic ? "Next associate" : "Previous associate"}
               >
-                <span>0{index + 1}</span>
-                <Typography component="h3">{associate.name}</Typography>
-                <Typography className="about-associate-origin">
-                  {associate.origin[language]}
-                </Typography>
-                <Typography>{associate.text[language]}</Typography>
+                {isArabic ? (
+                  <ArrowForwardRounded fontSize="small" />
+                ) : (
+                  <ArrowBackRounded fontSize="small" />
+                )}
+              </button>
+              <Box className="about-associate-dots" role="tablist" aria-label="Associate slides">
+                {associates.map((associate, index) => (
+                  <button
+                    key={associate.name}
+                    type="button"
+                    className={activeAssociate === index ? "is-active" : ""}
+                    onClick={() => setActiveAssociate(index)}
+                    aria-label={`Show ${associate.name}`}
+                    aria-selected={activeAssociate === index}
+                  />
+                ))}
               </Box>
-            ))}
+              <button
+                type="button"
+                onClick={isArabic ? showPreviousAssociate : showNextAssociate}
+                aria-label={isArabic ? "Previous associate" : "Next associate"}
+              >
+                {isArabic ? (
+                  <ArrowBackRounded fontSize="small" />
+                ) : (
+                  <ArrowForwardRounded fontSize="small" />
+                )}
+              </button>
+            </Box>
           </Box>
         </Container>
       </section>

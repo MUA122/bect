@@ -127,21 +127,122 @@
   .contact-page-form-footer { align-items: stretch; flex-direction: column; }
   .contact-page-form-footer > p { text-align: center; }
   .contact-page-form-footer .MuiButton-root { width: 100%; }
-  .contact-offices-heading h2 { font-size: clamp(2.8rem,13vw,4.5rem) !important; }
-  .office-grid { grid-template-columns: 1fr; }
-  .office-card { padding: 30px 0 44px; border-inline-end: 0; border-bottom: 1px solid rgba(255,255,255,.16); }
-  .office-card:last-child { padding-top: 44px; border-bottom: 0; }
-  .office-title-row h3 { font-size: clamp(3.4rem,17vw,5rem) !important; }
-  .office-map { min-height: 270px; }
+  .contact-offices { padding: 58px 0 62px; }
+  .contact-offices-heading { gap: 18px; }
+  .contact-offices-heading h2 {
+    max-width: 360px;
+    font-size: clamp(2.45rem,10.5vw,3.5rem) !important;
+    line-height: .95 !important;
+  }
+  .contact-offices-heading > p {
+    max-width: 330px;
+    font-size: 12px !important;
+    line-height: 1.65 !important;
+  }
+  .office-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+    margin-top: 28px;
+    border: 0;
+  }
+  .office-card {
+    display: grid;
+    grid-template-columns: 70px minmax(0,1fr);
+    gap: 14px 16px;
+    padding: 16px;
+    border: 1px solid rgba(255,255,255,.16);
+    border-radius: 8px;
+    background: rgba(255,255,255,.045);
+  }
+  .office-card:last-child {
+    padding-top: 16px;
+    border: 1px solid rgba(255,255,255,.16);
+  }
+  .office-card-top {
+    display: block;
+    grid-row: 1 / 3;
+  }
+  .office-flag {
+    width: 70px;
+    height: 48px;
+    padding: 4px;
+    border-radius: 5px;
+    box-shadow: 0 10px 24px rgba(0,0,0,.18);
+  }
+  .office-index {
+    display: none;
+  }
+  .office-title-row {
+    align-items: start;
+    margin-top: 0;
+  }
+  .office-title-row h3 {
+    margin-top: 2px !important;
+    font-size: 28px !important;
+    letter-spacing: -.04em !important;
+  }
+  .office-label,
+  .office-detail-label {
+    font-size: 7px !important;
+  }
+  .office-country {
+    padding-bottom: 0;
+    font-size: 8px !important;
+  }
+  .office-map {
+    display: none;
+  }
+  .office-details {
+    grid-column: 2;
+    gap: 10px;
+    margin-top: 0;
+  }
+  .office-detail-label {
+    display: none;
+  }
+  .office-address {
+    min-height: 0;
+    gap: 8px;
+  }
+  .office-address svg {
+    font-size: 15px;
+  }
+  .office-address p {
+    font-size: 10px !important;
+    line-height: 1.5 !important;
+  }
+  .office-phone {
+    display: none;
+  }
+  .directions-button {
+    min-height: 38px;
+    width: fit-content;
+    margin-top: 0;
+    padding: 7px 12px !important;
+    font-size: 11px !important;
+    border-radius: 6px !important;
+  }
 }
 
 @media (max-width: 430px) {
   .contact-page-shell { padding-inline: 18px !important; }
   .contact-direct-list p { font-size: 7px !important; }
   .contact-direct-list strong { font-size: 13px; }
-  .office-title-row { align-items: flex-start; flex-direction: column; gap: 10px; }
-  .office-country { padding-bottom: 0; }
-  .office-map { min-height: 245px; }
+  .office-card {
+    grid-template-columns: 62px minmax(0,1fr);
+    gap: 12px 14px;
+    padding: 14px;
+  }
+  .office-card:last-child {
+    padding-top: 14px;
+  }
+  .office-flag {
+    width: 62px;
+    height: 42px;
+  }
+  .office-title-row { align-items: flex-start; flex-direction: column; gap: 4px; }
+  .office-title-row h3 { font-size: 25px !important; }
+  .office-address p { font-size: 9px !important; }
 }
 
 @media (prefers-reduced-motion: reduce) {
