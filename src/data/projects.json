@@ -236,7 +236,7 @@
   {
     "id": "cleopatra-mall",
     "name": "Cleopatra Mall",
-    "category": "urban",
+    "category": "commercial",
     "location": "6th of October, Egypt",
     "country": "Egypt",
     "countryCode": "EG",
@@ -249,7 +249,7 @@
   {
     "id": "al-jawhara-mall",
     "name": "Al Jawhara Mall",
-    "category": "urban",
+    "category": "commercial",
     "location": "Jeddah, KSA",
     "country": "Saudi Arabia",
     "countryCode": "SA",
@@ -262,7 +262,7 @@
   {
     "id": "jeddah-heights-sales-center",
     "name": "Jeddah Heights Sales Center",
-    "category": "urban",
+    "category": "commercial",
     "location": "Jeddah, KSA",
     "country": "Saudi Arabia",
     "countryCode": "SA",
@@ -271,6 +271,48 @@
     "description": "This project covers consulting and supervision services for a dedicated sales center for the National Housing Company (NHC) in Jeddah. The scope includes preparing work plans to control time, cost, and quality, supervising execution on site, auditing and approving payment documents, and reviewing all detailed and execution drawings It also involves reviewing budgets, monitoring the project schedule, overseeing contractor performance, providing technical opinions on variations, and checking materials and equipment The consultant prepares regular reports, participates in initial and final handover, and develops the safety and security plan with the necessary recommendations",
     "image": "/projects/profile/34-jeddah-heights-sales-center.jpg",
     "sourcePage": 34
+  },
+  {
+    "id": "alamein-city-towers",
+    "name": "Alamein City Towers",
+    "category": "commercial",
+    "location": "Alalamein, Egypt",
+    "country": "Egypt",
+    "countryCode": "EG",
+    "year": "In progress",
+    "client": "CIB",
+    "value": "~800 million EGP",
+    "description": "Ongoing in New Alamein, Egypt for CIB, the project involves the development of Alamein New City Towers, including residential, commercial, and parking facilities. The scope covers urban planning, multidisciplinary engineering design, tender documents, site supervision, and project management to ensure full project delivery.",
+    "image": "/projects/profile/commercial-alamein-city-towers.jpg",
+    "sourcePage": 96
+  },
+  {
+    "id": "city-center-almaza-shopping-mall",
+    "name": "City Center Almaza Shopping Mall",
+    "category": "commercial",
+    "location": "Cairo, Egypt",
+    "country": "Egypt",
+    "countryCode": "EG",
+    "year": "In progress",
+    "client": "CIB",
+    "value": "~33 million EGP",
+    "description": "Completed in 2018 in Cairo for the Egyptian Ministry of Higher Education, the project involved the comprehensive design and development of Ain Shams University Medical City. The scope included urban design, architectural development, and key facilities such as the ER building, multi-storey garage, and restoration of Demerdash Palace.",
+    "image": "/projects/profile/commercial-city-center-almaza-shopping-mall.jpg",
+    "sourcePage": 97
+  },
+  {
+    "id": "grand-view-towers",
+    "name": "Grand View Towers",
+    "category": "commercial",
+    "location": "Alexandria, Egypt",
+    "country": "Egypt",
+    "countryCode": "EG",
+    "year": "In progress",
+    "client": "CIB",
+    "value": "~25 million EGP",
+    "description": "Ongoing in Alexandria, Egypt for CIB, the project involves the development of Grand View Towers on a 1,240 m² site with residential and service levels. The scope includes urban planning, multidisciplinary engineering design, tender documents, site supervision, and project management to ensure high-quality delivery.",
+    "image": "/projects/profile/commercial-grand-view-towers.jpg",
+    "sourcePage": 98
   },
   {
     "id": "qayati-and-al-ailili-historic-houses-on-al-muizz-street",
@@ -299,9 +341,23 @@
     "sourcePage": 36
   },
   {
+    "id": "el-reef-el-masry",
+    "name": "El Reef El Masry",
+    "category": "urban",
+    "location": "Egypt",
+    "country": "Egypt",
+    "countryCode": "EG",
+    "year": "In progress",
+    "client": "Egyptian Countryside Development Company",
+    "value": "",
+    "description": "This project covers urban planning and design, landscape design, and architectural design, with a scope spanning conceptual design, detailed drawings, tender documents, site supervision, and project management. Launched in 2024 in rural Egypt, it aims to enhance agricultural productivity through the reclamation and cultivation of 1.5 million feddans. It adopts an integrated, community-oriented approach to support rural development and strengthen local capacities in land management and agricultural planning.",
+    "image": "/projects/profile/37-el-reef-el-masry.jpg",
+    "sourcePage": 37
+  },
+  {
     "id": "egypts-national-universities",
     "name": "Egypt’s National Universities",
-    "category": "landscape",
+    "category": "urban",
     "location": "Several cities, Egypt ; Banha, Zagazig, Bani Suif, Helwan, Mansoura, Ganoub El Wadi, El Minya, Assiut, Qanat El Suez, Port Said, Mnufia",
     "country": "Egypt",
     "countryCode": "EG",
@@ -312,9 +368,23 @@
     "sourcePage": 38
   },
   {
+    "id": "consultancy-services-for-special-emergency-forces",
+    "name": "Consultancy Services for Special Emergency Forces",
+    "category": "urban",
+    "location": "Madinah, Riyadh, Asir and Mecca, KSA",
+    "country": "Saudi Arabia",
+    "countryCode": "SA",
+    "year": "In progress",
+    "client": "Special Emergency Forces",
+    "value": "",
+    "description": "Provision of engineering consultancy services for studies and designs of high-priority construction and renovation projects for the Special Emergency Forces.",
+    "image": "/projects/profile/39-consultancy-services-for-special-emergency-forces.jpg",
+    "sourcePage": 39
+  },
+  {
     "id": "peoples-square",
     "name": "People’s Square",
-    "category": "landscape",
+    "category": "urban",
     "location": "New Administrative Capital, Egypt",
     "country": "Egypt",
     "countryCode": "EG",
@@ -325,9 +395,23 @@
     "sourcePage": 40
   },
   {
+    "id": "al-maamoura-resort",
+    "name": "Al Maamoura Resort",
+    "category": "urban",
+    "location": "Port Said, Egypt",
+    "country": "Egypt",
+    "countryCode": "EG",
+    "year": "2017",
+    "client": "Port Said Governorate",
+    "value": "158 million EGP",
+    "description": "Awarded Second Prize in the architectural competition for the design of Al Maamoura Resort in Port Said. The project covers an area of 70 feddans. It reflects a high-quality design proposal for a large-scale coastal development.",
+    "image": "/projects/profile/41-al-maamoura-resort.jpg",
+    "sourcePage": 41
+  },
+  {
     "id": "icity-international-school",
     "name": "ICity International School",
-    "category": "landscape",
+    "category": "education",
     "location": "6th of October, Egypt",
     "country": "Egypt",
     "countryCode": "EG",
@@ -340,7 +424,7 @@
   {
     "id": "lycee-francais-du-caire",
     "name": "Lycee Francais du Caire",
-    "category": "landscape",
+    "category": "education",
     "location": "Maadi, Cairo, Egypt",
     "country": "Egypt",
     "countryCode": "EG",
@@ -349,6 +433,48 @@
     "description": "Currently in progress, this 12,500 m² project in Maadi upgrades the Lycée Français du Caire (LFC) to create a high-quality, engaging educational environment that enriches student life. Services include architecture, landscape, interior design, environmental consulting, structural and MEP works, along with full project management and site supervision",
     "image": "/projects/profile/43-lycee-francais-du-caire.jpg",
     "sourcePage": 43
+  },
+  {
+    "id": "sharm-el-sheikh-university",
+    "name": "Sharm El Sheikh University",
+    "category": "education",
+    "location": "Sharm Elsheikh, Egypt",
+    "country": "Egypt",
+    "countryCode": "EG",
+    "year": "2023",
+    "client": "Sharm El Sheikh University",
+    "value": "N/A",
+    "description": "Completed in 2023 in Egypt, the project involved the development of Sharm El Sheikh University, including urban planning, landscape, and architectural design. It also covered full multidisciplinary engineering coordination, tender documents, site supervision, and project management to ensure delivery in line with modern educational standards.",
+    "image": "/projects/profile/education-sharm-el-sheikh-university.jpg",
+    "sourcePage": 94
+  },
+  {
+    "id": "restoration-and-rehabilitation-of-asu-campus",
+    "name": "Restoration and Rehabilitation of (ASU) Campus",
+    "category": "education",
+    "location": "Cairo, Egypt",
+    "country": "Egypt",
+    "countryCode": "EG",
+    "year": "2018",
+    "client": "Ministry of Higher Education",
+    "value": "175 million EGP",
+    "description": "Completed in 2018 in Cairo for the Ministry of Higher Education, the project involved the restoration and rehabilitation of Ain Shams University campus across multiple sites in Abbassia. It included urban planning, architectural and landscape design, multidisciplinary engineering coordination, and full design-to-supervision services to ensure successful project delivery.",
+    "image": "/projects/profile/education-restoration-and-rehabilitation-of-asu-campus.jpg",
+    "sourcePage": 95
+  },
+  {
+    "id": "air-force-museum",
+    "name": "Air Force Museum",
+    "category": "urban",
+    "location": "Egypt",
+    "country": "Egypt",
+    "countryCode": "EG",
+    "year": "2018",
+    "client": "Ministry of Defense",
+    "value": "2 billion EGP",
+    "description": "This project involves the design and construction of the Air Force Museum at Almaza Airport in Heliopolis, Cairo, for the Ministry of Defense. The scope includes multidisciplinary design, detailed drawings, tender documents, site supervision, and project management.",
+    "image": "/projects/profile/44-air-force-museum.jpg",
+    "sourcePage": 44
   },
   {
     "id": "water-supply-networks-gis-systems",

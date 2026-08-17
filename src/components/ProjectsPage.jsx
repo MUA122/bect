@@ -44,6 +44,7 @@ const copy = {
     view: "View project",
     close: "Close project details",
     status: "Project date",
+    client: "Client",
     value: "Construction value",
     loadMore: "Load more projects",
     allLoaded: "All matching projects are displayed",
@@ -73,6 +74,7 @@ const copy = {
     view: "عرض المشروع",
     close: "إغلاق تفاصيل المشروع",
     status: "تاريخ المشروع",
+    client: "العميل",
     value: "قيمة الإنشاء",
     loadMore: "عرض المزيد من المشروعات",
     allLoaded: "تم عرض كل المشروعات المطابقة",
@@ -367,10 +369,12 @@ function ProjectsPage({ language = "en", onContactClick }) {
           project.name,
           project.location,
           project.description,
+          project.client,
           project.value,
           localizeProject(project, "name", language),
           localizeProject(project, "location", language),
           localizeProject(project, "description", language),
+          localizeProject(project, "client", language),
           localizeProject(project, "value", language),
         ]
           .join(" ")
@@ -672,6 +676,11 @@ function ProjectsPage({ language = "en", onContactClick }) {
               language,
             );
             const projectYear = localizeProject(selected, "year", language);
+            const projectClient = localizeProject(
+              selected,
+              "client",
+              language,
+            );
             const projectValue = localizeProject(selected, "value", language);
             const projectDescription = localizeProject(
               selected,
@@ -718,6 +727,12 @@ function ProjectsPage({ language = "en", onContactClick }) {
                       <span>{text.status}</span>
                       <strong>{projectYear}</strong>
                     </Box>
+                    {selected.client && (
+                      <Box>
+                        <span>{text.client}</span>
+                        <strong>{projectClient}</strong>
+                      </Box>
+                    )}
                     {selected.value && (
                       <Box>
                         <span>{text.value}</span>
