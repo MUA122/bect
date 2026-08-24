@@ -10,6 +10,7 @@ export const projectCategories = [
   { id: 'offices', code: 'HQ', color: '#7668dc', label: { en: 'Headquarters & Offices', ar: 'المقار والمكاتب' } },
   { id: 'industrial', code: 'IN', color: '#8f7a5c', label: { en: 'Industrial', ar: 'المشروعات الصناعية' } },
   { id: 'transportation', code: 'TR', color: '#347cbe', label: { en: 'Transportation', ar: 'النقل والمواصلات' } },
+  { id: 'historic-restoration', code: 'HR', color: '#a85f4b', label: { en: 'Historic Restoration', ar: 'الترميم التاريخي' } },
   { id: 'energy', code: 'PE', color: '#e8ad2c', label: { en: 'Power & Energy', ar: 'الطاقة والكهرباء' } },
 ];
 

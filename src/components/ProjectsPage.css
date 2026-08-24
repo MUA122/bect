@@ -134,14 +134,23 @@
 .projects-color-key-heading { flex: 0 0 170px; padding-inline-end: 20px; border-inline-end: 1px solid rgba(7,66,95,.1); }
 .projects-color-key-heading h2 { font-size: 20px !important; font-weight: 650 !important; line-height: 1.05 !important; letter-spacing: -.035em !important; }
 .projects-color-key-heading > p { margin-top: 6px !important; color: #7a8990; font-size: 9px !important; line-height: 1.45 !important; }
-.projects-color-key-list { display: flex; min-width: 0; flex: 1; align-items: center; justify-content: space-between; overflow-x: visible; gap: clamp(5px,.8vw,12px); padding: 0; }
+.projects-color-key-list {
+  display: grid;
+  min-width: 0;
+  flex: 1;
+  grid-template-columns: repeat(10,minmax(0,1fr));
+  align-items: stretch;
+  gap: clamp(2px,.4vw,7px);
+  padding: 0;
+}
 .projects-color-key-list button {
   display: inline-flex;
-  min-width: max-content;
+  width: 100%;
+  min-width: 0;
   align-items: center;
   gap: 7px;
   min-height: 42px;
-  padding: 6px 7px;
+  padding: 6px clamp(3px,.38vw,7px);
   color: #264858;
   font: inherit;
   text-align: start;
@@ -152,7 +161,7 @@
   transition: color .2s ease, border-color .2s ease, background .2s ease;
 }
 .projects-color-key-list button i { width: 9px; height: 30px; flex: 0 0 auto; border-radius: 999px; background: var(--category); box-shadow: 0 0 0 5px color-mix(in srgb,var(--category) 10%, transparent); }
-.projects-color-key-list button span { font-size: 10px; font-weight: 850; line-height: 1.15; white-space: nowrap; }
+.projects-color-key-list button span { min-width: 0; font-size: clamp(8px,.58vw,10px); font-weight: 850; line-height: 1.15; white-space: normal; }
 .projects-color-key-list button:hover { border-color: color-mix(in srgb,var(--category) 22%, transparent); background: color-mix(in srgb,var(--category) 6%, white); }
 .projects-color-key-list button.is-active { color: #123747; border-color: color-mix(in srgb,var(--category) 34%, transparent); background: color-mix(in srgb,var(--category) 11%, white); }
 
@@ -473,13 +482,8 @@
   .projects-atlas-image { width: min(108%, 610px); max-height: 560px; }
   .projects-color-key-heading { flex-basis: 170px; }
   .projects-color-key-list {
-    justify-content: flex-start;
-    overflow-x: auto;
-    gap: 12px;
-    margin-inline-end: -6px;
-    padding: 6px 8px 8px 2px;
-    scrollbar-width: thin;
-    scrollbar-color: rgba(7,66,95,.18) transparent;
+    grid-template-columns: repeat(5,minmax(0,1fr));
+    gap: 6px;
   }
   .projects-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
   .projects-filter-row { grid-template-columns: 1fr 1fr; }
@@ -511,7 +515,9 @@
   .projects-color-key { display: block; padding: 16px 17px; }
   .projects-color-key-heading { padding: 0 0 12px; border-inline-end: 0; border-bottom: 1px solid rgba(7,66,95,.1); }
   .projects-color-key-heading > p { display: none; }
-  .projects-color-key-list { justify-content: flex-start; overflow-x: auto; margin: 8px -7px 0; padding: 8px 7px; scrollbar-width: thin; scrollbar-color: rgba(7,66,95,.16) transparent; }
+  .projects-color-key-list { display: flex; justify-content: flex-start; overflow-x: auto; margin: 8px -7px 0; padding: 8px 7px; scrollbar-width: thin; scrollbar-color: rgba(7,66,95,.16) transparent; }
+  .projects-color-key-list button { width: auto; min-width: max-content; flex: 0 0 auto; padding-inline: 7px; }
+  .projects-color-key-list button span { font-size: 10px; white-space: nowrap; }
   .projects-filter-heading { align-items: flex-start; flex-direction: column; }
   .projects-filter-row { grid-template-columns: 1fr; }
   .premium-select-menu { position: fixed; top: auto; right: 18px; bottom: 18px; left: 18px; max-height: min(60vh,420px); transform: translateY(15px); }
