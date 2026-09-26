@@ -337,7 +337,7 @@
     inset: auto;
     flex: none;
     width: 100%;
-    height: clamp(360px, 76vw, 520px);
+    height: clamp(220px, 56.25vw, 340px);
     background: #092b51;
     clip-path: none;
     -webkit-mask-image: none;
@@ -396,7 +396,6 @@
   .trial-event-detail strong,
   .trial-event-detail small { letter-spacing: .02em; }
   .trial-detail-divider { margin: 0 3px; }
-  .trial-photo-stage { height: 360px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
