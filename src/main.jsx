@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
 import { CssBaseline, ThemeProvider, createTheme } from '@mui/material';
 import App from './App';
 import './styles.css';
+
+const TrialPage = lazy(() => import('./components/TrialPage'));
 
 const theme = createTheme({
   palette: {
@@ -21,7 +23,13 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <App />
+      {window.location.pathname.replace(/\/+$/, '') === '/trial' ? (
+        <Suspense fallback={<div style={{ minHeight: '100svh', background: '#06273b' }} />}>
+          <TrialPage />
+        </Suspense>
+      ) : (
+        <App />
+      )}
     </ThemeProvider>
   </React.StrictMode>,
 );
