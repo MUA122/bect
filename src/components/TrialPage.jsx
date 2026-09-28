@@ -203,6 +203,13 @@ function EventPhotoCarousel() {
         ))}
       </div>
 
+      <p
+        className="trial-gallery-caption"
+        aria-label="From Our Gallery — Cityscape 2025"
+      >
+        From Our Gallery — Cityscape 2025
+      </p>
+
     </section>
   );
 }
