@@ -29,13 +29,6 @@ const eventPhotos = [
     mobilePosition: "52% 43%",
     overlay: 0.1,
   },
-  {
-    src: "/trial/hq/consultation-master.png",
-    alt: "A BECT representative discussing work with a visitor beside the BECT Cityscape booth",
-    position: "50% 47%",
-    mobilePosition: "49% 46%",
-    overlay: 0.12,
-  },
 ];
 
 function getCountdown() {
