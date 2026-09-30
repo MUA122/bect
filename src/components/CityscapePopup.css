@@ -28,6 +28,7 @@
 
 .bect-cityscape-popup {
   position: fixed;
+  isolation: isolate;
   z-index: 11000;
   inset: 0;
   display: grid;
@@ -38,11 +39,20 @@
   letter-spacing: normal;
   line-height: normal;
   direction: ltr;
+}
+
+.bect-cityscape-popup::before {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  content: "";
+  pointer-events: none;
   background:
     radial-gradient(circle at 50% 42%, rgba(33, 63, 91, .08), transparent 52%),
     rgba(4, 15, 29, .55);
   -webkit-backdrop-filter: blur(9px) saturate(.82);
   backdrop-filter: blur(9px) saturate(.82);
+  animation: bect-cityscape-backdrop-in 360ms ease-out backwards;
 }
 
 .bect-cityscape-popup,
@@ -72,6 +82,30 @@
   top: 0;
   isolation: isolate;
   container-type: inline-size;
+  visibility: hidden;
+  opacity: 0;
+}
+
+.bect-cityscape-popup[data-ready="true"] .bect-cityscape-popup__scene {
+  visibility: visible;
+  opacity: 1;
+  animation: bect-cityscape-scene-in 520ms cubic-bezier(.22, 1, .36, 1) backwards;
+}
+
+.bect-cityscape-popup[data-ready="true"] .bect-cityscape-popup__reveal {
+  animation: bect-cityscape-copy-in 400ms cubic-bezier(.22, 1, .36, 1) backwards;
+}
+
+.bect-cityscape-popup[data-ready="true"] .bect-cityscape-popup__headline {
+  animation-delay: 60ms;
+}
+
+.bect-cityscape-popup[data-ready="true"] .bect-cityscape-popup__description {
+  animation-delay: 120ms;
+}
+
+.bect-cityscape-popup[data-ready="true"] .bect-cityscape-popup__action-copy {
+  animation-delay: 180ms;
 }
 
 .bect-cityscape-popup .bect-cityscape-popup__artwork {
@@ -124,7 +158,52 @@
   box-shadow: 0 0 0 9px #03a7ec;
 }
 
+.bect-cityscape-popup .bect-cityscape-popup__meet-button:disabled {
+  pointer-events: none;
+}
+
 /* The supplied embedded mode, scoped to this instance instead of <html>. */
 .bect-cityscape-popup[data-embedded] .bect-cityscape-popup__mock-page {
   display: none;
+}
+
+.bect-cityscape-popup .bect-cityscape-popup__load-error {
+  width: min(90vw, 440px);
+  padding: 28px;
+  border-radius: 20px;
+  color: #031f4d;
+  background: #fbfdff;
+}
+
+.bect-cityscape-popup .bect-cityscape-popup__load-error button {
+  padding: 14px 22px;
+  border: 0;
+  border-radius: 12px;
+  color: white;
+  background: #05244c;
+  font: inherit;
+  cursor: pointer;
+}
+
+@keyframes bect-cityscape-backdrop-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes bect-cityscape-scene-in {
+  from { opacity: 0; transform: translate3d(0, 12px, 0); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes bect-cityscape-copy-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bect-cityscape-popup::before,
+  .bect-cityscape-popup[data-ready="true"] .bect-cityscape-popup__scene,
+  .bect-cityscape-popup[data-ready="true"] .bect-cityscape-popup__reveal {
+    animation: none;
+  }
 }
