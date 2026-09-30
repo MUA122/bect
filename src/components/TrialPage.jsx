@@ -7,11 +7,49 @@ import "./TrialPage.css";
 const EVENT_START = new Date("2026-11-16T12:00:00+03:00").getTime();
 const ROTATION_INTERVAL = 5000;
 
+const eventCopy = {
+  en: {
+    announcement: "Cityscape Riyadh 2026 announcement",
+    brand: "BECT Architects and Engineers",
+    heading: "WE’RE HEADING TO",
+    title: "Cityscape",
+    cityYear: "RIYADH 2026",
+    details: "Event details",
+    monthYear: "NOVEMBER 2026",
+    city: "RIYADH",
+    country: "SAUDI ARABIA",
+    countdown: "COUNTDOWN TO CITYSCAPE RIYADH 2026",
+    units: { days: "days", hours: "hours", minutes: "minutes", seconds: "seconds" },
+    remaining: "remaining",
+    pass: "Get Your Free Pass!",
+    photos: "BECT at Cityscape event photographs",
+    gallery: "From Our Gallery — Cityscape 2025",
+  },
+  ar: {
+    announcement: "إعلان سيتي سكيب الرياض 2026",
+    brand: "بيكت للاستشارات الهندسية",
+    heading: "نلتقي بكم في",
+    title: "سيتي سكيب",
+    cityYear: "الرياض 2026",
+    details: "تفاصيل الفعالية",
+    monthYear: "نوفمبر 2026",
+    city: "الرياض",
+    country: "المملكة العربية السعودية",
+    countdown: "العد التنازلي لسيتي سكيب الرياض 2026",
+    units: { days: "أيام", hours: "ساعات", minutes: "دقائق", seconds: "ثوانٍ" },
+    remaining: "الوقت المتبقي",
+    pass: "احصل على تذكرتك المجانية",
+    photos: "صور مشاركة بيكت في سيتي سكيب",
+    gallery: "من مشاركتنا في سيتي سكيب 2025",
+  },
+};
+
 const eventPhotos = [
   {
     src: "/trial/hq/demo-master.png",
     mobileSrc: "/trial/mobile/demo-master.png",
     alt: "BECT representatives demonstrating a project display to a visitor at the Cityscape exhibition booth",
+    altAr: "ممثلو بيكت يعرضون أحد المشاريع لزائر في جناح الشركة بمعرض سيتي سكيب",
     position: "45% 52%",
     mobilePosition: "48% 50%",
     overlay: 0.07,
@@ -20,6 +58,7 @@ const eventPhotos = [
     src: "/trial/hq/team-master.png",
     mobileSrc: "/trial/mobile/team-master.png",
     alt: "BECT team members together at the company Cityscape exhibition booth",
+    altAr: "فريق بيكت في جناح الشركة بمعرض سيتي سكيب",
     position: "47% 51%",
     mobilePosition: "47% 50%",
     overlay: 0.09,
@@ -28,6 +67,7 @@ const eventPhotos = [
     src: "/trial/hq/conversation-master.png",
     mobileSrc: "/trial/mobile/conversation-master.png",
     alt: "BECT representatives in conversation with a visitor at Cityscape",
+    altAr: "ممثلو بيكت يتحدثون مع أحد زوار معرض سيتي سكيب",
     position: "52% 45%",
     mobilePosition: "52% 43%",
     overlay: 0.1,
@@ -36,6 +76,7 @@ const eventPhotos = [
     src: "/trial/hq/consultation-master.png",
     mobileSrc: "/trial/mobile/consultation-master.png",
     alt: "A BECT representative consulting with a visitor at the Cityscape exhibition booth",
+    altAr: "أحد ممثلي بيكت يقدم استشارة لزائر في جناح الشركة بمعرض سيتي سكيب",
     position: "48% 45%",
     mobilePosition: "50% 50%",
     overlay: 0.08,
@@ -79,10 +120,10 @@ function useReducedMotion() {
   return reduced;
 }
 
-function BrandLockup() {
+function BrandLockup({ text }) {
   return (
-    <div className="trial-brand" aria-label="BECT Architects and Engineers">
-      <div className="trial-wordmark trial-wordmark-en">
+    <div className="trial-brand" aria-label={text.brand}>
+      <div className="trial-wordmark trial-wordmark-en" lang="en" dir="ltr">
         <strong>BECT</strong>
         <span>Architects &amp; Engineers</span>
       </div>
@@ -95,29 +136,29 @@ function BrandLockup() {
   );
 }
 
-function EventDetails() {
+function EventDetails({ text }) {
   return (
-    <div className="trial-event-details" aria-label="Event details">
+    <div className="trial-event-details" aria-label={text.details}>
       <div className="trial-event-detail">
         <CalendarMonthOutlined aria-hidden="true" />
         <span>
-          <strong>16 – 19</strong>
-          <small>NOVEMBER 2026</small>
+          <strong><bdi dir="ltr">16 – 19</bdi></strong>
+          <small>{text.monthYear}</small>
         </span>
       </div>
       <span className="trial-detail-divider" aria-hidden="true" />
       <div className="trial-event-detail">
         <LocationOnOutlined aria-hidden="true" />
         <span>
-          <strong>RIYADH</strong>
-          <small>SAUDI ARABIA</small>
+          <strong>{text.city}</strong>
+          <small>{text.country}</small>
         </span>
       </div>
     </div>
   );
 }
 
-function Countdown() {
+function Countdown({ text }) {
   const countdown = useCountdown();
   const units = [
     ["days", countdown.days],
@@ -129,21 +170,21 @@ function Countdown() {
   return (
     <section
       className="trial-countdown"
-      aria-label="Countdown to Cityscape Riyadh 2026"
+      aria-label={text.countdown}
     >
-      <p>COUNTDOWN TO CITYSCAPE RIYADH 2026</p>
+      <p>{text.countdown}</p>
       <div className="trial-countdown-row">
         <div
           className="trial-countdown-values"
           role="timer"
-          aria-label={`${countdown.days} days, ${countdown.hours} hours, ${countdown.minutes} minutes and ${countdown.seconds} seconds remaining`}
+          aria-label={`${text.remaining}: ${units.map(([unit, value]) => `${value} ${text.units[unit]}`).join("، ")}`}
         >
           {units.map(([label, value]) => (
             <div className="trial-countdown-unit" key={label}>
-              <strong>
+              <strong dir="ltr">
                 {label === "days" ? value : String(value).padStart(2, "0")}
               </strong>
-              <span>{label}</span>
+              <span>{text.units[label]}</span>
             </div>
           ))}
         </div>
@@ -153,7 +194,7 @@ function Countdown() {
           target="_blank"
           rel="noreferrer"
         >
-          <span>Get Your Free Pass!</span>
+          <span>{text.pass}</span>
           <ArrowForwardRounded aria-hidden="true" />
         </a>
       </div>
@@ -161,7 +202,7 @@ function Countdown() {
   );
 }
 
-function EventPhotoCarousel() {
+function EventPhotoCarousel({ text, isArabic }) {
   const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
@@ -196,7 +237,7 @@ function EventPhotoCarousel() {
   return (
     <section
       className="trial-photo-stage"
-      aria-label="BECT at Cityscape event photographs"
+      aria-label={text.photos}
     >
       <div className="trial-photo-stack">
         {eventPhotos.map((photo, index) => (
@@ -214,7 +255,7 @@ function EventPhotoCarousel() {
               <source media="(max-width: 899px)" srcSet={photo.mobileSrc} />
               <img
                 src={photo.src}
-                alt={activeIndex === index ? photo.alt : ""}
+                alt={activeIndex === index ? (isArabic ? photo.altAr : photo.alt) : ""}
                 loading={index < 2 ? "eager" : "lazy"}
                 fetchPriority={index === 0 ? "high" : "auto"}
                 decoding={index === 0 ? "sync" : "async"}
@@ -228,15 +269,16 @@ function EventPhotoCarousel() {
 
       <p
         className="trial-gallery-caption"
-        aria-label="From Our Gallery — Cityscape 2025"
       >
-        From Our Gallery — Cityscape 2025
+        {text.gallery}
       </p>
     </section>
   );
 }
 
-export default function CityscapeSection() {
+export default function CityscapeSection({ language = "en" }) {
+  const isArabic = language === "ar";
+  const text = eventCopy[isArabic ? "ar" : "en"];
   const [ready, setReady] = useState(false);
   const heroRef = useRef(null);
   const frameRef = useRef(null);
@@ -267,7 +309,9 @@ export default function CityscapeSection() {
     <section
       id="cityscape-2026"
       className="trial-page cityscape-home-section"
-      aria-label="Cityscape Riyadh 2026 announcement"
+      aria-label={text.announcement}
+      lang={isArabic ? "ar" : "en"}
+      dir={isArabic ? "rtl" : "ltr"}
     >
       <section
         className={`trial-hero${ready ? " is-ready" : ""}`}
@@ -291,20 +335,20 @@ export default function CityscapeSection() {
         <div className="trial-skyline-wash" aria-hidden="true" />
 
         <div className="trial-content">
-          <BrandLockup />
+          <BrandLockup text={text} />
           <div className="trial-heading-block">
-            <p>WE’RE HEADING TO</p>
+            <p>{text.heading}</p>
             <h1 id="cityscape-title">
-              <span>Cityscape</span>
-              <strong>RIYADH 2026</strong>
+              <span>{text.title}</span>
+              <strong>{text.cityYear}</strong>
             </h1>
           </div>
-          <EventDetails />
+          <EventDetails text={text} />
         </div>
 
-        <EventPhotoCarousel />
+        <EventPhotoCarousel text={text} isArabic={isArabic} />
 
-        <Countdown />
+        <Countdown text={text} />
       </section>
     </section>
   );

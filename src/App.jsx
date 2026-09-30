@@ -1036,7 +1036,7 @@ function App() {
           </Box>
 
           <ImpactSection language={language} />
-          <CityscapeSection />
+          <CityscapeSection language={language} />
           <PartnerLogoCarousel language={language} />
           <ServicesSection language={language} />
           <ExperienceTimeline language={language} />
