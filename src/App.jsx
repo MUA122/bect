@@ -761,7 +761,10 @@ function App() {
       />
 
       {cityscapePopupOpen && (
-        <CityscapePopup onMeetUs={handleCityscapePopupAction} />
+        <CityscapePopup
+          onMeetUs={handleCityscapePopupAction}
+          onClose={() => setCityscapePopupOpen(false)}
+        />
       )}
 
       <AppBar

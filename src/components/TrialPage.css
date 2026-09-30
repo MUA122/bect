@@ -2,7 +2,6 @@
   --trial-orange: #d98a72;
   /* Lower = clearer Riyadh image; higher = stronger white wash. */
   --trial-riyadh-overlay-opacity: .72;
-  min-height: 100svh;
   overflow-x: clip;
   color: #08244b;
   background:
@@ -21,9 +20,11 @@
   --trial-left-panel: 52%;
   position: relative;
   isolation: isolate;
+  display: grid;
+  grid-template-columns: var(--trial-left-panel) minmax(0, 1fr);
+  grid-template-rows: auto auto;
   width: 100%;
-  height: clamp(590px, 34vw, 680px);
-  min-height: 590px;
+  min-height: clamp(590px, 34vw, 680px);
   overflow: hidden;
   background: #061f3b;
 }
@@ -78,9 +79,10 @@
   z-index: 5;
   display: flex;
   flex-direction: column;
-  width: min(41%, 665px);
-  height: 100%;
-  padding: clamp(36px, 3.4vw, 62px) 0 186px clamp(34px, 4.25vw, 82px);
+  grid-column: 1;
+  grid-row: 1;
+  width: min(79%, 665px);
+  padding: clamp(36px, 3.4vw, 62px) 0 26px clamp(34px, 4.25vw, 82px);
   pointer-events: none;
 }
 
@@ -262,11 +264,14 @@
 .trial-hero.is-ready .trial-gallery-caption { opacity: 1; transform: translate(-50%, 0); }
 
 .trial-countdown {
-  position: absolute;
+  position: relative;
   z-index: 8;
-  bottom: clamp(28px, 3.1vw, 48px);
-  left: clamp(30px, 4.1vw, 79px);
-  width: min(46%, 790px);
+  grid-column: 1;
+  grid-row: 2;
+  align-self: end;
+  justify-self: start;
+  width: min(calc(100% - 6vw), 790px);
+  margin: 0 0 clamp(28px, 3.1vw, 48px) clamp(30px, 4.1vw, 79px);
   padding: 19px clamp(24px, 2.1vw, 40px) 22px;
   color: #fff;
   background:
@@ -319,10 +324,10 @@
 
 @media (max-width: 1180px) {
   .trial-hero { --trial-left-panel: 60%; }
-  .trial-content { width: 47%; padding-left: 34px; }
+  .trial-content { width: 78%; padding-left: 34px; }
   .trial-heading-block h1 span { font-size: clamp(4.6rem, 7.45vw, 6.25rem); }
   .trial-heading-block h1 strong { font-size: clamp(3rem, 4.9vw, 4.15rem); }
-  .trial-countdown { left: 30px; width: calc(var(--trial-left-panel) - 60px); }
+  .trial-countdown { width: calc(100% - 60px); margin-left: 30px; }
 }
 
 @media (max-width: 899px) {
@@ -407,6 +412,8 @@
     left: auto;
     flex: none;
     width: 100%;
+    max-width: none;
+    margin: 0;
     padding: 22px clamp(20px, 5.5vw, 44px) 25px;
     border: 0;
     border-radius: 0;

@@ -68,6 +68,48 @@
   overflow: hidden;
 }
 
+.bect-cityscape-popup .bect-cityscape-popup__close {
+  position: absolute;
+  z-index: 20;
+  top: 16.5%;
+  right: 4.1%;
+  display: grid;
+  width: clamp(36px, 3.35cqw, 48px);
+  aspect-ratio: 1;
+  padding: 0;
+  place-items: center;
+  color: rgba(255, 255, 255, .96);
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: color .22s ease, opacity .22s ease, transform .3s cubic-bezier(.22, 1, .36, 1);
+}
+
+.bect-cityscape-popup .bect-cityscape-popup__close:hover {
+  color: #fff;
+  background: transparent;
+  box-shadow: none;
+  transform: scale(1.1) rotate(4deg);
+}
+
+.bect-cityscape-popup .bect-cityscape-popup__close:focus-visible {
+  outline: 3px solid #03a7ec;
+  outline-offset: 3px;
+}
+
+.bect-cityscape-popup .bect-cityscape-popup__close svg {
+  width: 48%;
+  height: 48%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.55;
+  stroke-linecap: round;
+  filter: drop-shadow(0 1px 4px rgba(2, 20, 43, .72));
+}
+
 @media (max-width: 640px) {
   .bect-cityscape-popup .bect-cityscape-popup__viewport {
     width: min(94vw, 126svh);
@@ -168,6 +210,7 @@
 }
 
 .bect-cityscape-popup .bect-cityscape-popup__load-error {
+  position: relative;
   width: min(90vw, 440px);
   padding: 28px;
   border-radius: 20px;
@@ -175,7 +218,13 @@
   background: #fbfdff;
 }
 
-.bect-cityscape-popup .bect-cityscape-popup__load-error button {
+.bect-cityscape-popup .bect-cityscape-popup__load-error .bect-cityscape-popup__close {
+  top: 14px;
+  right: 14px;
+  color: #08244b;
+}
+
+.bect-cityscape-popup .bect-cityscape-popup__load-error button:not(.bect-cityscape-popup__close) {
   padding: 14px 22px;
   border: 0;
   border-radius: 12px;

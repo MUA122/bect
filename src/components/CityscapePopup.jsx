@@ -32,7 +32,7 @@ function prepareResources() {
 
 // Direct port of the supplied src/announcement.html in embedded mode.
 // Keep the artwork, masks and text in the original 1536 × 1024 coordinate system.
-export default function CityscapePopup({ onMeetUs }) {
+export default function CityscapePopup({ onMeetUs, onClose }) {
   const [resourceState, setResourceState] = useState("loading");
   const [actionReady, setActionReady] = useState(false);
   const instanceId = useId().replace(/[^a-zA-Z0-9_-]/g, "");
@@ -60,6 +60,27 @@ export default function CityscapePopup({ onMeetUs }) {
     return () => motionPreference.removeEventListener("change", enableReducedMotionAction);
   }, [ready]);
 
+  useEffect(() => {
+    const closeOnEscape = (event) => {
+      if (event.key === "Escape") onClose();
+    };
+    window.addEventListener("keydown", closeOnEscape);
+    return () => window.removeEventListener("keydown", closeOnEscape);
+  }, [onClose]);
+
+  const closeButton = (
+    <button
+      className="bect-cityscape-popup__close"
+      type="button"
+      aria-label="Close Cityscape announcement"
+      onClick={onClose}
+    >
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M6 6l12 12M18 6L6 18" />
+      </svg>
+    </button>
+  );
+
   return (
     <div
       className="bect-cityscape-popup"
@@ -73,15 +94,20 @@ export default function CityscapePopup({ onMeetUs }) {
       aria-labelledby={id("event-heading")}
       aria-describedby={id("event-description")}
       aria-busy={resourceState === "loading"}
+      onClick={(event) => {
+        if (event.target === event.currentTarget) onClose();
+      }}
     >
       {resourceState === "error" ? (
         <div className="bect-cityscape-popup__load-error" role="alert">
+          {closeButton}
           <h2 id={id("event-heading")}>Cityscape Riyadh 2026</h2>
           <p id={id("event-description")}>The announcement image could not load. Visit the banner to meet us in Riyadh.</p>
           <button type="button" onClick={onMeetUs}>MEET US THERE →</button>
         </div>
       ) : (
         <div className="bect-cityscape-popup__viewport">
+          {closeButton}
           <section
             className="bect-cityscape-popup__scene"
             aria-labelledby={id("event-heading")}
