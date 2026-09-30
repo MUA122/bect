@@ -34,6 +34,8 @@ import GlobalPresenceSection from "./components/GlobalPresenceSection";
 import HomeFlyerSection from "./components/HomeFlyerSection";
 import PartnerLogoCarousel from "./components/PartnerLogoCarousel";
 import SiteFooter from "./components/SiteFooter";
+import CityscapeSection from "./components/TrialPage";
+import CityscapePopup from "./components/CityscapePopup";
 import halfMoonImage from "./assets/projects/half-moon.png";
 import helioImage from "./assets/projects/helio.jpg";
 import metroImage from "./assets/projects/metro.jpg";
@@ -539,6 +541,8 @@ function App() {
   const [pageTransitioning, setPageTransitioning] = useState(false);
   const [transitionProgress, setTransitionProgress] = useState(0);
   const [contactOpen, setContactOpen] = useState(false);
+  const [cityscapePopupOpen, setCityscapePopupOpen] = useState(true);
+  const [cityscapeScrollPending, setCityscapeScrollPending] = useState(false);
   const [formStatus, setFormStatus] = useState("idle");
   const transitionTimer = useRef(null);
   const transitionProgressTimer = useRef(null);
@@ -607,6 +611,36 @@ function App() {
   }, [language, isArabic]);
 
   useEffect(() => {
+    if (!cityscapePopupOpen) return undefined;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [cityscapePopupOpen]);
+
+  useEffect(() => {
+    if (!cityscapeScrollPending || currentPage !== "home") return undefined;
+
+    let secondFrame;
+    const firstFrame = window.requestAnimationFrame(() => {
+      secondFrame = window.requestAnimationFrame(() => {
+        const target = document.getElementById("cityscape-2026");
+        if (!target) return;
+        const nextUrl = `${window.location.pathname}${window.location.search}#cityscape-2026`;
+        window.history.replaceState(window.history.state, "", nextUrl);
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+        setCityscapeScrollPending(false);
+      });
+    });
+
+    return () => {
+      window.cancelAnimationFrame(firstFrame);
+      if (secondFrame) window.cancelAnimationFrame(secondFrame);
+    };
+  }, [cityscapeScrollPending, currentPage]);
+
+  useEffect(() => {
     const minimumTimer = window.setTimeout(
       () => setMinimumTimePassed(true),
       450,
@@ -669,6 +703,19 @@ function App() {
     );
   };
 
+  const handleCityscapePopupAction = () => {
+    setCityscapePopupOpen(false);
+    setCityscapeScrollPending(true);
+
+    if (window.location.pathname.replace(/\/+$/, "") !== "") {
+      window.history.pushState(window.history.state, "", "/");
+    }
+
+    if (currentPage !== "home") {
+      window.location.hash = "home";
+    }
+  };
+
   const handleContactSubmit = async (event) => {
     event.preventDefault();
     const form = event.currentTarget;
@@ -712,6 +759,10 @@ function App() {
         progress={progress}
         compact={pageTransitioning && !initialLoading}
       />
+
+      {cityscapePopupOpen && (
+        <CityscapePopup onMeetUs={handleCityscapePopupAction} />
+      )}
 
       <AppBar
         elevation={0}
@@ -982,6 +1033,7 @@ function App() {
           </Box>
 
           <ImpactSection language={language} />
+          <CityscapeSection />
           <PartnerLogoCarousel language={language} />
           <ServicesSection language={language} />
           <ExperienceTimeline language={language} />

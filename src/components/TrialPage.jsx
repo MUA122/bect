@@ -116,7 +116,10 @@ function Countdown() {
   ];
 
   return (
-    <section className="trial-countdown" aria-label="Countdown to Cityscape Riyadh 2026">
+    <section
+      className="trial-countdown"
+      aria-label="Countdown to Cityscape Riyadh 2026"
+    >
       <p>COUNTDOWN TO CITYSCAPE RIYADH 2026</p>
       <div className="trial-countdown-row">
         <div
@@ -126,7 +129,9 @@ function Countdown() {
         >
           {units.map(([label, value]) => (
             <div className="trial-countdown-unit" key={label}>
-              <strong>{label === "days" ? value : String(value).padStart(2, "0")}</strong>
+              <strong>
+                {label === "days" ? value : String(value).padStart(2, "0")}
+              </strong>
               <span>{label}</span>
             </div>
           ))}
@@ -137,7 +142,7 @@ function Countdown() {
           target="_blank"
           rel="noreferrer"
         >
-          <span>MEET US THERE</span>
+          <span>Get Your Free Pass!</span>
           <ArrowForwardRounded aria-hidden="true" />
         </a>
       </div>
@@ -164,7 +169,9 @@ function EventPhotoCarousel() {
 
     preload(eventPhotos[1]);
     const loadRemaining = () => eventPhotos.slice(2).forEach(preload);
-    const idleId = window.requestIdleCallback?.(loadRemaining, { timeout: 1800 });
+    const idleId = window.requestIdleCallback?.(loadRemaining, {
+      timeout: 1800,
+    });
     const timer = idleId ? null : window.setTimeout(loadRemaining, 1200);
 
     return () => {
@@ -209,25 +216,21 @@ function EventPhotoCarousel() {
       >
         From Our Gallery — Cityscape 2025
       </p>
-
     </section>
   );
 }
 
-export default function TrialPage() {
+export default function CityscapeSection() {
   const [ready, setReady] = useState(false);
   const heroRef = useRef(null);
   const frameRef = useRef(null);
   const reducedMotion = useReducedMotion();
 
   useEffect(() => {
-    const originalTitle = document.title;
-    document.title = "Cityscape Riyadh 2026 | BECT";
     const frame = window.requestAnimationFrame(() => {
       window.requestAnimationFrame(() => setReady(true));
     });
     return () => {
-      document.title = originalTitle;
       window.cancelAnimationFrame(frame);
     };
   }, []);
@@ -245,7 +248,11 @@ export default function TrialPage() {
   };
 
   return (
-    <main className="trial-page">
+    <section
+      id="cityscape-2026"
+      className="trial-page cityscape-home-section"
+      aria-label="Cityscape Riyadh 2026 announcement"
+    >
       <section
         className={`trial-hero${ready ? " is-ready" : ""}`}
         ref={heroRef}
@@ -283,6 +290,6 @@ export default function TrialPage() {
 
         <Countdown />
       </section>
-    </main>
+    </section>
   );
 }

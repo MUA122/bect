@@ -11,6 +11,10 @@
   font-family: "DM Sans", Arial, sans-serif;
 }
 
+.cityscape-home-section {
+  scroll-margin-top: 96px;
+}
+
 .trial-hero {
   --parallax-x: 0;
   --parallax-y: 0;

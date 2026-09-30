@@ -1,0 +1,130 @@
+@font-face {
+  font-family: "BectCityscapeOutfit";
+  src: url("../assets/cityscape/Outfit-650.woff") format("woff");
+  font-weight: 650;
+  font-display: block;
+}
+
+@font-face {
+  font-family: "BectCityscapeInter";
+  src: url("../assets/cityscape/Inter-750.woff") format("woff");
+  font-weight: 750;
+  font-display: block;
+}
+
+@font-face {
+  font-family: "BectCityscapeInter";
+  src: url("../assets/cityscape/Inter-400.woff") format("woff");
+  font-weight: 400;
+  font-display: block;
+}
+
+@font-face {
+  font-family: "BectCityscapeInter";
+  src: url("../assets/cityscape/Inter-500.woff") format("woff");
+  font-weight: 500;
+  font-display: block;
+}
+
+.bect-cityscape-popup {
+  position: fixed;
+  z-index: 11000;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color-scheme: light;
+  font-family: "BectCityscapeInter", sans-serif;
+  font-style: normal;
+  letter-spacing: normal;
+  line-height: normal;
+  direction: ltr;
+  background:
+    radial-gradient(circle at 50% 42%, rgba(33, 63, 91, .08), transparent 52%),
+    rgba(4, 15, 29, .55);
+  -webkit-backdrop-filter: blur(9px) saturate(.82);
+  backdrop-filter: blur(9px) saturate(.82);
+}
+
+.bect-cityscape-popup,
+.bect-cityscape-popup * {
+  box-sizing: border-box;
+}
+
+/* Scale the complete approved canvas, including protruding glass and the CTA. */
+.bect-cityscape-popup .bect-cityscape-popup__viewport {
+  width: min(84vw, 126svh, 1180px);
+  aspect-ratio: 3 / 2;
+  position: relative;
+  overflow: hidden;
+}
+
+@media (max-width: 640px) {
+  .bect-cityscape-popup .bect-cityscape-popup__viewport {
+    width: min(94vw, 126svh);
+  }
+}
+
+.bect-cityscape-popup .bect-cityscape-popup__scene {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  isolation: isolate;
+  container-type: inline-size;
+}
+
+.bect-cityscape-popup .bect-cityscape-popup__artwork {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  user-select: none;
+}
+
+.bect-cityscape-popup .bect-cityscape-popup__accessible {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.bect-cityscape-popup .bect-cityscape-popup__editable-type {
+  pointer-events: auto;
+  user-select: text;
+}
+
+.bect-cityscape-popup .bect-cityscape-popup__editable-type text {
+  font-kerning: normal;
+  font-synthesis: none;
+}
+
+.bect-cityscape-popup .bect-cityscape-popup__meet-button {
+  position: absolute;
+  left: 17.1875%;
+  top: 72.36328125%;
+  width: 31.90104167%;
+  height: 9.9609375%;
+  padding: 0;
+  border: 0;
+  border-radius: 1.63cqw;
+  cursor: pointer;
+  background: transparent;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.bect-cityscape-popup .bect-cityscape-popup__meet-button:focus-visible {
+  outline: 3px solid white;
+  outline-offset: 5px;
+  box-shadow: 0 0 0 9px #03a7ec;
+}
+
+/* The supplied embedded mode, scoped to this instance instead of <html>. */
+.bect-cityscape-popup[data-embedded] .bect-cityscape-popup__mock-page {
+  display: none;
+}
