@@ -10,6 +10,7 @@ const ROTATION_INTERVAL = 5000;
 const eventPhotos = [
   {
     src: "/trial/hq/demo-master.png",
+    mobileSrc: "/trial/mobile/demo-master.png",
     alt: "BECT representatives demonstrating a project display to a visitor at the Cityscape exhibition booth",
     position: "45% 52%",
     mobilePosition: "48% 50%",
@@ -17,6 +18,7 @@ const eventPhotos = [
   },
   {
     src: "/trial/hq/team-master.png",
+    mobileSrc: "/trial/mobile/team-master.png",
     alt: "BECT team members together at the company Cityscape exhibition booth",
     position: "47% 51%",
     mobilePosition: "47% 50%",
@@ -24,10 +26,19 @@ const eventPhotos = [
   },
   {
     src: "/trial/hq/conversation-master.png",
+    mobileSrc: "/trial/mobile/conversation-master.png",
     alt: "BECT representatives in conversation with a visitor at Cityscape",
     position: "52% 45%",
     mobilePosition: "52% 43%",
     overlay: 0.1,
+  },
+  {
+    src: "/trial/hq/consultation-master.png",
+    mobileSrc: "/trial/mobile/consultation-master.png",
+    alt: "A BECT representative consulting with a visitor at the Cityscape exhibition booth",
+    position: "48% 45%",
+    mobilePosition: "50% 50%",
+    overlay: 0.08,
   },
 ];
 
@@ -164,7 +175,9 @@ function EventPhotoCarousel() {
     const preload = (photo) => {
       const image = new Image();
       image.decoding = "async";
-      image.src = photo.src;
+      image.src = window.matchMedia("(max-width: 899px)").matches
+        ? photo.mobileSrc
+        : photo.src;
     };
 
     preload(eventPhotos[1]);
@@ -197,14 +210,17 @@ function EventPhotoCarousel() {
               "--photo-overlay": photo.overlay,
             }}
           >
-            <img
-              src={photo.src}
-              alt={activeIndex === index ? photo.alt : ""}
-              loading={index < 2 ? "eager" : "lazy"}
-              fetchPriority={index === 0 ? "high" : "auto"}
-              decoding={index === 0 ? "sync" : "async"}
-              draggable="false"
-            />
+            <picture>
+              <source media="(max-width: 899px)" srcSet={photo.mobileSrc} />
+              <img
+                src={photo.src}
+                alt={activeIndex === index ? photo.alt : ""}
+                loading={index < 2 ? "eager" : "lazy"}
+                fetchPriority={index === 0 ? "high" : "auto"}
+                decoding={index === 0 ? "sync" : "async"}
+                draggable="false"
+              />
+            </picture>
             <span aria-hidden="true" />
           </figure>
         ))}
