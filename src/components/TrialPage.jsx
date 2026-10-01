@@ -72,15 +72,6 @@ const eventPhotos = [
     mobilePosition: "52% 43%",
     overlay: 0.1,
   },
-  {
-    src: "/trial/hq/consultation-master.png",
-    mobileSrc: "/trial/mobile/consultation-master.png",
-    alt: "A BECT representative consulting with a visitor at the Cityscape exhibition booth",
-    altAr: "أحد ممثلي بيكت يقدم استشارة لزائر في جناح الشركة بمعرض سيتي سكيب",
-    position: "48% 45%",
-    mobilePosition: "50% 50%",
-    overlay: 0.08,
-  },
 ];
 
 function getCountdown() {
