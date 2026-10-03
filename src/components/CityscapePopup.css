@@ -38,7 +38,11 @@
   font-style: normal;
   letter-spacing: normal;
   line-height: normal;
-  direction: ltr;
+}
+
+.bect-cityscape-popup[lang="ar"],
+.bect-cityscape-popup .bect-cityscape-popup__arabic-type {
+  font-family: "Noto Kufi Arabic", Arial, sans-serif;
 }
 
 .bect-cityscape-popup::before {

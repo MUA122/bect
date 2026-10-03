@@ -775,6 +775,7 @@ function App() {
 
       {cityscapePopupOpen && (
         <CityscapePopup
+          language={language}
           onMeetUs={handleCityscapePopupAction}
           onClose={() => setCityscapePopupOpen(false)}
         />
