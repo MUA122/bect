@@ -125,12 +125,19 @@ export default function CityscapePopup({ onMeetUs, onClose }) {
                   <use href={href("panel-outline")} fill="black" />
                 </mask>
                 <filter id={id("feather")} x="-20%" y="-20%" width="140%" height="140%" colorInterpolationFilters="sRGB"><feGaussianBlur stdDeviation="4" /></filter>
+                <filter id={id("button-glow")} x="-20%" y="-50%" width="140%" height="200%" colorInterpolationFilters="sRGB"><feDropShadow dx="0" dy="10" stdDeviation="12" floodColor="#039ffc" floodOpacity=".4" /></filter>
+                {/* Remove the original CTA and glow to leave room around the date. */}
+                <mask id={id("button-area")} maskUnits="userSpaceOnUse" x="0" y="0" width="1536" height="1024">
+                  <rect width="1536" height="1024" fill="white" />
+                  <rect x="239" y="716" width="540" height="154" rx="20" fill="black" filter={paint("feather")} />
+                </mask>
                 <mask id={id("editable-copy")} maskUnits="userSpaceOnUse" x="0" y="0" width="1536" height="1024">
                   <rect width="1536" height="1024" fill="white" />
                   <g fill="black" filter={paint("feather")}>
                     <rect x="222" y="362" width="473" height="230" rx="10" />
                     <rect x="256" y="624" width="435" height="53" rx="8" />
                     <rect x="256" y="669" width="194" height="56" rx="8" />
+                    <rect x="239" y="716" width="540" height="154" rx="20" />
                   </g>
                 </mask>
                 <linearGradient id={id("headline-paper")} x1="225" y1="445" x2="695" y2="475" gradientUnits="userSpaceOnUse">
@@ -146,22 +153,19 @@ export default function CityscapePopup({ onMeetUs, onClose }) {
               </defs>
               <g className="bect-cityscape-popup__mock-page" mask={paint("page-only")}><use href={href("reference-art")} /></g>
               <g clipPath={paint("announcement-clip")}>
+                <rect x="235" y="610" width="560" height="280" fill={paint("description-paper")} />
                 {resourceState === "static" ? (
-                  <use href={href("reference-art")} />
+                  <use href={href("reference-art")} mask={paint("button-area")} />
                 ) : (
                   <>
                     <rect x="200" y="340" width="520" height="270" fill={paint("headline-paper")} />
                     <rect x="200" y="340" width="520" height="270" fill={paint("headline-shade")} />
-                    <rect x="235" y="610" width="480" height="130" fill={paint("description-paper")} />
                     <use href={href("reference-art")} mask={paint("editable-copy")} />
                   </>
                 )}
               </g>
               {resourceState !== "static" && (
                 <>
-                  {/* This opaque fill covers the lettering baked into the supplied
-                      artwork while the live arrow and CTA label enter. */}
-                  <rect x="264" y="741" width="490" height="102" rx="25" fill={paint("button-ink")} />
                   <g className="bect-cityscape-popup__reveal bect-cityscape-popup__headline">
                   <g className="bect-cityscape-popup__editable-type" transform="matrix(1.30281690 0 0 1.34986226 233.58978873 472.54889807)" fill="#031f4d"><text x="0" y="0" fontFamily="BectCityscapeOutfit" fontWeight="650" fontSize="100" letterSpacing="0">See You</text></g>
                   <g className="bect-cityscape-popup__editable-type" transform="matrix(1.14393338 0 0 1.21953164 254.05102944 576.72569053)" fill="#039ffc"><text x="0" y="0" fontFamily="BectCityscapeInter" fontWeight="750" fontSize="100" letterSpacing="0">There</text></g>
@@ -170,20 +174,26 @@ export default function CityscapePopup({ onMeetUs, onClose }) {
                   <g className="bect-cityscape-popup__editable-type" transform="matrix(0.38988454 0 0 0.37998720 266.09626690 664.55470250)" fill="#09204d"><text x="0" y="0" fontFamily="BectCityscapeInter" fontWeight="400" fontSize="100" letterSpacing="0">Join us this November</text></g>
                   <g className="bect-cityscape-popup__editable-type" transform="matrix(0.37569381 0 0 0.36478372 266.72529137 706.41221374)" fill="#09204d"><text x="0" y="0" fontFamily="BectCityscapeInter" fontWeight="400" fontSize="100" letterSpacing="0">in Riyadh.</text></g>
                   </g>
-                  <g
-                    className="bect-cityscape-popup__reveal bect-cityscape-popup__action-copy"
-                    onAnimationStart={() => setActionReady(true)}
-                  >
-                  <path d="M652 791.5H679M668 780L679.5 791.5L668 803" fill="none" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-                  <g className="bect-cityscape-popup__editable-type" transform="matrix(0.28753926 0 0 0.28026274 361.68507569 801.66390287)" fill="#ffffff"><text x="0" y="0" fontFamily="BectCityscapeInter" fontWeight="500" fontSize="100" letterSpacing="6">MEET US THERE</text></g>
-                  </g>
                 </>
               )}
+              <g transform="translate(0 44)">
+                <rect x="264" y="741" width="490" height="102" rx="25" fill={paint("button-ink")} filter={paint("button-glow")} />
+                <g
+                  className="bect-cityscape-popup__reveal bect-cityscape-popup__action-copy"
+                  onAnimationStart={() => setActionReady(true)}
+                >
+                  <path d="M652 791.5H679M668 780L679.5 791.5L668 803" fill="none" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                  <g className="bect-cityscape-popup__editable-type" transform="matrix(0.28753926 0 0 0.28026274 361.68507569 801.66390287)" fill="#ffffff"><text x="0" y="0" fontFamily="BectCityscapeInter, sans-serif" fontWeight="500" fontSize="100" letterSpacing="6">MEET US THERE</text></g>
+                </g>
+              </g>
+              <g className="bect-cityscape-popup__reveal bect-cityscape-popup__description bect-cityscape-popup__editable-type" fill="#09204d">
+                <text x="266.72529137" y="753" fontFamily="BectCityscapeInter, sans-serif" fontWeight="500" fontSize="24">16–19 November 2026</text>
+              </g>
             </svg>
 
             <div className="bect-cityscape-popup__accessible">BECT Architects &amp; Engineers · Cityscape Riyadh 2026</div>
             <h2 id={id("event-heading")} className="bect-cityscape-popup__accessible">See You There</h2>
-            <p id={id("event-description")} className="bect-cityscape-popup__accessible">Join us this November in Riyadh.</p>
+            <p id={id("event-description")} className="bect-cityscape-popup__accessible">Join us this November in Riyadh. 16–19 November 2026.</p>
             <button className="bect-cityscape-popup__meet-button" type="button" aria-label="Meet us there" disabled={!ready || !actionReady} onClick={onMeetUs} />
           </section>
         </div>

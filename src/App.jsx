@@ -47,6 +47,8 @@ import wadiDayqahImage from "./assets/projects/wadi-dayqah.jpeg";
 const GOOGLE_SHEETS_ENDPOINT =
   "https://script.google.com/macros/s/AKfycbzm0W8QlkWbNqhBwuE2VCDoeGMsri4R0EHawp3OGX0d3NZeOXcoH51_kjGEk7DXD2u0/exec";
 
+const LANGUAGE_STORAGE_KEY = "bect-language";
+
 const impactStats = [
   { value: 300, suffix: "+", label: { en: "Employees", ar: "موظفًا" } },
   {
@@ -524,7 +526,13 @@ function ImpactSection({ language }) {
 }
 
 function App() {
-  const [language, setLanguage] = useState("en");
+  const [language, setLanguage] = useState(() => {
+    try {
+      return window.localStorage.getItem(LANGUAGE_STORAGE_KEY) === "ar" ? "ar" : "en";
+    } catch {
+      return "en";
+    }
+  });
   const [currentPage, setCurrentPage] = useState(() => {
     if (window.location.hash.startsWith("#expertise")) return "expertise";
     if (window.location.hash.startsWith("#projects")) return "projects";
@@ -608,6 +616,11 @@ function App() {
   useEffect(() => {
     document.documentElement.lang = language;
     document.documentElement.dir = isArabic ? "rtl" : "ltr";
+    try {
+      window.localStorage.setItem(LANGUAGE_STORAGE_KEY, language);
+    } catch {
+      // Keep the language switch working when browser storage is unavailable.
+    }
   }, [language, isArabic]);
 
   useEffect(() => {
