@@ -4,21 +4,21 @@ import CalendarMonthOutlined from "@mui/icons-material/CalendarMonthOutlined";
 import LocationOnOutlined from "@mui/icons-material/LocationOnOutlined";
 import "./TrialPage.css";
 
-const EVENT_START = new Date("2026-11-16T12:00:00+03:00").getTime();
+const EVENT_START = new Date("2027-02-01T12:00:00+03:00").getTime();
 const ROTATION_INTERVAL = 5000;
 
 const eventCopy = {
   en: {
-    announcement: "Cityscape Riyadh 2026 announcement",
+    announcement: "Cityscape Riyadh 2027 announcement",
     brand: "BECT Architects and Engineers",
     heading: "WE’RE HEADING TO",
     title: "Cityscape",
-    cityYear: "RIYADH 2026",
+    cityYear: "RIYADH 2027",
     details: "Event details",
-    monthYear: "NOVEMBER 2026",
+    monthYear: "FEBRUARY 2027",
     city: "RIYADH",
     country: "SAUDI ARABIA",
-    countdown: "COUNTDOWN TO CITYSCAPE RIYADH 2026",
+    countdown: "COUNTDOWN TO CITYSCAPE RIYADH 2027",
     units: { days: "days", hours: "hours", minutes: "minutes", seconds: "seconds" },
     remaining: "remaining",
     pass: "Get Your Free Pass!",
@@ -26,16 +26,16 @@ const eventCopy = {
     gallery: "From Our Gallery — Cityscape 2025",
   },
   ar: {
-    announcement: "إعلان سيتي سكيب الرياض 2026",
+    announcement: "إعلان سيتي سكيب الرياض 2027",
     brand: "بيكت للاستشارات الهندسية",
     heading: "نلتقي بكم في",
     title: "سيتي سكيب",
-    cityYear: "الرياض 2026",
+    cityYear: "الرياض 2027",
     details: "تفاصيل الفعالية",
-    monthYear: "نوفمبر 2026",
+    monthYear: "فبراير 2027",
     city: "الرياض",
     country: "المملكة العربية السعودية",
-    countdown: "العد التنازلي لسيتي سكيب الرياض 2026",
+    countdown: "العد التنازلي لسيتي سكيب الرياض 2027",
     units: { days: "أيام", hours: "ساعات", minutes: "دقائق", seconds: "ثوانٍ" },
     remaining: "الوقت المتبقي",
     pass: "احصل على تذكرتك المجانية",
@@ -133,7 +133,7 @@ function EventDetails({ text }) {
       <div className="trial-event-detail">
         <CalendarMonthOutlined aria-hidden="true" />
         <span>
-          <strong><bdi dir="ltr">16 – 19</bdi></strong>
+          <strong><bdi dir="ltr">1 – 4</bdi></strong>
           <small>{text.monthYear}</small>
         </span>
       </div>

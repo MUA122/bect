@@ -549,7 +549,8 @@ function App() {
   const [pageTransitioning, setPageTransitioning] = useState(false);
   const [transitionProgress, setTransitionProgress] = useState(0);
   const [contactOpen, setContactOpen] = useState(false);
-  const [cityscapePopupOpen, setCityscapePopupOpen] = useState(true);
+  // Popup preserved as a draft; set to true to restore automatic display.
+  const [cityscapePopupOpen, setCityscapePopupOpen] = useState(false);
   const [cityscapeScrollPending, setCityscapeScrollPending] = useState(false);
   const [formStatus, setFormStatus] = useState("idle");
   const transitionTimer = useRef(null);
