@@ -55,15 +55,6 @@ const eventPhotos = [
     overlay: 0.07,
   },
   {
-    src: "/trial/hq/team-master.png",
-    mobileSrc: "/trial/mobile/team-master.png",
-    alt: "BECT team members together at the company Cityscape exhibition booth",
-    altAr: "فريق بيكت في جناح الشركة بمعرض سيتي سكيب",
-    position: "47% 51%",
-    mobilePosition: "47% 50%",
-    overlay: 0.09,
-  },
-  {
     src: "/trial/hq/conversation-master.png",
     mobileSrc: "/trial/mobile/conversation-master.png",
     alt: "BECT representatives in conversation with a visitor at Cityscape",
@@ -203,28 +194,6 @@ function EventPhotoCarousel({ text, isArabic }) {
     return () => window.clearInterval(timer);
   }, []);
 
-  useEffect(() => {
-    const preload = (photo) => {
-      const image = new Image();
-      image.decoding = "async";
-      image.src = window.matchMedia("(max-width: 899px)").matches
-        ? photo.mobileSrc
-        : photo.src;
-    };
-
-    preload(eventPhotos[1]);
-    const loadRemaining = () => eventPhotos.slice(2).forEach(preload);
-    const idleId = window.requestIdleCallback?.(loadRemaining, {
-      timeout: 1800,
-    });
-    const timer = idleId ? null : window.setTimeout(loadRemaining, 1200);
-
-    return () => {
-      if (idleId) window.cancelIdleCallback?.(idleId);
-      if (timer) window.clearTimeout(timer);
-    };
-  }, []);
-
   return (
     <section
       className="trial-photo-stage"
@@ -247,7 +216,6 @@ function EventPhotoCarousel({ text, isArabic }) {
               <img
                 src={photo.src}
                 alt={activeIndex === index ? (isArabic ? photo.altAr : photo.alt) : ""}
-                loading={index < 2 ? "eager" : "lazy"}
                 fetchPriority={index === 0 ? "high" : "auto"}
                 decoding={index === 0 ? "sync" : "async"}
                 draggable="false"
