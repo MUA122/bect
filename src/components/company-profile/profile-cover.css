@@ -17,6 +17,9 @@
   justify-content: space-between; border-bottom: 1px solid var(--rule);
 }
 .cp-mast .cp-brand { display: inline-flex; align-items: center; min-height: 44px; }
+.cp-mast:lang(en) .cp-brand { width: clamp(152px,15vw,224px); min-width: 0; margin-inline-end: 12px; }
+.cp-mast-extended { display: block; width: 100%; height: auto; }
+.cp-mast:lang(en) .cp-mast-actions { flex: none; }
 .cp-mast .cp-wordmark { width: clamp(85px,7.1vw,116px); }
 .cp-mast-actions { display: flex; align-items: center; gap: clamp(12px,1.7vw,28px); }
 .cp-home-link, .cp-mast .cp-language {

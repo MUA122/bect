@@ -15,25 +15,54 @@ export default function CompanyProfilePage() {
   const [language, setLanguage] = useSiteLanguage();
   const [intent, setIntent] = useState(() => ({ number: locationPage(), opening: false }));
   const target = useRef(intent.number);
-  const [manifest, setManifest] = useState(null);
+  const [editionChange, setEditionChange] = useState(null);
+  const transition = useRef(null);
+  const failedEdition = useRef(null);
+  const requestedLanguage = editionChange?.to ?? language;
   const [current, setCurrent] = useState(null);
   const [failed, setFailed] = useState(false);
   const [revealing, setRevealing] = useState(false);
   const [attempt, setAttempt] = useState(0);
   const exploreFocus = useRef(false);
-  const text = profileCopy[language];
+  const displayLanguage = current?.language ?? language;
+  const text = profileCopy[displayLanguage];
+  const manifest = current?.manifest;
+
+  const finishTransition = useCallback((change) => {
+    if (!change || transition.current !== change) return;
+    change.cover();
+    transition.current = null;
+    setEditionChange(null);
+  }, []);
+
+  function changeLanguage(to) {
+    transition.current?.cover();
+    failedEdition.current = null;
+    if (current) {
+      let cover;
+      const covered = new Promise((resolve) => { cover = resolve; });
+      transition.current = { to, covered, cover };
+      setEditionChange(transition.current);
+    } else {
+      setLanguage(to);
+    }
+    setFailed(false);
+    setRevealing(false);
+  }
 
   const request = useCallback((number, opening = false) => {
     if (target.current === number) return;
     target.current = number;
+    failedEdition.current = null;
     setFailed(false);
     setRevealing(false);
     if (number === null) {
+      finishTransition(transition.current);
       exploreFocus.current = true;
       setCurrent(null);
     }
     setIntent({ number, opening });
-  }, []);
+  }, [finishTransition]);
 
   useEffect(() => {
     const sync = () => request(locationPage());
@@ -50,28 +79,27 @@ export default function CompanyProfilePage() {
   }, [text.title]);
 
   useEffect(() => {
-    let active = true;
-    loadProfileManifest().then((data) => { if (active) setManifest(data); }).catch(() => {
-      // The intro remains available. Opening the reader retries the request.
+    loadProfileManifest(language).catch(() => {
+      // A foreground request retries a failed prefetch.
     });
-    return () => { active = false; };
-  }, []);
+  }, [language]);
 
   useEffect(() => {
-    if (intent.number === null) return;
+    if (intent.number === null || failedEdition.current) return;
     let active = true;
     let timer;
-    const cinematic = intent.opening && !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const change = transition.current;
+    const cinematic = intent.opening && !change && !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const entrance = cinematic ? new Promise((resolve) => { timer = window.setTimeout(resolve, 1650); }) : null;
 
     async function prepare() {
       try {
-        const data = await loadProfileManifest();
+        const data = await loadProfileManifest(requestedLanguage);
         if (!active) return;
-        setManifest(data);
         const number = Math.min(data.slides.length, intent.number);
         const slide = await prepareProfileSlide(data.slides[number - 1]);
         if (cinematic) await entrance;
+        if (change) await change.covered;
         if (!active) return;
         if (locationPage() !== number || window.location.hash !== `#page=${number}`) {
           window.history.replaceState(window.history.state, "", `#page=${number}`);
@@ -82,17 +110,22 @@ export default function CompanyProfilePage() {
           setIntent({ number, opening: false });
         }
         if (cinematic) setRevealing(true);
-        setCurrent((previous) => previous?.slide.number === number ? previous : ({
-          slide, step: previous && number < previous.slide.number ? -1 : 1,
+        setCurrent((previous) => previous?.slide.src === slide.src ? previous : ({
+          slide, language: requestedLanguage, manifest: data, step: previous && number < previous.slide.number ? -1 : 1,
         }));
+        if (change) setLanguage(requestedLanguage);
         setFailed(false);
       } catch {
-        if (active) setFailed(true);
+        if (active) {
+          if (change) failedEdition.current = change.to;
+          finishTransition(change);
+          setFailed(true);
+        }
       }
     }
     prepare();
     return () => { active = false; window.clearTimeout(timer); };
-  }, [intent, attempt]);
+  }, [intent, attempt, requestedLanguage, setLanguage, finishTransition]);
 
   useEffect(() => {
     if (!current || !manifest) return;
@@ -127,24 +160,33 @@ export default function CompanyProfilePage() {
   };
   const warmCover = () => {
     if (navigator.connection?.saveData) return;
-    loadProfileManifest().then((data) => {
+    loadProfileManifest(language).then((data) => {
       if (target.current === null) return prepareProfileSlide(data.slides[0]);
     }).catch(() => {});
   };
-  const retry = () => { setFailed(false); setAttempt((n) => n + 1); };
-  const shared = { text, language, toggleLanguage: () => setLanguage(language === "ar" ? "en" : "ar") };
+  const retry = () => {
+    if (failedEdition.current) changeLanguage(failedEdition.current);
+    setFailed(false);
+    setAttempt((n) => n + 1);
+  };
+  const shared = { text, language: displayLanguage, toggleLanguage: () => {
+    const selected = transition.current?.to ?? displayLanguage;
+    changeLanguage(selected === "ar" ? "en" : "ar");
+    if (failed) setAttempt((n) => n + 1);
+  } };
 
-  return <div className="cp-publication" dir={language === "ar" ? "rtl" : "ltr"}>
+  return <div className="cp-publication" dir={displayLanguage === "ar" ? "rtl" : "ltr"} lang={displayLanguage}>
     {current && intent.number !== null ? <ProfileReader {...shared} manifest={manifest} slide={current.slide}
-      direction={current.step * (language === "ar" ? -1 : 1)} target={intent.number} turn={turn}
+      editionChange={editionChange} onEditionRevealed={finishTransition}
+      direction={current.step * (displayLanguage === "ar" ? -1 : 1)} target={intent.number} turn={turn}
       goTo={goTo} onClose={exit} error={failed} onRetry={retry} /> :
       intent.number !== null && !intent.opening ? <main className="cp-entry">
-        <Opening text={text} onClose={exit} error={failed} onRetry={retry} /></main> :
+        <Opening language={displayLanguage} text={text} onClose={exit} error={failed} onRetry={retry} /></main> :
         <ProfileIntro {...shared} opening={intent.number !== null && !failed}
           error={failed} onRetry={retry} onClose={exit} onExplore={enter} onWarm={warmCover} />}
     {current && revealing && <div className="cp-opening-exit" aria-hidden="true" inert
       onAnimationEnd={(event) => { if (event.target === event.currentTarget) setRevealing(false); }}>
-      <Opening text={text} onClose={exit} />
+      <Opening language={displayLanguage} text={text} onClose={exit} />
     </div>}
   </div>;
 }

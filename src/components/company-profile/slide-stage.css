@@ -91,3 +91,6 @@
 }
 
 .cp-sector-curtain span:lang(ar) { letter-spacing: 0; line-height: 1.6; }
+
+.cp-sector-curtain span:lang(ar) { font-family: "Noto Kufi Arabic", sans-serif; }
+.cp-slide-stage:lang(ar) .cp-sector-detail { inset: 0 25% 0 0; mask-image: linear-gradient(270deg, transparent, #000 60%); }

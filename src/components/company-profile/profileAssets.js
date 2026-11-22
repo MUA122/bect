@@ -1,10 +1,9 @@
-const MANIFEST = '/company-profile/manifest.json';
+const manifests = new Map();
 const CACHE_SIZE = 3;
 export const FIT_MEDIA = '(max-width: 900px), (max-height: 520px) and (pointer: coarse)';
 const ready = new Map();
 const pending = new Map();
 const fonts = new Map();
-let manifestRequest;
 
 async function getFile(url, signal) {
   const response = await fetch(url, { signal });
@@ -12,21 +11,22 @@ async function getFile(url, signal) {
   return response;
 }
 
-export function loadProfileManifest() {
-  if (!manifestRequest) {
-    manifestRequest = getFile(MANIFEST)
+export function loadProfileManifest(language = 'en') {
+  if (!manifests.has(language)) {
+    const base = language === 'ar' ? '/company-profile/ar' : '/company-profile';
+    manifests.set(language, getFile(`${base}/manifest.json`)
       .then((response) => response.json())
       .catch((error) => {
-        manifestRequest = undefined;
+        manifests.delete(language);
         throw error;
-      });
+      }));
   }
-  return manifestRequest;
+  return manifests.get(language);
 }
 
-function loadFont({ family, src }) {
+function loadFont({ family, src, weight }) {
   if (!fonts.has(src)) {
-    const font = new FontFace(family, `url("${src}")`);
+    const font = new FontFace(family, `url("${src}")`, weight ? { weight } : {});
     fonts.set(src, font.load().then((loaded) => {
       document.fonts.add(loaded);
     }).catch((error) => {
@@ -93,6 +93,9 @@ async function readArtwork(slide, signal) {
   if (template.localName !== 'svg' || document.querySelector('parsererror')) {
     throw new Error(`Invalid profile artwork for page ${slide.number}`);
   }
+  // Standalone Arabic SVGs declare their webfont. The inline reader registers
+  // the same face once, before the first frame of the transition.
+  template.querySelector('style[data-standalone-font]')?.remove();
   const fitted = window.matchMedia(FIT_MEDIA).matches;
   const sources = [];
   for (const image of template.querySelectorAll('image')) {

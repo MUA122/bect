@@ -33,7 +33,7 @@ export default function ProfileSlideStage({ slide, direction = 1, fullResolution
   useLayoutEffect(() => {
     const prepared = slide && getPreparedProfileSlide(slide);
     if (!prepared) return;
-    if (host.current.querySelector('.cp-slide-frame[data-current="true"]')?.dataset.slideNumber === String(slide.number)) return;
+    if (host.current.querySelector('.cp-slide-frame[data-current="true"]')?.dataset.artworkSrc === slide.src) return;
     const now = performance.now();
     const rapid = lastNavigation.current > 0 && now - lastNavigation.current < 420;
     lastNavigation.current = now;
@@ -61,5 +61,5 @@ export default function ProfileSlideStage({ slide, direction = 1, fullResolution
     };
   }, [slide, fullResolution]);
 
-  return <div ref={host} className="cp-slide-stage" dir="ltr" lang="en" />;
+  return <div ref={host} className="cp-slide-stage" dir="ltr" lang={slide.language || "en"} />;
 }

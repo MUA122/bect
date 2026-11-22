@@ -102,7 +102,7 @@ function sectorCurtain(stage, slide, direction) {
     }
   }
   const label = document.createElement('span');
-  label.lang = stage.ownerDocument.documentElement.lang;
+  label.lang = slide.language || 'en';
   label.dir = label.lang === 'ar' ? 'rtl' : 'ltr';
   label.textContent = sectionLabel(slide.sector, label.lang);
   curtain.append(label);
@@ -129,6 +129,8 @@ function createFrame(slide) {
   const frame = document.createElement('div');
   frame.className = 'cp-slide-frame';
   frame.dataset.slideNumber = slide.number;
+  frame.dataset.artworkSrc = slide.src;
+  frame.lang = slide.language || 'en';
   frame.dataset.sector = slide.sector;
   frame.dataset.ratio = slide.width / slide.height;
   frame.setAttribute('role', 'group');
@@ -145,9 +147,10 @@ function createFrame(slide) {
 /** The current composition stays mounted until its ready successor can paint. */
 export function presentSlide(stage, slide, direction, rapid, reducedMotion, lastSize) {
   const previous = stage.querySelector('.cp-slide-frame[data-current="true"]');
-  if (previous?.dataset.slideNumber === String(slide.number)) return;
+  if (previous?.dataset.artworkSrc === slide.src) return;
+  if (previous && previous.lang !== (slide.language || 'en')) clearSlideStage(stage);
   const frames = Array.from(stage.querySelectorAll('.cp-slide-frame'));
-  const returning = frames.find((frame) => frame.dataset.slideNumber === String(slide.number));
+  const returning = frames.find((frame) => frame.dataset.artworkSrc === slide.src);
   // An early reversal can reuse the still-visible departing spread, including its
   // SVG definitions. Keep only the most visible other spread as the outgoing frame.
   const others = frames.filter((frame) => frame !== returning);

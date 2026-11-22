@@ -1,4 +1,8 @@
 @font-face {
+  font-family: "Profile Kufi"; src: url("/company-profile/ar/NotoKufiArabic.woff2") format("woff2");
+  font-weight: 100 900; font-display: swap;
+}
+@font-face {
   font-family: "Profile Inter"; src: url("../../assets/cityscape/Inter-400.woff") format("woff");
   font-weight: 400; font-display: swap;
 }
@@ -164,6 +168,7 @@
   .cp-reader { --rail: 3px; }
   .cp-publication .cp-scale { min-width: 34px; }
   .cp-counter { min-width: 62px; }
+  .cp-publication[lang=ar] .cp-counter { min-width: 52px; letter-spacing: normal; }
 }
 @media (max-height:520px) and (min-aspect-ratio: 1/1) {
   .cp-reader-head, .cp-controls { min-height: 44px; padding-block: 0; }
@@ -220,3 +225,17 @@
   0% { clip-path: inset(0); opacity: 1; }
   100% { clip-path: inset(0 0 100% 0); opacity: .35; }
 }
+
+.cp-edition-transition {
+  position: absolute; inset: 0; z-index: 5; display: grid; place-content: center; justify-items: center; gap: 16px;
+  background: radial-gradient(ellipse at 50% 46%, #163b50, #0b263a 55%, #071c2b);
+  color: #d7e6ed; font-size: .9rem;
+}
+.cp-edition-transition .cp-wordmark { width: clamp(120px, 14vw, 186px); }
+.cp-edition-transition[dir=rtl] .cp-wordmark { width: clamp(175px, 22vw, 265px); }
+.cp-edition-transition[dir=rtl], .cp-publication[lang=ar] { font-family: "Profile Kufi", "Noto Kufi Arabic", sans-serif; }
+.cp-publication[lang=ar] .cp-meta { letter-spacing: normal; }
+.cp-publication[dir=rtl] .cp-reader-brand img { width: clamp(82px, 9vw, 115px); }
+.cp-publication[dir=rtl] .cp-mast .cp-wordmark { width: clamp(95px, 11vw, 165px); }
+.cp-publication[dir=rtl] .cp-explore .cp-explore-mark { width: clamp(56px, 7.5vw, 99px); }
+.cp-publication[dir=rtl] .cp-opening .cp-wordmark { width: clamp(175px, 22vw, 265px); }

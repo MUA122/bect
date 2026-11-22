@@ -75,7 +75,8 @@ def check_landing(page, label):
     expect(atlas.locator(".cp-map-connection")).to_have_attribute("d", "M180.62 83.78 Q333 68 492.37 208.64")
     viewport = page.viewport_size
     wordmark = control.locator("img")
-    expect(wordmark).to_have_attribute("src", "/company-profile/intro/wordmark.png")
+    logo = "/company-profile/ar/wordmark-white.png" if label == EXPLORE_AR else "/company-profile/intro/wordmark.png"
+    expect(wordmark).to_have_attribute("src", logo)
     wordmark.evaluate("image => image.decode()")
     bounds = control.bounding_box()
     assert abs(bounds["x"] + bounds["width"] / 2 - viewport["width"] / 2) <= 1, bounds
@@ -376,11 +377,99 @@ def interaction_checks(browser, url, output, last_page, audit):
     slide(page, 1)
     button(page, "التالي").click()
     paper = slide(page, 2)
-    assert paper.evaluate("el => getComputedStyle(el).direction") == "ltr"
+    expect(paper).to_have_attribute("lang", "ar")
+    expect(paper).to_have_attribute("data-artwork-src", "/company-profile/ar/slides/002.svg")
     page.keyboard.press("ArrowLeft")
     slide(page, 3)
     page.screenshot(path=output / "arabic-mobile.png")
     context.close()
+
+
+def edition_checks(browser, url, output):
+    context = browser.new_context(viewport={"width": 1440, "height": 900})
+    page = context.new_page()
+    manifests = {lang: context.request.get(url.rstrip("/") + suffix).json()["slides"]
+                 for lang, suffix in (("en", "/manifest.json"), ("ar", "/ar/manifest.json"))}
+
+    def check_edition(number, language):
+        entry = manifests[language][number - 1]
+        frame = page.locator(f'{SETTLED}[lang="{language}"][data-slide-number="{number}"]')
+        expect(frame).to_be_visible(timeout=30000)
+        expect(frame).to_have_attribute("data-artwork-src", entry["src"])
+        expect(frame).to_have_attribute("aria-label", entry["title"])
+        expect(page.locator(".cp-reader-caption > span:last-child")).to_have_text(entry["title"])
+        expect(page.locator(".cp-edition-transition")).to_have_count(0)
+        assert page.url.endswith(f"#page={number}")
+        expect(page.locator(".cp-reader-brand img")).to_have_attribute("src",
+            "/company-profile/ar/wordmark-white.png" if language == "ar" else "/company-profile/intro/wordmark.png")
+
+    for number in (1, 42, 120):
+        open_page(page, url, number)
+        if number == 42:
+            button(page, "Fullscreen").click()
+            expect(page.locator(".cp-reader")).to_have_class(re.compile(r"\bis-full\b"))
+            button(page, "Zoom in").click()
+            expect(page.locator(".cp-viewport")).to_have_attribute("data-zoom", "1.65")
+        button(page, "العربية").click()
+        expect(page.get_by_text("جارٍ تجهيز النسخة العربية…")).to_be_visible()
+        check_edition(number, "ar")
+        if number == 42:
+            expect(page.locator(".cp-viewport")).to_have_attribute("data-zoom", "1.65")
+            expect(page.locator(".cp-reader")).to_have_class(re.compile(r"\bis-full\b"))
+        button(page, "English").click()
+        expect(page.get_by_text("Preparing the English edition…")).to_be_visible()
+        check_edition(number, "en")
+        if number == 42:
+            expect(page.locator(".cp-viewport")).to_have_attribute("data-zoom", "1.65")
+            button(page, "Exit fullscreen").click()
+
+    # Reverse the destination before a fetch or entry animation has completed.
+    open_page(page, url, 37)
+    button(page, "Next").click()
+    button(page, "العربية").click()
+    button(page, "English").click()
+    check_edition(38, "en")
+    button(page, "العربية").click()
+    check_edition(38, "ar")
+    button(page, "المحتويات").click()
+    dialog = page.get_by_role("dialog")
+    dialog.get_by_role("searchbox").fill("٠٤٢")
+    item = dialog.locator(".cp-contents-grid button")
+    expect(item).to_have_count(1)
+    expect(item).to_contain_text(manifests["ar"][41]["title"])
+    expect(item.locator("img")).to_have_attribute("src", manifests["ar"][41]["thumbnail"])
+    item.click()
+    check_edition(42, "ar")
+    page.keyboard.press("ArrowLeft")
+    check_edition(43, "ar")
+    page.keyboard.press("ArrowRight")
+    check_edition(42, "ar")
+    page.reload(wait_until="domcontentloaded")
+    check_edition(42, "ar")
+    page.screenshot(path=output / "arabic-desktop.png")
+
+    # A slow or failed edition fetch keeps the previous page available for retry.
+    context.close()
+    context = browser.new_context(reduced_motion="reduce")
+    page = context.new_page()
+    try:
+        open_page(page, url, 42)
+        held = []
+        pattern = "**/ar/slides/042.svg"
+        page.route(pattern, lambda route: held.append(route))
+        with page.expect_request(pattern):
+            button(page, "العربية").click()
+        expect(page.locator(".cp-edition-transition")).to_be_visible()
+        expect(page.locator(f'{CURRENT}[lang="en"]')).to_have_attribute("data-slide-number", "42")
+        expect(page.get_by_text("جارٍ تجهيز النسخة العربية…")).to_be_visible()
+        held[0].fulfill(status=503, body="temporarily unavailable")
+        expect(page.get_by_role("alert")).to_be_visible()
+        assert page.evaluate("localStorage.getItem('bect-language')") == "en"
+        page.unroute(pattern)
+        button(page, "Try again").click()
+        check_edition(42, "ar")
+    finally:
+        context.close()
 
 
 def reference_pages(pdf, output):
@@ -500,6 +589,7 @@ def main():
             count = int(re.search(r"^Pages:\s+(\d+)", subprocess.check_output(
                 ["pdfinfo", str(pdf)], text=True), re.MULTILINE).group(1))
             interaction_checks(browser, args.url, args.output, count, audit)
+            edition_checks(browser, args.url, args.output)
         browser.close()
     report = {"engine": args.engine, "version": browser_version,
               "interaction_checks_run": args.only != "visual",

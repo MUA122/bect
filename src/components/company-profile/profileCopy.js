@@ -6,7 +6,7 @@ export const profileCopy = {
     explore: "Explore company profile", clickToView: "Click to view", tapToView: "Tap to view",
     regionalPresence: "Our regional presence",
     page: "Page",
-    backToIntro: "Back to introduction", opening: "Opening the profile", loading: "Preparing page", contents: "Contents",
+    backToIntro: "Back to introduction", opening: "Opening the profile", preparingEdition: "Preparing the English edition…", loading: "Preparing page", contents: "Contents",
     search: "Find a page or project", sectors: "Sections", all: "All sections",
     empty: "No matching pages.", previous: "Previous", next: "Next", close: "Close",
     closeProfile: "Close profile", fullscreen: "Fullscreen", exitFullscreen: "Exit fullscreen",
@@ -23,7 +23,7 @@ export const profileCopy = {
     explore: "استكشف ملف الشركة", clickToView: "انقر للعرض", tapToView: "المس للعرض",
     regionalPresence: "حضورنا الإقليمي",
     page: "صفحة",
-    backToIntro: "العودة إلى المقدمة", opening: "جارٍ فتح الملف", loading: "جارٍ تجهيز الصفحة", contents: "المحتويات",
+    backToIntro: "العودة إلى المقدمة", opening: "جارٍ فتح الملف", preparingEdition: "جارٍ تجهيز النسخة العربية…", loading: "جارٍ تجهيز الصفحة", contents: "المحتويات",
     search: "ابحث عن صفحة أو مشروع", sectors: "الأقسام", all: "جميع الأقسام",
     empty: "لا توجد صفحات مطابقة.", previous: "السابق", next: "التالي", close: "إغلاق",
     closeProfile: "إغلاق الملف", fullscreen: "ملء الشاشة", exitFullscreen: "إنهاء ملء الشاشة",
@@ -35,7 +35,8 @@ export const profileCopy = {
   },
 };
 
-export const formatPage = (number) => String(number).padStart(3, "0");
+const arabicPageNumber = new Intl.NumberFormat("ar-EG", { minimumIntegerDigits: 3, useGrouping: false });
+export const formatPage = (number, language) => language === "ar" ? arabicPageNumber.format(number) : String(number).padStart(3, "0");
 
 const arabicSections = {
   "Company Profile": "الملف التعريفي",

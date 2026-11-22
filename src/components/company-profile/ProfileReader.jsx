@@ -8,16 +8,17 @@ import ChevronLeftOutlined from "@mui/icons-material/ChevronLeftOutlined";
 import ChevronRightOutlined from "@mui/icons-material/ChevronRightOutlined";
 import GridViewOutlined from "@mui/icons-material/GridViewOutlined";
 import { LanguageSwitch, Wordmark } from "./ProfileIntro";
+import EditionTransition from "./EditionTransition";
 import ProfileContents from "./ProfileContents";
 import ProfileSlideStage from "./ProfileSlideStage";
 import usePageViewport from "./usePageViewport";
-import { formatPage } from "./profileCopy";
+import { formatPage, profileCopy } from "./profileCopy";
 
 function Tool({ label, children, ...props }) {
   return <button type="button" className="cp-icon" title={label} aria-label={label} {...props}>{children}</button>;
 }
 
-export default function ProfileReader({ manifest, slide, direction, target, text, language, toggleLanguage, onClose, turn, goTo, error, onRetry }) {
+export default function ProfileReader({ manifest, slide, direction, target, text, language, toggleLanguage, onClose, turn, goTo, error, onRetry, editionChange, onEditionRevealed }) {
   const root = useRef(null);
   const [contents, setContents] = useState(false);
   const [nativeFull, setNativeFull] = useState(false);
@@ -86,9 +87,9 @@ export default function ProfileReader({ manifest, slide, direction, target, text
   const nextIcon = rtl ? <ChevronLeftOutlined /> : <ChevronRightOutlined />;
   return <main className={`cp-reader${full ? " is-full" : ""}`} aria-label={text.reader} ref={root} tabIndex={-1}>
     <header className="cp-reader-head">
-      <div className="cp-reader-brand"><Wordmark /><i aria-hidden="true" /><span>{text.title}</span></div>
+      <div className="cp-reader-brand"><Wordmark language={language} /><i aria-hidden="true" /><span>{text.title}</span></div>
       <div className="cp-reader-tools">
-        <LanguageSwitch {...{ text, toggleLanguage, language }} />
+        <LanguageSwitch language={editionChange?.to ?? language} text={profileCopy[editionChange?.to ?? language]} toggleLanguage={toggleLanguage} />
         <Tool label={full ? text.exitFullscreen : text.fullscreen} onClick={toggleFullscreen}>
           {full ? <FullscreenExitOutlined /> : <FullscreenOutlined />}
         </Tool>
@@ -97,8 +98,8 @@ export default function ProfileReader({ manifest, slide, direction, target, text
     </header>
     <div className={`cp-gallery${view.scale === 1 ? " is-fit" : ""}`}
       style={{ "--cp-paper-height": `${height}px` }}>
-      <div className="cp-reader-caption"><span className="cp-meta">{text.page} <bdi>{formatPage(slide.number)}</bdi></span>
-        <span lang="en" dir="auto">{slide.title}</span></div>
+      <div className="cp-reader-caption"><span className="cp-meta">{text.page} <bdi>{formatPage(slide.number, language)}</bdi></span>
+        <span lang={language} dir="auto">{slide.title}</span></div>
       <div className="cp-viewport" ref={viewport} dir="ltr" {...events} data-zoom={view.scale.toFixed(2)}>
         <div className="cp-paper" style={{ width, height, transform: `translate3d(${view.x}px,${view.y}px,0) scale(${view.scale})` }}>
           <ProfileSlideStage slide={slide} direction={direction} fullResolution={full || view.scale > 1} />
@@ -114,7 +115,9 @@ export default function ProfileReader({ manifest, slide, direction, target, text
           </div>}
           <span className="cp-touch-hint">{text.touchHint}</span>
         </>}</div>
-      {pending && <div className="cp-wait" role="status">{text.loading}</div>}
+      {editionChange && <EditionTransition key={editionChange.to} change={editionChange}
+        ready={language === editionChange.to && !pending} onRevealed={onEditionRevealed} />}
+      {pending && !editionChange && <div className="cp-wait" role="status">{text.loading}</div>}
       {error && <div className="cp-read-error" role="alert">{text.error} <button type="button" onClick={onRetry}>{text.retry}</button></div>}
     </div>
     <footer className="cp-controls">
@@ -130,11 +133,11 @@ export default function ProfileReader({ manifest, slide, direction, target, text
       </div>
       <div className="cp-turn-tools">
         <Tool label={text.previous} disabled={target <= 1} onClick={() => turn(-1)}>{previousIcon}</Tool>
-        <span className="cp-counter" dir="ltr"><b>{formatPage(slide.number)}</b> / {formatPage(total)}</span>
+        <span className="cp-counter" dir="ltr"><b>{formatPage(slide.number, language)}</b> / {formatPage(total, language)}</span>
         <Tool label={text.next} disabled={target >= total} onClick={() => turn(1)}>{nextIcon}</Tool>
       </div>
     </footer>
-    <span className="cp-sr" role="status">{text.page} {slide.number} / {total}. <span lang="en">{slide.title}</span></span>
+    <span className="cp-sr" role="status">{text.page} {slide.number} / {total}. <span lang={language}>{slide.title}</span></span>
     {contents && <ProfileContents slides={manifest.slides} current={slide.number} text={text} language={language}
       onClose={() => setContents(false)} onSelect={(n) => { setContents(false); goTo(n); }} />}
   </main>;

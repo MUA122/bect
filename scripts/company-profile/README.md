@@ -19,7 +19,10 @@ npm run preview -- --outDir /tmp/bect-profile-preview
 | `src/hooks/useSiteLanguage.js` | Shared English/Arabic preference |
 | `index.html`, `src/styles.css` | Route-specific first paint and resource preloading |
 | `src/components/company-profile/` | Introduction, page history, bilingual controls, browser fullscreen, gestures, zoom, contents and layered animation |
-| `public/company-profile/` | Original PDF, slide catalog, 120 structured SVG pages, licensed font subsets, images, previews and thumbnails |
+| `public/company-profile/` | Original PDF, English catalog and SVG artwork, shared photography, previews and thumbnails |
+| `public/company-profile/ar/` | Arabic catalog, 120 RTL SVGs, 120 Arabic thumbnails, official wordmarks, Noto Kufi Arabic and its license |
+| `scripts/company-profile/arabic/` | Reviewed Arabic source copy and generators for the opening section, projects, register and catalog |
+| `src/components/ArabicWordmark.jsx` | Supplied Arabic artwork for the website header and publication |
 | `vite.config.js` | Excludes the authoring PDF from the build output |
 | `scripts/company-profile/` | Source extraction, image preparation and browser verification |
 
@@ -29,7 +32,9 @@ Web Animations API timelines coordinate entrances, exits and section changes. Ra
 
 The introduction uses the main website’s typography and a bilingual map of BECT’s offices in Cairo and Riyadh. The country boundaries and city markers use the same Lambert conformal conic projection of Natural Earth’s 1:50m data. Selecting a country, flag or city marker opens a centered office dialog with the corresponding flag, address, telephone link, Google Maps directions and a link to BECT’s Contact page. The close control, backdrop and Escape return to the map.
 
-The centered Explore company profile button uses the official BECT wordmark from the publication cover. Hovering or focusing the button prepares the first page. When that page is ready, the normal opening sequence takes about two seconds including its reveal. Reduced motion bypasses the opening hold. Source page titles and artwork stay in English when the navigation switches to Arabic.
+The centered Explore company profile button uses the official BECT wordmark from the publication cover. Hovering or focusing the button prepares the first page. When that page is ready, the normal opening sequence takes about two seconds including its reveal. Reduced motion bypasses the opening hold. Each edition has its own catalog, using the same numbered page IDs, sector order, dimensions and transition types. The reader switches the current page’s artwork, searchable title, thumbnail and controls together. It prepares the target edition’s font and imagery before revealing it. The fullscreen element and zoom viewport stay mounted throughout the switch.
+
+Project pages place the metadata and narrative on the right and preserve the orientation of the original photographs on the left. Arabic text is typeset in the website’s Noto Kufi Arabic, bundled locally for the reader. Technical identifiers, client marks, drawings and photographs retain their original form. The website header uses the supplied Arabic artwork with the header’s exact blue (#005b8f). The profile uses the supplied white artwork on navy.
 
 ## Regeneration
 
@@ -40,6 +45,28 @@ python scripts/company-profile/extract.py
 ```
 
 The script reads the single PDF in `public/company-profile`. The cover wordmark crop, corporate page titles and transcription of the flattened milestones graphic are specific to this edition. Review those items when replacing the PDF with another edition. The landing map lives in `src/components/company-profile/RegionalMap.jsx`.
+
+### Rebuilding the Arabic edition
+
+Edit the source record for the existing PDF page number. `project-pages.json` contains project narratives, values, disciplines and divider titles. `practice-copy.json` and `practice-partners.json` cover the corporate pages. `registers.json` retains the original column and row order for the 226 register entries. The project generator also writes the title index that the opening contents pages consume.
+
+The generators use Python with lxml, uharfbuzz, fonttools with WOFF support, Pillow and Playwright Chromium. Run the final command while Vite is serving the site. It renders each thumbnail from its finished Arabic page with the original linked images and font.
+
+```sh
+python scripts/company-profile/arabic/project_spreads.py
+python scripts/company-profile/arabic/practice.py
+python scripts/company-profile/arabic/registers.py
+python scripts/company-profile/arabic/catalog.py --url http://127.0.0.1:5173
+```
+
+### Source details for editorial review
+
+- The original contents directs readers to page 8 for the milestones. They appear on page 7. The translated contents retains the printed reference.
+- Page 6 ends its technical-services list mid-sentence after firefighting systems. Arabic closes the sentence at that last named discipline.
+- Pages 10 and 120 give different Riyadh address details. Each Arabic page retains its own source address.
+- Page 14 uses different spellings for the project name and the municipal client. The client field includes the source spelling *Al-Muqeem*.
+- Page 78 lists Cairo in the location field and describes Al-Laith in the narrative. Page 119 labels the register 2007–2015 and lists entries from 1989–1997. Both source discrepancies are retained.
+- Unconfirmed proper names such as *Nouarachy* and *AlJela* retain their source spelling. The ambiguous register entry *Service Centers Policy* includes the original wording alongside its Arabic rendering.
 
 ## Quality review
 
@@ -54,6 +81,15 @@ The visual test renders the original CropBoxes independently with Poppler and ca
 
 The November 22, 2026 review covered all 120 pages. All passed the Chromium comparison. Average channel error was 4.16 on a 0–255 scale, or 1.87 after a one-pixel blur to reduce antialiasing differences. In WebKit at standard density, 117 pages met the same tolerance. Pages 2, 36 and 92 passed on repeat at 2× density. Fine dotted contents leaders and detailed photographs show some engine-dependent rasterization at fit-to-screen sizes. The review includes [four side-by-side comparisons](review/comparison.webp) and [per-page measurements](review/visual-comparison.json).
 
-Chromium and WebKit exercised direct links, reload, Back/Forward, repeated close and focus restoration, section transitions, Arabic navigation with English pages, searchable contents, zoom, fullscreen and its fallback, failed asset requests and retry. Chromium also exercised multi-touch pinch, pan and swipe. The responsive review used desktop, laptop, tablet, iPhone-sized and Android-sized viewports in portrait and landscape. Physical handset performance remains unmeasured.
+Chromium and WebKit exercised direct links, reload, Back/Forward, repeated close and focus restoration, section transitions, Arabic navigation in the original release, searchable contents, zoom, fullscreen and its fallback, failed asset requests and retry. Chromium also exercised multi-touch pinch, pan and swipe. The responsive review used desktop, laptop, tablet, iPhone-sized and Android-sized viewports in portrait and landscape. Physical handset performance remains unmeasured.
 
 A 1440 × 900 Chromium sample across eight warmed transitions recorded a median frame interval of 16.7 ms and a 95th percentile of 33.3 ms. The Vite production build passed. Vite reports a size warning for the main website bundle. The profile has its own lazy-loaded JavaScript chunk of approximately 12 KiB gzipped. The existing package defines build, development and preview commands and has no separate lint or type-check script.
+
+### Bilingual edition verification
+
+- The source PDF, English catalog and Arabic catalog each contain 120 pages. The Arabic catalog includes 92 project spreads, 10 sector dividers, the corporate material, and four register spreads containing 226 entries. Every register year and ongoing status was checked against its source row.
+- Chromium and WebKit traversed all 120 Arabic pages in the reader with the local font loaded. All visible text stayed inside the slide canvas. The layout review also checked the covers, contents, CEO portraits, organization chart, map legend and register columns. Nine sampled project photograph crops matched the English artwork to within 0.01 per RGB channel on average.
+- In Chromium, all 120 settled English slides matched screenshots of the approved build pixel for pixel. The English introduction also matched on desktop and mobile.
+- Switching editions on pages 1, 42 and 120, rapid reversal, fullscreen, zoom, Arabic title and number searches, keyboard navigation, touch gestures and failed-load recovery were exercised. A failed language switch preserves the displayed edition and its saved preference. Retry prepares the requested edition again.
+- Responsive checks used phone and tablet portrait and landscape viewports, laptops and large desktops. Chromium exercised native emulated touch events for pinch, pan and swipe. The mobile results come from browser emulation. Physical handset performance was not measured. The approved English footer has an existing approximately four-pixel overhang at 320 px. The Arabic footer fits at that width.
+- The final Vite build passed. Its interaction suite passed in Chromium and WebKit with zero browser errors. A separate Chromium comparison against all 120 pages rasterized from the original PDF with Poppler passed the repository’s visual thresholds. The project has no dedicated lint or type-check commands.

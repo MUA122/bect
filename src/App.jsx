@@ -33,6 +33,7 @@ import LeadershipSection from "./components/LeadershipSection";
 import CertificationsSection from "./components/CertificationsSection";
 import GlobalPresenceSection from "./components/GlobalPresenceSection";
 import HomeFlyerSection from "./components/HomeFlyerSection";
+import ArabicWordmark from "./components/ArabicWordmark";
 import PartnerLogoCarousel from "./components/PartnerLogoCarousel";
 import SiteFooter from "./components/SiteFooter";
 import CityscapeSection from "./components/TrialPage";
@@ -344,7 +345,10 @@ const copy = {
   },
 };
 
-function Logo({ light = false, compact = false }) {
+function Logo({ light = false, compact = false, language = "en" }) {
+  if (language === "ar") {
+    return <ArabicWordmark white={light} style={{ display: "block", width: compact ? 104 : 147, height: "auto" }} />;
+  }
   const color = light ? "#fff" : "#005b8f";
   return (
     <Stack direction="row" alignItems="center" spacing={1.15} sx={{ color }}>
@@ -781,10 +785,10 @@ function App() {
             <Box
               component="a"
               href="#home"
-              aria-label="BECT home"
+              aria-label={isArabic ? "بيكت، الصفحة الرئيسية" : "BECT home"}
               sx={{ textDecoration: "none", flexShrink: 0 }}
             >
-              <Logo compact={false} />
+              <Logo language={language} compact={false} />
             </Box>
 
             <Stack
@@ -1059,7 +1063,7 @@ function App() {
           justifyContent="space-between"
           alignItems="center"
         >
-          <Logo light />
+          <Logo language={language} light />
           <IconButton
             onClick={() => setMenuOpen(false)}
             sx={{ color: "white" }}
