@@ -22,6 +22,7 @@ import CloseRounded from "@mui/icons-material/CloseRounded";
 import LanguageRounded from "@mui/icons-material/LanguageRounded";
 import MenuRounded from "@mui/icons-material/MenuRounded";
 import SendRounded from "@mui/icons-material/SendRounded";
+import useSiteLanguage from "./hooks/useSiteLanguage";
 import ServicesSection from "./components/ServicesSection";
 import ExpertisePage from "./components/ExpertisePage";
 import ProjectsPage from "./components/ProjectsPage";
@@ -46,8 +47,6 @@ import wadiDayqahImage from "./assets/projects/wadi-dayqah.jpeg";
 // Paste your deployed Google Apps Script web app URL here.
 const GOOGLE_SHEETS_ENDPOINT =
   "https://script.google.com/macros/s/AKfycbzm0W8QlkWbNqhBwuE2VCDoeGMsri4R0EHawp3OGX0d3NZeOXcoH51_kjGEk7DXD2u0/exec";
-
-const LANGUAGE_STORAGE_KEY = "bect-language";
 
 const impactStats = [
   { value: 300, suffix: "+", label: { en: "Employees", ar: "موظفًا" } },
@@ -177,6 +176,7 @@ const menuData = {
         { title: "Recognition", items: ["Awards", "Board"] },
       ],
     },
+    { label: "Company Profile", groups: [] },
     { label: "Contact Us", groups: [] },
   ],
   ar: [
@@ -249,6 +249,7 @@ const menuData = {
         { title: "التقدير", items: ["الجوائز", "مجلس الإدارة"] },
       ],
     },
+    { label: "الملف التعريفي", groups: [] },
     { label: "تواصل معنا", groups: [] },
   ],
 };
@@ -526,13 +527,7 @@ function ImpactSection({ language }) {
 }
 
 function App() {
-  const [language, setLanguage] = useState(() => {
-    try {
-      return window.localStorage.getItem(LANGUAGE_STORAGE_KEY) === "ar" ? "ar" : "en";
-    } catch {
-      return "en";
-    }
-  });
+  const [language, setLanguage] = useSiteLanguage();
   const [currentPage, setCurrentPage] = useState(() => {
     if (window.location.hash.startsWith("#expertise")) return "expertise";
     if (window.location.hash.startsWith("#projects")) return "projects";
@@ -615,16 +610,6 @@ function App() {
   }, []);
 
   useEffect(() => {
-    document.documentElement.lang = language;
-    document.documentElement.dir = isArabic ? "rtl" : "ltr";
-    try {
-      window.localStorage.setItem(LANGUAGE_STORAGE_KEY, language);
-    } catch {
-      // Keep the language switch working when browser storage is unavailable.
-    }
-  }, [language, isArabic]);
-
-  useEffect(() => {
     if (!cityscapePopupOpen) return undefined;
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
@@ -703,10 +688,7 @@ function App() {
     () =>
       nav.map((item, index) => ({
         ...item,
-        href:
-          index === 0
-            ? "#home"
-            : `#${["home", "expertise", "projects", "about", "contact"][index]}`,
+        href: ["#home", "#expertise", "#projects", "#about", "/company-profile", "#contact"][index],
       })),
     [nav],
   );
@@ -809,24 +791,12 @@ function App() {
               className="desktop-nav"
               sx={{ mx: "auto", display: { xs: "none", md: "flex" } }}
             >
-              {links.map((item, index) => (
+              {links.map((item) => (
                 <Button
                   key={item.label}
                   href={item.href}
                   sx={{
-                    color: (
-                      currentPage === "expertise"
-                        ? index === 1
-                        : currentPage === "projects"
-                          ? index === 2
-                          : currentPage === "about"
-                            ? index === 3
-                            : currentPage === "contact"
-                              ? index === 4
-                              : index === 0
-                    )
-                      ? "#00639a"
-                      : "#183447",
+                    color: item.href === `#${currentPage}` ? "#00639a" : "#183447",
                     minWidth: 0,
                     px: 0.5,
                     fontSize: { md: 12, lg: 13 },

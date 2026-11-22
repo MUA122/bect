@@ -9,11 +9,20 @@
     />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" sizes="16x16 32x32 48x48 96x96" />
     <link rel="icon" type="image/png" href="/tab_logo.png" />
-    <link rel="preload" as="image" href="/src/assets/cityscape/reference.jpg" fetchpriority="high" />
-    <link rel="preload" as="font" type="font/woff" href="/src/assets/cityscape/Outfit-650.woff" crossorigin />
-    <link rel="preload" as="font" type="font/woff" href="/src/assets/cityscape/Inter-750.woff" crossorigin />
-    <link rel="preload" as="font" type="font/woff" href="/src/assets/cityscape/Inter-400.woff" crossorigin />
-    <link rel="preload" as="font" type="font/woff" href="/src/assets/cityscape/Inter-500.woff" crossorigin />
+    <template id="home-preloads">
+      <link rel="preload" as="image" href="/src/assets/cityscape/reference.jpg" fetchpriority="high" />
+      <link rel="preload" as="font" type="font/woff" href="/src/assets/cityscape/Outfit-650.woff" crossorigin />
+      <link rel="preload" as="font" type="font/woff" href="/src/assets/cityscape/Inter-750.woff" crossorigin />
+      <link rel="preload" as="font" type="font/woff" href="/src/assets/cityscape/Inter-400.woff" crossorigin />
+      <link rel="preload" as="font" type="font/woff" href="/src/assets/cityscape/Inter-500.woff" crossorigin />
+    </template>
+    <script>
+      if (location.pathname.replace(/\/+$/, '') === '/company-profile') {
+        document.documentElement.dataset.bectProfile = '';
+      } else {
+        document.head.append(document.getElementById('home-preloads').content);
+      }
+    </script>
     <!-- Site fonts load independently; their network must not block the popup. -->
     <link
       rel="stylesheet"

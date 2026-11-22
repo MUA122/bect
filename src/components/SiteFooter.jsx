@@ -60,7 +60,7 @@ const copy = {
     address: '17 Menof St., Heliopolis, Cairo, Egypt',
     connect: 'Follow our work',
     navigation: 'Explore',
-    links: ['Home', 'Expertise', 'Projects', 'About us'],
+    links: ['Home', 'Expertise', 'Projects', 'About us', 'Company profile'],
     statement: 'Architects and engineers shaping places, systems and infrastructure with purpose.',
     rights: 'All rights reserved.',
     privacy: 'Privacy',
@@ -74,7 +74,7 @@ const copy = {
     address: '17 شارع منوف، مصر الجديدة، القاهرة، مصر',
     connect: 'تابع أعمالنا',
     navigation: 'استكشف',
-    links: ['الرئيسية', 'خبراتنا', 'مشاريعنا', 'من نحن'],
+    links: ['الرئيسية', 'خبراتنا', 'مشاريعنا', 'من نحن', 'الملف التعريفي'],
     statement: 'معماريون ومهندسون نصنع أماكن وأنظمة وبنية تحتية ذات أثر.',
     rights: 'جميع الحقوق محفوظة.',
     privacy: 'الخصوصية',
@@ -141,7 +141,7 @@ function SiteFooter({ language = 'en', onContactClick }) {
           <Box className="footer-column footer-navigation">
             <Typography className="footer-column-title">{text.navigation}</Typography>
             {text.links.map((link, index) => (
-              <a key={link} href={['#home', '#expertise', '#projects', '#about'][index]}>
+              <a key={link} href={['#home', '#expertise', '#projects', '#about', '/company-profile'][index]}>
                 <span>{String(index + 1).padStart(2, '0')}</span>{link}
               </a>
             ))}

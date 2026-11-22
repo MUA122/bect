@@ -6,74 +6,8 @@ import LocationOnRounded from '@mui/icons-material/LocationOnRounded';
 import PhoneRounded from '@mui/icons-material/PhoneRounded';
 import ScheduleRounded from '@mui/icons-material/ScheduleRounded';
 import SendRounded from '@mui/icons-material/SendRounded';
+import { officeLocations } from '../data/officeLocations';
 import './ContactPage.css';
-
-const officeData = {
-  en: [
-    {
-      id: 'egypt',
-      index: '01',
-      country: 'Egypt',
-      city: 'Cairo',
-      label: 'Head office',
-      address: '17 Menof St., Almazah, Heliopolis, Cairo, Egypt',
-      destination: 'BECT Engineering Consulting, 17 Menof, Almazah, Heliopolis, Cairo Governorate 4460293, Egypt',
-      phone: '+20 (02) 24187866',
-      phoneUrl: 'tel:+20224187866',
-      locator: 'HELIOPOLIS / CAIRO',
-      mapEmbed: 'https://www.google.com/maps?q=BECT%20Engineering%20Consulting%2C%2017%20Menof%2C%20Almazah%2C%20Heliopolis%2C%20Cairo%20Governorate%204460293%2C%20Egypt&z=16&output=embed',
-      flagUrl: 'https://flagcdn.com/eg.svg',
-      flagAlt: 'Flag of Egypt',
-    },
-    {
-      id: 'saudi',
-      index: '02',
-      country: 'Saudi Arabia',
-      city: 'Riyadh',
-      label: 'Global office',
-      address: '6071 King Abdelaziz Rd., Al Maseef District, Riyadh, KSA',
-      destination: 'BECT - KSA Engineering Consulting Company, QM3G+HQV Office No. 11, King Abdulaziz Rd, Almasiaf, Riyadh 12465, Saudi Arabia',
-      phone: '+966 014535135',
-      phoneUrl: 'tel:+966014535135',
-      locator: 'AL MASEEF / RIYADH',
-      mapEmbed: 'https://www.google.com/maps?q=BECT%20-%20KSA%20Engineering%20Consulting%20Company%2C%20QM3G%2BHQV%20Office%20No.%2011%2C%20King%20Abdulaziz%20Rd%2C%20Almasiaf%2C%20Riyadh%2012465%2C%20Saudi%20Arabia&z=16&output=embed',
-      flagUrl: 'https://flagcdn.com/sa.svg',
-      flagAlt: 'Flag of Saudi Arabia',
-    },
-  ],
-  ar: [
-    {
-      id: 'egypt',
-      index: '01',
-      country: 'مصر',
-      city: 'القاهرة',
-      label: 'المكتب الرئيسي',
-      address: '17 شارع منوف، الماظة، مصر الجديدة، القاهرة، مصر',
-      destination: 'BECT Engineering Consulting, 17 Menof, Almazah, Heliopolis, Cairo Governorate 4460293, Egypt',
-      phone: '+20 (02) 24187866',
-      phoneUrl: 'tel:+20224187866',
-      locator: 'HELIOPOLIS / CAIRO',
-      mapEmbed: 'https://www.google.com/maps?q=BECT%20Engineering%20Consulting%2C%2017%20Menof%2C%20Almazah%2C%20Heliopolis%2C%20Cairo%20Governorate%204460293%2C%20Egypt&z=16&output=embed',
-      flagUrl: 'https://flagcdn.com/eg.svg',
-      flagAlt: 'علم مصر',
-    },
-    {
-      id: 'saudi',
-      index: '02',
-      country: 'المملكة العربية السعودية',
-      city: 'الرياض',
-      label: 'المكتب العالمي',
-      address: '6071 King Abdelaziz Rd., Al Maseef District, Riyadh, KSA',
-      destination: 'BECT - KSA Engineering Consulting Company, QM3G+HQV Office No. 11, King Abdulaziz Rd, Almasiaf, Riyadh 12465, Saudi Arabia',
-      phone: '+966 014535135',
-      phoneUrl: 'tel:+966014535135',
-      locator: 'AL MASEEF / RIYADH',
-      mapEmbed: 'https://www.google.com/maps?q=BECT%20-%20KSA%20Engineering%20Consulting%20Company%2C%20QM3G%2BHQV%20Office%20No.%2011%2C%20King%20Abdulaziz%20Rd%2C%20Almasiaf%2C%20Riyadh%2012465%2C%20Saudi%20Arabia&z=16&output=embed',
-      flagUrl: 'https://flagcdn.com/sa.svg',
-      flagAlt: 'علم المملكة العربية السعودية',
-    },
-  ],
-};
 
 const pageCopy = {
   en: {
@@ -153,7 +87,7 @@ function OfficeMap({ office, mapLabel }) {
 function ContactPage({ language = 'en', formText, formStatus, onSubmit }) {
   const isArabic = language === 'ar';
   const text = pageCopy[language];
-  const offices = officeData[language];
+  const offices = officeLocations[language];
 
   return (
     <Box component="main" className="contact-page" dir={isArabic ? 'rtl' : 'ltr'}>

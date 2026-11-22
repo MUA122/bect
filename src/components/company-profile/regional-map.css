@@ -1,0 +1,91 @@
+.cp-regional-map {
+  position: relative; width: 100%; aspect-ratio: 720 / 436; container-type: inline-size; isolation: isolate;
+}
+.cp-atlas-drawing {
+  display: block; width: 100%; height: 100%; overflow: visible; pointer-events: none;
+}
+.cp-map-context { fill: #244257; stroke: #6c8b9b; stroke-opacity: .55; stroke-width: .65; }
+.cp-map-grid { fill: none; stroke: #9cc5d9; stroke-opacity: .27; stroke-width: .65; stroke-dasharray: 2 3; }
+.cp-map-country { pointer-events: fill; cursor: pointer; transition: filter .22s ease; }
+.cp-map-country:focus-visible { outline: none; stroke: #daf3ff; stroke-width: 3; }
+.cp-map-country[aria-expanded="true"],
+.cp-regional-map:has([data-office-trigger="EG"]:focus-visible) .cp-map-country[data-country="EG"],
+.cp-regional-map:has([data-office-trigger="SA"]:focus-visible) .cp-map-country[data-country="SA"] { filter: brightness(1.2); }
+@media (hover: hover) {
+  .cp-regional-map:has([data-office-trigger="EG"]:hover) .cp-map-country[data-country="EG"],
+  .cp-regional-map:has([data-office-trigger="SA"]:hover) .cp-map-country[data-country="SA"] { filter: brightness(1.2); }
+}
+[data-office-trigger] { touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+.cp-map-relief { opacity: .83; }
+.cp-map-rivers { fill: none; stroke: #97c4d3; stroke-width: 1.05; opacity: .63; }
+.cp-map-boundaries { fill: none; stroke: #b2d5e1; stroke-opacity: .85; stroke-width: 1.2; stroke-linejoin: round; }
+.cp-map-connection {
+  fill: none; stroke: #c4e7f3; stroke-width: 1.25; stroke-linecap: round; stroke-dasharray: .008 .016; opacity: .83;
+}
+.cp-map-sea {
+  fill: #aac7d8; font: inherit; font-size: 11px; font-weight: 400; letter-spacing: .19em; text-transform: uppercase;
+}
+[dir="rtl"] .cp-map-sea { letter-spacing: 0; font-size: 13px; }
+.cp-publication .cp-map-country-label {
+  position: absolute; display: flex; flex-direction: column; align-items: center; gap: clamp(2px,.5cqw,5px);
+  transform: translate(-50%,-50%); white-space: nowrap; cursor: pointer;
+  color: #f4f9fa; line-height: 1.2; font-weight: 700; letter-spacing: .075em; text-transform: uppercase;
+  font-size: clamp(11px,2.35cqw,18px); text-shadow: 0 1px 4px #0a263d;
+}
+.cp-publication[dir="rtl"] .cp-map-country-label { letter-spacing: 0; }
+.cp-map-flag {
+  display: block; width: clamp(19px,3.9cqw,31px); height: auto; aspect-ratio: 3/2;
+  box-shadow: 0 0 0 .7px #e0eff293,0 2px 6px #00172561;
+}
+.cp-publication .cp-map-location {
+  position: absolute; display: inline-flex; align-items: center; gap: clamp(4px, .8cqw, 7px);
+  color: var(--cover-accent); min-height: 44px; padding: 0 2px; margin: 0; border: 0; border-radius: 3px;
+  transform: translate(-9px,-50%); direction: ltr; background: none; text-align: left;
+  font-weight: 500; line-height: 1.2; font-size: clamp(11px,2cqw,16px); white-space: nowrap;
+  pointer-events: none;
+}
+.cp-map-location .cp-map-city-label, .cp-map-location .cp-map-pin { pointer-events: auto; }
+/* Enlarge the pin around the city itself. Empty space above or below its label
+   belongs to the underlying country, including along Saudi Arabia's northwest border. */
+.cp-map-location::before {
+  content: ""; position: absolute; left: 9px; top: 50%; transform: translate(-50%, -50%);
+  width: min(44px, 10cqw); aspect-ratio: 1; border-radius: 50%; pointer-events: auto;
+}
+[dir="rtl"] .cp-map-city-label { direction: rtl; line-height: 1.6; }
+.cp-map-city-label { text-shadow: 0 0 2px #071c2b, 0 1px 3px #071c2b; }
+.cp-map-pin {
+  display: grid; place-items: center; flex: none; width: 14px; height: 14px; border-radius: 50%;
+  transition: background .25s, box-shadow .25s; position: relative;
+}
+.cp-map-pin::before, .cp-map-pin::after { content: ""; position: absolute; border-radius: 50%; }
+.cp-map-pin::before { inset: 1px; border: 1px solid currentColor; opacity: .85; }
+.cp-map-pin::after { inset: 4.4px; background: currentColor; box-shadow: 0 0 2px #0b2339; }
+.cp-map-location:is(:hover,:focus-visible,[aria-expanded="true"]) .cp-map-pin {
+  background: color-mix(in srgb, currentColor 16%, transparent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, currentColor 15%, transparent);
+}
+.cp-publication .cp-map-location:focus-visible { outline: 2px solid #d2f1ff; outline-offset: 2px; }
+@media (prefers-reduced-motion: no-preference) {
+  .cp-map-land, .cp-map-boundaries { animation: cp-map-develop .85s ease backwards; }
+  .cp-map-country-label { animation: cp-map-develop .65s .32s ease backwards; }
+  .cp-map-location { animation: cp-map-develop .5s .55s ease backwards; }
+  .cp-map-connection { animation: cp-map-route 1.25s .25s ease-out backwards; }
+  @keyframes cp-map-develop { from { opacity: 0; } }
+  @keyframes cp-map-route { from { clip-path: inset(0 100% 0 0); opacity: 0; } to { clip-path: inset(0); opacity: .83; } }
+}
+@container (max-width:420px) {
+  .cp-map-city-label { font-weight: 600; }
+  .cp-publication .cp-map-country-label { font-size: 11px; letter-spacing: .035em; }
+  .cp-map-country-label[data-country="SA"] { margin-top: 3cqw; }
+  .cp-map-sea { font-size: 14px; }
+}
+@container (min-width: 335px) and (max-width: 350px) {
+  .cp-publication[dir="rtl"] .cp-map-location[data-city="cairo"] { gap: 2px; }
+}
+/* When the map is narrow, place the Cairo label on the Egyptian side of the pin. */
+@container (max-width: 335px) {
+  .cp-map-location[data-city="cairo"] {
+    flex-direction: row-reverse; transform: translate(calc(-100% + 9px), -50%);
+  }
+  .cp-map-location[data-city="cairo"]::before { left: auto; right: 9px; transform: translate(50%, -50%); }
+}

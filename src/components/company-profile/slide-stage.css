@@ -1,0 +1,93 @@
+.cp-slide-stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  isolation: isolate;
+  container-type: inline-size;
+  direction: ltr;
+  text-align: left;
+  color-scheme: light;
+}
+
+.cp-slide-frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #fff;
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
+.cp-slide-frame[data-current="false"] {
+  pointer-events: none;
+}
+
+.cp-slide-frame > svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  overflow: hidden;
+}
+
+.cp-slide-frame svg g[data-role] {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.cp-slide-transcript {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.cp-sector-curtain {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  padding: 6%;
+  background: linear-gradient(108deg, #073753, #075480 68%, #075982);
+  color: #fff;
+  pointer-events: none;
+}
+
+.cp-sector-detail {
+  position: absolute;
+  inset: 0 0 0 25%;
+  background-size: cover;
+  background-position: center;
+  mask-image: linear-gradient(90deg, transparent 0%, #000 60%);
+  opacity: .35;
+}
+
+.cp-sector-curtain span {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: .55em;
+  font-family: "Profile Inter", Arial, sans-serif;
+  font-size: clamp(1rem, 4.3cqw, 4.5rem);
+  line-height: 1.1;
+  letter-spacing: -.035em;
+  text-align: center;
+}
+
+.cp-sector-curtain span::before,
+.cp-sector-curtain span::after {
+  content: "";
+  width: .85em;
+  height: 1px;
+  flex: none;
+  background: #76bfd8;
+}
+
+.cp-sector-curtain span:lang(ar) { letter-spacing: 0; line-height: 1.6; }
