@@ -2,7 +2,7 @@
 
 ## Local preview
 
-From the repository root, run `npm run dev` and open `/company-profile` on the printed local URL. The main navigation and footer link to the same page. A URL ending in `#page=42` opens that page directly. Closing the reader or going back after Explore returns to the introduction.
+From the repository root, run `npm run dev` and open `/company-profile` on the printed local URL. The site footer links to the same page. A URL ending in `#page=42` opens that page directly. Closing the reader or going back after Explore returns to the introduction.
 
 The generated assets are ready to use. A normal Vite build includes the interactive edition and excludes the 293 MiB source PDF. To review a production build without overwriting the repository's tracked `dist` folder, use a separate output directory.
 

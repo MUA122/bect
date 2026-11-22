@@ -686,10 +686,12 @@ function App() {
 
   const links = useMemo(
     () =>
-      nav.map((item, index) => ({
-        ...item,
-        href: ["#home", "#expertise", "#projects", "#about", "/company-profile", "#contact"][index],
-      })),
+      nav
+        .map((item, index) => ({
+          ...item,
+          href: ["#home", "#expertise", "#projects", "#about", "/company-profile", "#contact"][index],
+        }))
+        .filter((item) => item.href !== "/company-profile"),
     [nav],
   );
 
