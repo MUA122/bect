@@ -189,32 +189,84 @@ def check_office_interactions(page, *, touch=False):
             expect(shape).to_be_focused()
 
 
-def check_arabic_mobile_project(page, url):
+def check_mobile_project_modes(page, url):
+    editions = {
+        "ar": {
+            "title": "مدينة المكيمن", "direction": "rtl",
+            "read": "عرض النص", "spread": "عرض الصفحتين",
+            "overview": "نبذة عن المشروع", "narrative": "تقدم بيكت خدمات الاستشارات",
+            "facts": ["الموقع", "العميل", "تاريخ الإنجاز", "القيمة التقديرية", "التخصصات"],
+            "location": "المدينة المنورة، المملكة العربية السعودية",
+            "zoom": "تكبير", "next": "التالي", "next_title": "مقر رئاسة أمن الدولة",
+        },
+        "en": {
+            "title": "Al Mukaymen City", "direction": "ltr",
+            "read": "Read text", "spread": "Show both pages",
+            "overview": "Project Overview", "narrative": "This project provides consultancy and project management services",
+            "facts": ["Location", "Client", "Completion", "Est. value", "Disciplines"],
+            "location": "Al-Madinah Al-Munawwarah, Kingdom of Saudi Arabia",
+            "zoom": "Zoom in", "next": "Next", "next_title": "State Security Headquarters",
+        },
+    }
     page.goto(f"{url}#page=14", wait_until="domcontentloaded")
-    article = page.get_by_role("article", name="مدينة المكيمن")
-    expect(article.get_by_role("heading", level=1)).to_be_visible()
-    expect(article).to_have_css("direction", "rtl")
-    narrative = article.locator("p").filter(has_text="تقدم بيكت خدمات الاستشارات")
-    expect(narrative).to_be_visible()
-    assert narrative.evaluate("p => parseFloat(getComputedStyle(p).fontSize) >= 16")
-    expect(article.locator("dt")).to_have_text(["الموقع", "العميل", "تاريخ الإنجاز", "القيمة التقديرية", "التخصصات"])
-    expect(article.locator("dd").first).to_have_text("المدينة المنورة، المملكة العربية السعودية")
     viewport = page.locator(".cp-viewport")
-    assert viewport.evaluate("el => el.scrollWidth <= el.clientWidth + 1")
-    article.locator("dd").last.scroll_into_view_if_needed()
-    assert viewport.evaluate("el => el.scrollTop > 0")
 
-    button(page, "عرض الصفحتين").tap()
-    slide(page, 14)
-    button(page, "تكبير").tap()
-    expect(viewport).to_have_attribute("data-zoom", "1.65")
-    button(page, "عرض النص").tap()
-    expect(article).to_be_visible()
-    expect(viewport).to_have_attribute("data-zoom", "1.00")
-    article.locator("dd").last.scroll_into_view_if_needed()
-    button(page, "التالي").tap()
-    expect(page.get_by_role("heading", name="مقر رئاسة أمن الدولة", exact=True)).to_be_visible()
-    assert viewport.evaluate("el => el.scrollTop === 0")
+    for language, copy in editions.items():
+        page.reload(wait_until="domcontentloaded")
+        paper = slide(page, 14)
+        expect(paper).to_have_attribute("lang", language)
+        assert paper.evaluate("el => el.clientWidth / el.clientHeight > 2")
+        half_width = paper.locator(":scope > svg").evaluate("svg => svg.viewBox.baseVal.width / 2")
+        expect(viewport.get_by_role("article")).to_have_count(0)
+
+        read = button(page, copy["read"])
+        show_spread = button(page, copy["spread"])
+        article = viewport.get_by_role("article", name=copy["title"], exact=True)
+        read.tap()
+        expect(article).to_have_css("direction", copy["direction"])
+        expect(article.get_by_role("heading", level=1)).to_have_text(copy["title"])
+        expect(article.get_by_role("heading", level=2)).to_have_text(copy["overview"])
+        expect(article.get_by_role("img", name=copy["title"])).to_be_visible()
+        crop = article.locator(".cp-project-photo svg")
+        expected_left = 0 if language == "ar" else half_width
+        assert crop.evaluate("(svg, x) => Math.abs(svg.viewBox.baseVal.x - x) < 0.01", expected_left)
+        narrative = article.locator("p").filter(has_text=copy["narrative"])
+        expect(narrative).to_be_visible()
+        assert narrative.evaluate("p => parseFloat(getComputedStyle(p).fontSize) >= 16")
+        expect(article.locator("dt")).to_have_text(copy["facts"])
+        expect(article.locator("dd").first).to_have_text(copy["location"])
+        assert viewport.evaluate("el => el.scrollWidth <= el.clientWidth + 1")
+
+        show_spread.tap()
+        slide(page, 14)
+        button(page, copy["zoom"]).tap()
+        expect(viewport).to_have_attribute("data-zoom", "1.65")
+        read.tap()
+        expect(article).to_be_visible()
+        expect(viewport).to_have_attribute("data-zoom", "1.00")
+        article.locator("dd").last.scroll_into_view_if_needed()
+        assert viewport.evaluate("el => el.scrollTop > 0")
+        button(page, copy["next"]).tap()
+        expect(viewport.get_by_role("heading", name=copy["next_title"], exact=True)).to_be_visible()
+        assert viewport.evaluate("el => el.scrollTop === 0")
+
+        # Non-project slides fall back to their artwork without clearing reading mode.
+        page.keyboard.press("Home")
+        slide(page, 1)
+        expect(page.locator(".cp-project-mode")).to_have_count(0)
+        page.goto(f"{url}#page=94", wait_until="domcontentloaded")
+        legend = viewport.locator("figcaption")
+        expect(legend).to_contain_text("Bzaza2")
+        expect(legend.locator("li")).to_have_count(3)
+
+        if language == "ar":
+            page.goto(f"{url}#page=14", wait_until="domcontentloaded")
+            expect(article).to_be_visible()
+            button(page, "English").tap()
+            english_article = viewport.get_by_role("article", name=editions["en"]["title"], exact=True)
+            expect(english_article).to_have_css("direction", "ltr")
+            expect(button(page, editions["en"]["spread"])).to_be_visible()
+            assert page.url.endswith("#page=14")
 
 
 def interaction_checks(browser, url, output, last_page, audit):
@@ -410,7 +462,7 @@ def interaction_checks(browser, url, output, last_page, audit):
     page.keyboard.press("ArrowLeft")
     slide(page, 3)
     page.screenshot(path=output / "arabic-mobile.png")
-    check_arabic_mobile_project(page, url)
+    check_mobile_project_modes(page, url)
     context.close()
 
 

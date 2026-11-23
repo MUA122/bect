@@ -2,7 +2,6 @@
   display: flex;
   flex: none;
   align-items: center;
-  justify-content: space-between;
   padding-inline: clamp(16px, 4vw, 32px);
   border-bottom: 1px solid var(--line);
 }
@@ -10,6 +9,7 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
+  margin-inline-start: auto;
   min-height: 44px;
   font-size: .8rem;
   color: #c2e4f0;

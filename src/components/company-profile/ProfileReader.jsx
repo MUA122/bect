@@ -28,12 +28,12 @@ export default function ProfileReader({ manifest, slide, direction, target, text
   const [contents, setContents] = useState(false);
   const [nativeFull, setNativeFull] = useState(false);
   const [immersive, setImmersive] = useState(false);
-  const [showSpread, setShowSpread] = useState(false);
+  const [showReading, setShowReading] = useState(false);
   const full = immersive || nativeFull;
   const rtl = language === "ar";
   const compact = useMediaQuery(FIT_MEDIA, { noSsr: true });
-  const compactProject = rtl && compact && Boolean(slide.project);
-  const reading = compactProject && !showSpread;
+  const compactProject = compact && Boolean(slide.project);
+  const reading = compactProject && showReading;
   const { viewport, view, zoom, pan, enlargeHalf, width, height, events } = usePageViewport(slide, turn, rtl, reading);
   const pending = slide.number !== target && !error;
   const total = manifest.slides.length;
@@ -107,19 +107,19 @@ export default function ProfileReader({ manifest, slide, direction, target, text
       </div>
     </header>
     {compactProject && <div className="cp-project-mode">
-      <span className="cp-meta">{text.page} <bdi>{formatPage(slide.number, language)}</bdi></span>
-      <button type="button" onClick={() => setShowSpread(shown => !shown)}>
+      {reading && <span className="cp-meta">{text.page} <bdi>{formatPage(slide.number, language)}</bdi></span>}
+      <button type="button" onClick={() => setShowReading(shown => !shown)}>
         {reading ? <MenuBookOutlined /> : <SubjectOutlined />}
-        {reading ? "عرض الصفحتين" : "عرض النص"}
+        {reading ? text.showSpread : text.readProject}
       </button>
     </div>}
     <div className={`cp-gallery${view.scale === 1 ? " is-fit" : ""}${reading ? " is-reading" : ""}`}
       style={{ "--cp-paper-height": `${height}px` }}>
-      {!compactProject && <div className="cp-reader-caption"><span className="cp-meta">{text.page} <bdi>{formatPage(slide.number, language)}</bdi></span>
+      {!reading && <div className="cp-reader-caption"><span className="cp-meta">{text.page} <bdi>{formatPage(slide.number, language)}</bdi></span>
         <span lang={language} dir="auto">{slide.title}</span></div>}
-      <div className="cp-viewport" ref={viewport} dir={reading ? "rtl" : "ltr"} {...events}
+      <div className="cp-viewport" ref={viewport} dir={reading && rtl ? "rtl" : "ltr"} {...events}
         tabIndex={reading ? 0 : undefined} data-zoom={view.scale.toFixed(2)}>
-        {reading ? <MobileProjectSlide slide={slide} fullscreen={full} /> : <div className="cp-paper" style={{ width, height, transform: `translate3d(${view.x}px,${view.y}px,0) scale(${view.scale})` }}>
+        {reading ? <MobileProjectSlide slide={slide} language={language} fullscreen={full} /> : <div className="cp-paper" style={{ width, height, transform: `translate3d(${view.x}px,${view.y}px,0) scale(${view.scale})` }}>
           <ProfileSlideStage slide={slide} direction={direction} fullResolution={full || view.scale > 1} />
         </div>}
       </div>

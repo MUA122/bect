@@ -533,6 +533,52 @@ def transcript(page, number):
     return body
 
 
+def project_details(page):
+    """Reflow the print layout's project facts, paragraphs and artwork captions."""
+    blocks = []
+    for block in page.get_text("dict", flags=pymupdf.TEXTFLAGS_TEXT)["blocks"]:
+        lines = []
+        for line in block["lines"]:
+            text = " ".join("".join(span["text"] for span in line["spans"]).split())
+            if text:
+                lines.append((line["bbox"][0], text))
+        if lines:
+            blocks.append(lines)
+
+    overview_start = next(i for i, block in enumerate(blocks) if block[0][1] == "Project Overview")
+    metadata = [line for block in blocks[:overview_start] for line in block]
+    location = next(i for i, (_, text) in enumerate(metadata) if text.startswith("LOCATION"))
+    client = next(i for i, (_, text) in enumerate(metadata) if text == "CLIENT")
+    status = next(i for i, (_, text) in enumerate(metadata) if text in ("COMPLETION", "STATUS"))
+    value = next(i for i, (_, text) in enumerate(metadata) if text == "EST. VALUE")
+    disciplines = next(i for i, (_, text) in enumerate(metadata) if text == "DISCIPLINES")
+
+    # Completion and estimated value share one row and can both wrap independently.
+    column_split = (metadata[status][0] + metadata[value][0]) / 2
+    row = metadata[value + 1 : disciplines]
+    location_label = metadata[location][1]
+    location_separator = ", " if location_label.endswith("REGIONS") else " "
+
+    def join(lines, separator=" "):
+        return separator.join(text for _, text in lines)
+
+    details = {
+        "facts": [
+            [location_label.capitalize(), join(metadata[location + 1 : client], location_separator)],
+            ["Client", join(metadata[client + 1 : status])],
+            [metadata[status][1].capitalize(), join((x, text) for x, text in row if x < column_split)],
+            ["Est. value", join((x, text) for x, text in row if x >= column_split)],
+            ["Disciplines", join(metadata[disciplines + 1 :], ", ")],
+        ],
+        "overview": [join(block) for block in blocks[overview_start + 1 :]],
+    }
+    # Map keys and identifiers are printed on the artwork half of the spread.
+    artwork_notes = [text for x, text in metadata[:location] if x >= page.rect.width / 2]
+    if artwork_notes:
+        details["legend"] = artwork_notes
+    return details
+
+
 def catalog(doc):
     # The section index on page 12 includes the actual sector names and their
     # printed start pages. All other titles below identify the original plates.
@@ -594,6 +640,8 @@ def catalog(doc):
                 "transition": "section" if n in starts and n > 1 else "regular",
             }
         )
+        if kind == "project":
+            slides[-1]["project"] = project_details(page)
     return {
         "slides": slides,
         "sections": [{"title": title, "start": n} for n, title in sorted(starts.items())],

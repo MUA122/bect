@@ -1,19 +1,21 @@
 import React, { useEffect, useLayoutEffect, useRef } from "react";
 import { upgradeProfileImages } from "./profileAssets";
-import { sectionLabel } from "./profileCopy";
+import { profileCopy, sectionLabel } from "./profileCopy";
 import "./mobile-project-slide.css";
 
-export default function MobileProjectSlide({ slide, fullscreen }) {
+export default function MobileProjectSlide({ slide, language, fullscreen }) {
   const photo = useRef(null);
   const { overview, facts, legend } = slide.project;
 
   useLayoutEffect(() => {
-    // The left page holds the complete photo composition, including masks and map annotations.
+    // The photo composition is on the right in English and on the left in Arabic.
+    const pageWidth = slide.width / 2;
+    const photoStart = language === "ar" ? 0 : pageWidth;
     const artwork = document.importNode(slide.artwork.template, true);
-    artwork.setAttribute("viewBox", `0 0 ${slide.width / 2} ${slide.height}`);
+    artwork.setAttribute("viewBox", `${photoStart} 0 ${pageWidth} ${slide.height}`);
     artwork.setAttribute("aria-hidden", "true");
     photo.current.replaceChildren(artwork);
-  }, [slide]);
+  }, [slide, language]);
 
   useEffect(() => {
     if (!fullscreen) return;
@@ -26,7 +28,7 @@ export default function MobileProjectSlide({ slide, fullscreen }) {
 
   return <article className="cp-project-article" aria-labelledby="cp-project-title">
     <header className="cp-project-heading">
-      <p>{sectionLabel(slide.sector, "ar")}</p>
+      <p>{sectionLabel(slide.sector, language)}</p>
       <h1 id="cp-project-title">{slide.title}</h1>
     </header>
     <figure className="cp-project-figure">
@@ -38,7 +40,7 @@ export default function MobileProjectSlide({ slide, fullscreen }) {
       </figcaption>}
     </figure>
     <div className="cp-project-details">
-      <h2>نبذة عن المشروع</h2>
+      <h2>{profileCopy[language].projectOverview}</h2>
       {overview.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
       <dl>{facts.map(([label, value]) => <div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}</dl>
     </div>
