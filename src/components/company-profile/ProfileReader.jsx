@@ -108,9 +108,10 @@ export default function ProfileReader({ manifest, slide, direction, target, text
     </header>
     {compactProject && <div className="cp-project-mode">
       {reading && <span className="cp-meta">{text.page} <bdi>{formatPage(slide.number, language)}</bdi></span>}
-      <button type="button" onClick={() => setShowReading(shown => !shown)}>
+      <button type="button" className={reading ? undefined : "cp-project-read"} onClick={() => setShowReading(shown => !shown)}>
         {reading ? <MenuBookOutlined /> : <SubjectOutlined />}
-        {reading ? text.showSpread : text.readProject}
+        <span>{reading ? text.showSpread : text.readProject}</span>
+        {!reading && <span className="cp-project-recommended">{text.recommended}</span>}
       </button>
     </div>}
     <div className={`cp-gallery${view.scale === 1 ? " is-fit" : ""}${reading ? " is-reading" : ""}`}

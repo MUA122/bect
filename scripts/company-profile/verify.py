@@ -193,7 +193,7 @@ def check_mobile_project_modes(page, url):
     editions = {
         "ar": {
             "title": "مدينة المكيمن", "direction": "rtl",
-            "read": "عرض النص", "spread": "عرض الصفحتين",
+            "read": "عرض النص", "recommended": "موصى به", "spread": "عرض الصفحتين",
             "overview": "نبذة عن المشروع", "narrative": "تقدم بيكت خدمات الاستشارات",
             "facts": ["الموقع", "العميل", "تاريخ الإنجاز", "القيمة التقديرية", "التخصصات"],
             "location": "المدينة المنورة، المملكة العربية السعودية",
@@ -201,7 +201,7 @@ def check_mobile_project_modes(page, url):
         },
         "en": {
             "title": "Al Mukaymen City", "direction": "ltr",
-            "read": "Read text", "spread": "Show both pages",
+            "read": "Read text", "recommended": "Recommended", "spread": "Show both pages",
             "overview": "Project Overview", "narrative": "This project provides consultancy and project management services",
             "facts": ["Location", "Client", "Completion", "Est. value", "Disciplines"],
             "location": "Al-Madinah Al-Munawwarah, Kingdom of Saudi Arabia",
@@ -219,10 +219,12 @@ def check_mobile_project_modes(page, url):
         half_width = paper.locator(":scope > svg").evaluate("svg => svg.viewBox.baseVal.width / 2")
         expect(viewport.get_by_role("article")).to_have_count(0)
 
-        read = button(page, copy["read"])
+        read = button(page, f'{copy["read"]} {copy["recommended"]}')
+        expect(read.get_by_text(copy["recommended"], exact=True)).to_be_visible()
         show_spread = button(page, copy["spread"])
         article = viewport.get_by_role("article", name=copy["title"], exact=True)
         read.tap()
+        expect(show_spread.locator(".cp-project-recommended")).to_have_count(0)
         expect(article).to_have_css("direction", copy["direction"])
         expect(article.get_by_role("heading", level=1)).to_have_text(copy["title"])
         expect(article.get_by_role("heading", level=2)).to_have_text(copy["overview"])

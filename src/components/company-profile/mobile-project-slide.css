@@ -2,6 +2,7 @@
   display: flex;
   flex: none;
   align-items: center;
+  padding-block: 4px;
   padding-inline: clamp(16px, 4vw, 32px);
   border-bottom: 1px solid var(--line);
 }
@@ -13,6 +14,23 @@
   min-height: 44px;
   font-size: .8rem;
   color: #c2e4f0;
+}
+.cp-publication .cp-project-mode .cp-project-read {
+  padding-inline: 10px;
+  border: 1px solid #6d9cab;
+  border-radius: 6px;
+  background: #16394d;
+  color: #eff6f8;
+  font-weight: 500;
+}
+.cp-publication .cp-project-mode .cp-project-read:hover { background: #204a60; }
+.cp-project-recommended {
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: var(--ice);
+  color: var(--ink);
+  font-size: .7rem;
+  white-space: nowrap;
 }
 .cp-project-mode svg { font-size: 18px; }
 .cp-gallery.is-reading { padding: 0; }
