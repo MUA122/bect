@@ -5,7 +5,7 @@ const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
 const distance = (a, b) => Math.hypot(a.x - b.x, a.y - b.y);
 const midpoint = (a, b) => ({ x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 });
 
-export default function usePageViewport(slide, turn, rtl) {
+export default function usePageViewport(slide, turn, rtl, reading) {
   const viewport = useRef(null);
   const [size, setSize] = useState({ width: 0, height: 0 });
   const [view, setView] = useState(fit);
@@ -41,7 +41,11 @@ export default function usePageViewport(slide, turn, rtl) {
     setView(fit);
     pointers.current.clear();
     gesture.current = null;
-  }, [slide.number, size.height, size.width]);
+  }, [slide.number, size.height, size.width, reading]);
+
+  useLayoutEffect(() => {
+    viewport.current.scrollTop = 0;
+  }, [slide.src, reading]);
 
   useEffect(() => () => cancelAnimationFrame(frame.current), []);
 
@@ -68,6 +72,7 @@ export default function usePageViewport(slide, turn, rtl) {
   }
 
   useEffect(() => {
+    if (reading) return;
     const element = viewport.current;
     const wheel = (e) => {
       if (!(e.ctrlKey || e.metaKey)) return;
@@ -76,13 +81,14 @@ export default function usePageViewport(slide, turn, rtl) {
     };
     element.addEventListener("wheel", wheel, { passive: false });
     return () => element.removeEventListener("wheel", wheel);
-  }, [zoom]);
+  }, [zoom, reading]);
 
   const down = (e) => {
-    if (e.button !== 0 || (e.pointerType === "mouse" && current.current.scale === 1)) return;
+    if (e.button !== 0 || (e.pointerType === "mouse" && current.current.scale === 1) ||
+        (reading && window.visualViewport?.scale > 1)) return;
     const points = pointers.current;
     points.set(e.pointerId, relative(e.clientX, e.clientY));
-    e.currentTarget.setPointerCapture(e.pointerId);
+    if (!reading) e.currentTarget.setPointerCapture(e.pointerId);
     const [a, b] = points.values();
     if (points.size === 1) {
       gesture.current = { start: a, view: current.current, swipable: current.current.scale === 1 };
@@ -92,6 +98,7 @@ export default function usePageViewport(slide, turn, rtl) {
   };
 
   const drag = (e) => {
+    if (reading) return;
     const points = pointers.current;
     if (!points.has(e.pointerId) || !gesture.current) return;
     points.set(e.pointerId, relative(e.clientX, e.clientY));
@@ -133,5 +140,5 @@ export default function usePageViewport(slide, turn, rtl) {
   return { viewport, view, zoom, pan, enlargeHalf, width, height,
     events: { onPointerDown: down, onPointerMove: drag, onPointerUp: end, onPointerCancel: end,
       onLostPointerCapture: end,
-      onDoubleClick: (e) => zoom(current.current.scale > 1 ? 1 : 3, relative(e.clientX, e.clientY)) } };
+      onDoubleClick: reading ? undefined : (e) => zoom(current.current.scale > 1 ? 1 : 3, relative(e.clientX, e.clientY)) } };
 }

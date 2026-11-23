@@ -189,6 +189,34 @@ def check_office_interactions(page, *, touch=False):
             expect(shape).to_be_focused()
 
 
+def check_arabic_mobile_project(page, url):
+    page.goto(f"{url}#page=14", wait_until="domcontentloaded")
+    article = page.get_by_role("article", name="مدينة المكيمن")
+    expect(article.get_by_role("heading", level=1)).to_be_visible()
+    expect(article).to_have_css("direction", "rtl")
+    narrative = article.locator("p").filter(has_text="تقدم بيكت خدمات الاستشارات")
+    expect(narrative).to_be_visible()
+    assert narrative.evaluate("p => parseFloat(getComputedStyle(p).fontSize) >= 16")
+    expect(article.locator("dt")).to_have_text(["الموقع", "العميل", "تاريخ الإنجاز", "القيمة التقديرية", "التخصصات"])
+    expect(article.locator("dd").first).to_have_text("المدينة المنورة، المملكة العربية السعودية")
+    viewport = page.locator(".cp-viewport")
+    assert viewport.evaluate("el => el.scrollWidth <= el.clientWidth + 1")
+    article.locator("dd").last.scroll_into_view_if_needed()
+    assert viewport.evaluate("el => el.scrollTop > 0")
+
+    button(page, "عرض الصفحتين").tap()
+    slide(page, 14)
+    button(page, "تكبير").tap()
+    expect(viewport).to_have_attribute("data-zoom", "1.65")
+    button(page, "عرض النص").tap()
+    expect(article).to_be_visible()
+    expect(viewport).to_have_attribute("data-zoom", "1.00")
+    article.locator("dd").last.scroll_into_view_if_needed()
+    button(page, "التالي").tap()
+    expect(page.get_by_role("heading", name="مقر رئاسة أمن الدولة", exact=True)).to_be_visible()
+    assert viewport.evaluate("el => el.scrollTop === 0")
+
+
 def interaction_checks(browser, url, output, last_page, audit):
     context = browser.new_context(viewport={"width": 1440, "height": 900})
     page = context.new_page()
@@ -382,6 +410,7 @@ def interaction_checks(browser, url, output, last_page, audit):
     page.keyboard.press("ArrowLeft")
     slide(page, 3)
     page.screenshot(path=output / "arabic-mobile.png")
+    check_arabic_mobile_project(page, url)
     context.close()
 
 

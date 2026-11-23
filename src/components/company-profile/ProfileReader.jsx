@@ -7,10 +7,15 @@ import RemoveOutlined from "@mui/icons-material/RemoveOutlined";
 import ChevronLeftOutlined from "@mui/icons-material/ChevronLeftOutlined";
 import ChevronRightOutlined from "@mui/icons-material/ChevronRightOutlined";
 import GridViewOutlined from "@mui/icons-material/GridViewOutlined";
+import MenuBookOutlined from "@mui/icons-material/MenuBookOutlined";
+import SubjectOutlined from "@mui/icons-material/SubjectOutlined";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import { LanguageSwitch, Wordmark } from "./ProfileIntro";
 import EditionTransition from "./EditionTransition";
 import ProfileContents from "./ProfileContents";
 import ProfileSlideStage from "./ProfileSlideStage";
+import MobileProjectSlide from "./MobileProjectSlide";
+import { FIT_MEDIA } from "./profileAssets";
 import usePageViewport from "./usePageViewport";
 import { formatPage, profileCopy } from "./profileCopy";
 
@@ -23,9 +28,13 @@ export default function ProfileReader({ manifest, slide, direction, target, text
   const [contents, setContents] = useState(false);
   const [nativeFull, setNativeFull] = useState(false);
   const [immersive, setImmersive] = useState(false);
+  const [showSpread, setShowSpread] = useState(false);
   const full = immersive || nativeFull;
   const rtl = language === "ar";
-  const { viewport, view, zoom, pan, enlargeHalf, width, height, events } = usePageViewport(slide, turn, rtl);
+  const compact = useMediaQuery(FIT_MEDIA, { noSsr: true });
+  const compactProject = rtl && compact && Boolean(slide.project);
+  const reading = compactProject && !showSpread;
+  const { viewport, view, zoom, pan, enlargeHalf, width, height, events } = usePageViewport(slide, turn, rtl, reading);
   const pending = slide.number !== target && !error;
   const total = manifest.slides.length;
 
@@ -60,6 +69,7 @@ export default function ProfileReader({ manifest, slide, direction, target, text
         if (immersive) { e.preventDefault(); setImmersive(false); }
         return;
       }
+      if (reading && ["+", "=", "-", "0"].includes(e.key)) return;
       if (view.scale > 1 && e.key.startsWith("Arrow")) {
         const delta = { ArrowLeft: [80, 0], ArrowRight: [-80, 0], ArrowUp: [0, 80], ArrowDown: [0, -80] }[e.key];
         if (delta) { e.preventDefault(); pan(...delta); }
@@ -81,7 +91,7 @@ export default function ProfileReader({ manifest, slide, direction, target, text
     };
     window.addEventListener("keydown", keydown);
     return () => window.removeEventListener("keydown", keydown);
-  }, [contents, goTo, immersive, pan, rtl, total, turn, view.scale, zoom]);
+  }, [contents, goTo, immersive, pan, reading, rtl, total, turn, view.scale, zoom]);
 
   const previousIcon = rtl ? <ChevronRightOutlined /> : <ChevronLeftOutlined />;
   const nextIcon = rtl ? <ChevronLeftOutlined /> : <ChevronRightOutlined />;
@@ -96,41 +106,49 @@ export default function ProfileReader({ manifest, slide, direction, target, text
         <Tool label={text.closeProfile} onClick={onClose}><CloseOutlined /></Tool>
       </div>
     </header>
-    <div className={`cp-gallery${view.scale === 1 ? " is-fit" : ""}`}
+    {compactProject && <div className="cp-project-mode">
+      <span className="cp-meta">{text.page} <bdi>{formatPage(slide.number, language)}</bdi></span>
+      <button type="button" onClick={() => setShowSpread(shown => !shown)}>
+        {reading ? <MenuBookOutlined /> : <SubjectOutlined />}
+        {reading ? "عرض الصفحتين" : "عرض النص"}
+      </button>
+    </div>}
+    <div className={`cp-gallery${view.scale === 1 ? " is-fit" : ""}${reading ? " is-reading" : ""}`}
       style={{ "--cp-paper-height": `${height}px` }}>
-      <div className="cp-reader-caption"><span className="cp-meta">{text.page} <bdi>{formatPage(slide.number, language)}</bdi></span>
-        <span lang={language} dir="auto">{slide.title}</span></div>
-      <div className="cp-viewport" ref={viewport} dir="ltr" {...events} data-zoom={view.scale.toFixed(2)}>
-        <div className="cp-paper" style={{ width, height, transform: `translate3d(${view.x}px,${view.y}px,0) scale(${view.scale})` }}>
+      {!compactProject && <div className="cp-reader-caption"><span className="cp-meta">{text.page} <bdi>{formatPage(slide.number, language)}</bdi></span>
+        <span lang={language} dir="auto">{slide.title}</span></div>}
+      <div className="cp-viewport" ref={viewport} dir={reading ? "rtl" : "ltr"} {...events}
+        tabIndex={reading ? 0 : undefined} data-zoom={view.scale.toFixed(2)}>
+        {reading ? <MobileProjectSlide slide={slide} fullscreen={full} /> : <div className="cp-paper" style={{ width, height, transform: `translate3d(${view.x}px,${view.y}px,0) scale(${view.scale})` }}>
           <ProfileSlideStage slide={slide} direction={direction} fullResolution={full || view.scale > 1} />
-        </div>
+        </div>}
       </div>
-      <div className="cp-reader-hint">{view.scale > 1 ? <>{text.panHint}<span> · {text.keyPan}</span></> :
+      {!reading && <div className="cp-reader-hint">{view.scale > 1 ? <>{text.panHint}<span> · {text.keyPan}</span></> :
         <>
           {slide.width / slide.height > 2 && <div className="cp-page-halves" role="group" aria-label={text.enlarge}>
             <span>{text.enlarge}</span>
-            {["left", "right"].map((side) => <button type="button" key={side} onClick={() => enlargeHalf(side)}>
+            {(rtl ? ["right", "left"] : ["left", "right"]).map((side) => <button type="button" key={side} onClick={() => enlargeHalf(side)}>
               <i aria-hidden="true" className={`cp-pane-glyph ${side}`} />{side === "left" ? text.leftPage : text.rightPage}
             </button>)}
           </div>}
           <span className="cp-touch-hint">{text.touchHint}</span>
-        </>}</div>
+        </>}</div>}
       {editionChange && <EditionTransition key={editionChange.to} change={editionChange}
         ready={language === editionChange.to && !pending} onRevealed={onEditionRevealed} />}
       {pending && !editionChange && <div className="cp-wait" role="status">{text.loading}</div>}
       {error && <div className="cp-read-error" role="alert">{text.error} <button type="button" onClick={onRetry}>{text.retry}</button></div>}
     </div>
-    <footer className="cp-controls">
+    <footer className={`cp-controls${reading ? " is-reading" : ""}`}>
       <div className="cp-progress" role="progressbar" aria-label={text.progress} aria-valuenow={slide.number} aria-valuemin={1} aria-valuemax={total}>
         <i style={{ transform: `scaleX(${slide.number / total})` }} />
       </div>
       <button className="cp-contents-trigger" type="button" aria-label={text.contents} aria-haspopup="dialog" onClick={() => setContents(true)}>
         <GridViewOutlined /><span>{text.contents}</span></button>
-      <div className="cp-zoom-tools" role="group" aria-label={text.zoomReset}>
+      {!reading && <div className="cp-zoom-tools" role="group" aria-label={text.zoomReset}>
         <Tool label={text.zoomOut} onClick={() => zoom(view.scale / 1.65)} disabled={view.scale <= 1}><RemoveOutlined /></Tool>
         <button className="cp-scale" type="button" dir="ltr" title={text.zoomReset} aria-label={text.zoomReset} onClick={() => zoom(1)}>{Math.round(view.scale * 100)}%</button>
         <Tool label={text.zoomIn} onClick={() => zoom(view.scale * 1.65)} disabled={view.scale >= 10}><AddOutlined /></Tool>
-      </div>
+      </div>}
       <div className="cp-turn-tools">
         <Tool label={text.previous} disabled={target <= 1} onClick={() => turn(-1)}>{previousIcon}</Tool>
         <span className="cp-counter" dir="ltr"><b>{formatPage(slide.number, language)}</b> / {formatPage(total, language)}</span>

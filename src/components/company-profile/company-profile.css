@@ -195,6 +195,9 @@
     max-width: 100%; font-size: clamp(1.1rem,5vw,1.6rem); line-height: 1.23;
     letter-spacing: -.035em; white-space: normal; text-wrap: balance;
   }
+  .cp-publication[lang=ar] .cp-gallery.is-fit .cp-reader-caption > span:last-child {
+    line-height: 1.6; letter-spacing: normal;
+  }
   .cp-gallery.is-fit .cp-reader-hint {
     top: calc(50% + var(--cp-paper-height)/2 + 15px); flex-direction: column; gap: 14px;
   }

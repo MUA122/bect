@@ -6,8 +6,7 @@ import re
 from pathlib import Path
 from xml.etree import ElementTree as ET
 
-from PIL import Image
-from playwright.sync_api import sync_playwright
+from project_copy import metadata_rows
 
 PROFILE = Path(__file__).resolve().parents[3] / "public/company-profile"
 AR = PROFILE / "ar"
@@ -17,6 +16,7 @@ SVG = "{http://www.w3.org/2000/svg}"
 
 def catalog():
     original = json.loads((PROFILE / "manifest.json").read_text())
+    projects = json.loads(Path(__file__).with_name("project-pages.json").read_text())
     slides = []
     for entry in original["slides"]:
         name = f'{entry["number"]:03}'
@@ -25,8 +25,15 @@ def catalog():
         description = artwork.findtext(SVG + "desc")
         if not title or not re.search(r"[ء-ي]", description or ""):
             raise ValueError(f"Page {name} needs a title and an Arabic transcript.")
-        slides.append({**entry, "title": title, "language": "ar", "src": f"/company-profile/ar/slides/{name}.svg",
-                       "thumbnail": f"/company-profile/ar/thumbs/{name}.webp", "fontFaces": [FONT]})
+        slide = {**entry, "title": title, "language": "ar", "src": f"/company-profile/ar/slides/{name}.svg",
+                 "thumbnail": f"/company-profile/ar/thumbs/{name}.webp", "fontFaces": [FONT]}
+        if entry["type"] == "project":
+            record = projects[str(entry["number"])]
+            rows = metadata_rows(record, entry["number"])
+            slide["project"] = {"facts": [fact for row in rows for fact in row], "overview": record["overview"]}
+            if "legend" in record:
+                slide["project"]["legend"] = record["legend"]
+        slides.append(slide)
     return {**original, "slides": slides}
 
 
@@ -47,6 +54,9 @@ DRAW = """async (slide) => {
 
 
 def thumbnails(slides, url, captures):
+    from PIL import Image
+    from playwright.sync_api import sync_playwright
+
     (AR / "thumbs").mkdir(exist_ok=True)
     if captures:
         captures.mkdir(parents=True, exist_ok=True)

@@ -1,0 +1,85 @@
+.cp-project-mode {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: space-between;
+  padding-inline: clamp(16px, 4vw, 32px);
+  border-bottom: 1px solid var(--line);
+}
+.cp-publication .cp-project-mode button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  font-size: .8rem;
+  color: #c2e4f0;
+}
+.cp-project-mode svg { font-size: 18px; }
+.cp-gallery.is-reading { padding: 0; }
+.cp-gallery.is-reading .cp-viewport {
+  display: block;
+  overflow: hidden auto;
+  touch-action: pan-y pinch-zoom;
+  scrollbar-color: #537686 transparent;
+}
+.cp-controls.is-reading .cp-contents-trigger span { display: inline; }
+.cp-project-article {
+  --project-inset: clamp(16px, 4.5vw, 32px);
+  max-width: 680px;
+  margin-inline: auto;
+  color: #eff6f8;
+  overflow-wrap: anywhere;
+  text-align: start;
+}
+.cp-project-heading { padding: 1rem var(--project-inset); }
+.cp-project-heading p {
+  margin: 0 0 .3rem;
+  color: #a9d8e6;
+  font-size: .78rem;
+  line-height: 1.8;
+}
+.cp-project-heading h1 {
+  margin: 0;
+  font-size: clamp(1.4rem, 5.6vw, 2rem);
+  font-weight: 600;
+  line-height: 1.65;
+}
+.cp-project-figure { margin: 0; }
+.cp-project-photo { width: 100%; overflow: hidden; background: var(--navy); }
+.cp-project-photo svg { display: block; width: 100%; height: 100%; }
+.cp-project-figure figcaption {
+  padding: .75rem var(--project-inset);
+  font-size: .9rem;
+  line-height: 1.85;
+}
+.cp-project-figure ul { margin: .3rem 0 0; padding-inline-start: 1.25rem; }
+.cp-project-details {
+  padding: 1.25rem var(--project-inset) 2rem;
+  font-size: 1rem;
+  line-height: 1.95;
+}
+.cp-project-details h2 { margin: 0 0 .45rem; font-size: 1rem; font-weight: 600; color: #a9d8e6; }
+.cp-project-details p { margin: 0 0 .75rem; }
+.cp-project-details dl { margin: 1.25rem 0 0; }
+.cp-project-details dl > div {
+  display: grid;
+  grid-template-columns: minmax(5.5rem, 1fr) minmax(0, 2fr);
+  align-items: baseline;
+  gap: 1rem;
+  padding-block: .65rem;
+  border-top: 1px solid var(--line);
+}
+.cp-project-details dt { font-size: .85rem; color: #a9d8e6; }
+.cp-project-details dd { margin: 0; }
+
+@media (min-width: 600px) and (orientation: landscape) {
+  .cp-project-article {
+    display: grid;
+    max-width: 960px;
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+  }
+  .cp-project-heading { grid-column: 1; }
+  .cp-project-figure { grid-column: 2; grid-row: 1 / 3; padding-top: 1rem; }
+  .cp-project-details { grid-column: 1; padding-top: 0; }
+}

@@ -14,6 +14,8 @@ import xml.etree.ElementTree as ET
 from fontTools.ttLib import TTFont
 import uharfbuzz as hb
 
+from project_copy import metadata_rows
+
 HERE = Path(__file__).resolve().parent
 PUBLICATION = HERE.parents[2] / "public/company-profile"
 SVG = "http://www.w3.org/2000/svg"
@@ -188,15 +190,6 @@ def divider_page(root, data):
     baseline = HEIGHT / 2 - (len(lines) - 1)*leading/2 + size*.31
     write_lines(layer, lines, 121, baseline, size, leading, 650, anchor="middle")
     write_lines(layer, [data["chapter"]], 45, 35, 13, 18, 600, "#42b7e4")
-
-
-def metadata_rows(data, number):
-    return [
-        [("الموقع · ١٣ منطقة" if number == 15 else "الموقع", data["location"])],
-        [("العميل", data["client"])],
-        [(data["completionLabel"], data["completion"]), ("القيمة التقديرية", data["value"])],
-        [("التخصصات", "، ".join(data["disciplines"]))],
-    ]
 
 
 def metadata(root, data, number):

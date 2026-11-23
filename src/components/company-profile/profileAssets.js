@@ -96,6 +96,20 @@ async function readArtwork(slide, signal) {
   // Standalone Arabic SVGs declare their webfont. The inline reader registers
   // the same face once, before the first frame of the transition.
   template.querySelector('style[data-standalone-font]')?.remove();
+  if (slide.language === 'ar' && (slide.type === 'project' || slide.type === 'sector')) {
+    // Each positioned line needs its own bidi paragraph. Some mobile SVG
+    // renderers reorder RTL runs across adjacent tspans despite their fixed x/y.
+    for (const block of template.querySelectorAll('text[direction="rtl"]')) {
+      const lines = Array.from(block.children);
+      if (lines.length < 2 || !lines.every(line => line.matches('tspan[x][y]'))) continue;
+      for (const line of lines) {
+        const text = block.cloneNode(false);
+        text.append(line);
+        block.before(text);
+      }
+      block.remove();
+    }
+  }
   const fitted = window.matchMedia(FIT_MEDIA).matches;
   const sources = [];
   for (const image of template.querySelectorAll('image')) {
